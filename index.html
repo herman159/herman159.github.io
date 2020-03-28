@@ -192,6 +192,13 @@
 
               <time title="Created: 2020-03-26 17:17:20" itemprop="dateCreated datePublished" datetime="2020-03-26T17:17:20+08:00">2020-03-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-28 20:08:42" itemprop="dateModified" datetime="2020-03-28T20:08:42+08:00">2020-03-28</time>
+              </span>
 
           
 
@@ -204,7 +211,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <p>  2020/3/26<br>    1. Properties properties = new Properties();<br>       //properties.load(JDBCUtils.class.getResourceAsStream(“druid.properties”)); 注意这里别写错,忘了.getClassLoader()加载器<br>       properties.load(JDBCUtils.class.getClassLoader().getResourceAsStream(“druid.properties”));<br>    2. // JDBCTemplate jdbcTemplate = new JDBCTemplate(JDBCUtils.getDataSource());<br>          JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());<br>          注意是JdbcTemplate对象！！！<br>  2020/3/27<br>    1.404错误 servletLogin -&gt; servletlogin<br>         这种404错误一定要好好检查路径<br>  2020/3/28<br>    1. 404错误  web目录下的可以直接访问  写绝对路径的时候格式一定是：/虚拟路径/资源路径<br>                <a href="/d15/img/1.jpg">图片</a><br>                不可写成<a href="/d15/web/img/1.jpg">图片</a><br>                还有src 下的直接/虚拟路径/demo<br>                不可 d15/src/demo</p>
+
       
     </div>
 
