@@ -28,7 +28,7 @@
 <meta property="og:description" content="2020&#x2F;3&#x2F;26    1. Properties properties &#x3D; new Properties();       &#x2F;&#x2F;properties.load(JDBCUtils.class.getResourceAsStream(“druid.properties”)); 注意这里别写错,忘了.getClassLoader()加载器       properties.load(JDBCU">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-26T09:17:20.000Z">
-<meta property="article:modified_time" content="2020-03-28T12:08:42.717Z">
+<meta property="article:modified_time" content="2020-03-31T03:23:34.809Z">
 <meta property="article:author" content="Herman">
 <meta name="twitter:card" content="summary">
 
@@ -198,7 +198,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-28 20:08:42" itemprop="dateModified" datetime="2020-03-28T20:08:42+08:00">2020-03-28</time>
+                <time title="Modified: 2020-03-31 11:23:34" itemprop="dateModified" datetime="2020-03-31T11:23:34+08:00">2020-03-31</time>
               </span>
 
           
@@ -212,7 +212,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>  2020/3/26<br>    1. Properties properties = new Properties();<br>       //properties.load(JDBCUtils.class.getResourceAsStream(“druid.properties”)); 注意这里别写错,忘了.getClassLoader()加载器<br>       properties.load(JDBCUtils.class.getClassLoader().getResourceAsStream(“druid.properties”));<br>    2. // JDBCTemplate jdbcTemplate = new JDBCTemplate(JDBCUtils.getDataSource());<br>          JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());<br>          注意是JdbcTemplate对象！！！<br>  2020/3/27<br>    1.404错误 servletLogin -&gt; servletlogin<br>         这种404错误一定要好好检查路径<br>  2020/3/28<br>    1. 404错误  web目录下的可以直接访问  写绝对路径的时候格式一定是：/虚拟路径/资源路径<br>                <a href="/d15/img/1.jpg">图片</a><br>                不可写成<a href="/d15/web/img/1.jpg">图片</a><br>                还有src 下的直接/虚拟路径/demo<br>                不可 d15/src/demo</p>
+        <p>  2020/3/26<br>    1. Properties properties = new Properties();<br>       //properties.load(JDBCUtils.class.getResourceAsStream(“druid.properties”)); 注意这里别写错,忘了.getClassLoader()加载器<br>       properties.load(JDBCUtils.class.getClassLoader().getResourceAsStream(“druid.properties”));<br>    2. // JDBCTemplate jdbcTemplate = new JDBCTemplate(JDBCUtils.getDataSource());<br>          JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());<br>          注意是JdbcTemplate对象！！！<br>  2020/3/27<br>    1.404错误 servletLogin -&gt; servletlogin<br>         这种404错误一定要好好检查路径<br>  2020/3/28<br>    1. 404错误  web目录下的可以直接访问  写绝对路径的时候格式一定是：/虚拟路径/资源路径<br>                <a href="/d15/img/1.jpg">图片</a><br>                不可写成<a href="/d15/web/img/1.jpg">图片</a><br>                还有src 下的直接/虚拟路径/demo<br>                不可 d15/src/demo<br>  2020/3/30<br>      因为tomcat8以前cookie保存中文字符会出问题，所以改了tomcat8<br>      改完以后日志出现了乱码<br>      键入<br>      -Dfile.encoding=UTF-8：<br>      Application Server was not connected before run configuration stop, reason: Unable to ping server at localhost:1099<br>      结果时多写了个：<br>      应该是<br>      -Dfile.encoding=UTF-8<br>      键入后完美解决<br>      如果还有问题<br>      打开idea安装目录-bin<br>      用记事本打开idea.exe.vmoptions和idea64.exe.vmoptions文件<br>      在文件后面添加一行：-Dfile.encoding=UTF-8<br>      2.Google浏览器打开新页面会覆盖当前页面的问题<br>        - 点击链接时使用鼠标中间的转轮点击，会在后台打开新网页<br>        - 点击链接时使用Ctrl+鼠标左击，在后台打开新网页<br>        - 点击连接时Ctrl+Shift+左击，跳转到打开的新页面<br>      3. response.setContentType(“text/html;charset=utf-8”)<br>         不可写成response.setContentType(“text/html;setcharacter=utf-8”);<br>      4.           //更新cookie<br>                    c.setValue(encode);<br>                    //设置存活时间<br>                    c.setMaxAge(60<em>60</em>24);<br>                    //这里要注意重设要完add！！！！<br>                    response.addCookie(c);</p>
 
     </div>
 
