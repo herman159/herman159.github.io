@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives<span class="badge">11</span></a>
+    <a href="/archives/" rel="section">Archives<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -397,6 +397,64 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/04/04/EL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/04/EL/" class="post-title-link" itemprop="url">EL</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-04 09:05:53 / Modified: 09:05:54" itemprop="dateCreated datePublished" datetime="2020-04-04T09:05:53+08:00">2020-04-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/26/%E6%88%91%E7%9A%84Debug%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -428,7 +486,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-01 23:30:26" itemprop="dateModified" datetime="2020-04-01T23:30:26+08:00">2020-04-01</time>
+                <time title="Modified: 2020-04-08 19:42:56" itemprop="dateModified" datetime="2020-04-08T19:42:56+08:00">2020-04-08</time>
               </span>
 
           
@@ -442,7 +500,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>  2020/3/26<br>    1. Properties properties = new Properties();<br>       //properties.load(JDBCUtils.class.getResourceAsStream(“druid.properties”)); 注意这里别写错,忘了.getClassLoader()加载器<br>       properties.load(JDBCUtils.class.getClassLoader().getResourceAsStream(“druid.properties”));<br>    2. // JDBCTemplate jdbcTemplate = new JDBCTemplate(JDBCUtils.getDataSource());<br>          JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());<br>          注意是JdbcTemplate对象！！！<br>  2020/3/27<br>    1.404错误 servletLogin -&gt; servletlogin<br>         这种404错误一定要好好检查路径<br>  2020/3/28<br>    1. 404错误  web目录下的可以直接访问  写绝对路径的时候格式一定是：/虚拟路径/资源路径<br>                <a href="/d15/img/1.jpg">图片</a><br>                不可写成<a href="/d15/web/img/1.jpg">图片</a><br>                还有src 下的直接/虚拟路径/demo<br>                不可 d15/src/demo<br>  2020/3/30<br>      因为tomcat8以前cookie保存中文字符会出问题，所以改了tomcat8<br>      改完以后日志出现了乱码<br>      键入<br>      -Dfile.encoding=UTF-8：<br>      Application Server was not connected before run configuration stop, reason: Unable to ping server at localhost:1099<br>      结果时多写了个：<br>      应该是<br>      -Dfile.encoding=UTF-8<br>      键入后完美解决<br>      如果还有问题<br>      打开idea安装目录-bin<br>      用记事本打开idea.exe.vmoptions和idea64.exe.vmoptions文件<br>      在文件后面添加一行：-Dfile.encoding=UTF-8<br>      2.Google浏览器打开新页面会覆盖当前页面的问题<br>        - 点击链接时使用鼠标中间的转轮点击，会在后台打开新网页<br>        - 点击链接时使用Ctrl+鼠标左击，在后台打开新网页<br>        - 点击连接时Ctrl+Shift+左击，跳转到打开的新页面<br>      3. response.setContentType(“text/html;charset=utf-8”)<br>         不可写成response.setContentType(“text/html;setcharacter=utf-8”);<br>      4.           //更新cookie<br>                    c.setValue(encode);<br>                    //设置存活时间<br>                    c.setMaxAge(60<em>60</em>24);<br>                    //这里要注意重设要完add！！！！<br>                    response.addCookie(c);<br>  2020/4/1<br>      1.if(flag.equals(“on”)) 如果flag为空的话 会报空指针异常<br>      所以通常我们写成 if(“on”.equals(flag))就可以避免空指针异常<br>      要养成一个习惯<br>      2.html checkbox的checked属性问题和value属性问题<br>        对于value属性，复选框的 value 属性值不会显示在用户界面中。value 属性用于表单数据的提交（只有选中的复选框才会传递数据到服务端，如果什么都没选则不传递复选框数据）。<br>        只要出现了checked=””，不管等于什么，可以等于checked=”checked”,甚至checked=”false”，其checkbox的属性checked都是true,在alert中输出其checked属性都是true.</p>
+          <p>  2020/3/26<br>    1. Properties properties = new Properties();<br>       //properties.load(JDBCUtils.class.getResourceAsStream(“druid.properties”)); 注意这里别写错,忘了.getClassLoader()加载器<br>       properties.load(JDBCUtils.class.getClassLoader().getResourceAsStream(“druid.properties”));<br>    2. // JDBCTemplate jdbcTemplate = new JDBCTemplate(JDBCUtils.getDataSource());<br>          JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());<br>          注意是JdbcTemplate对象！！！<br>  2020/3/27<br>    1.404错误 servletLogin -&gt; servletlogin<br>         这种404错误一定要好好检查路径<br>  2020/3/28<br>    1. 404错误  web目录下的可以直接访问  写绝对路径的时候格式一定是：/虚拟路径/资源路径<br>                <a href="/d15/img/1.jpg">图片</a><br>                不可写成<a href="/d15/web/img/1.jpg">图片</a><br>                还有src 下的直接/虚拟路径/demo<br>                不可 d15/src/demo<br>  2020/3/30<br>      因为tomcat8以前cookie保存中文字符会出问题，所以改了tomcat8<br>      改完以后日志出现了乱码<br>      键入<br>      -Dfile.encoding=UTF-8：<br>      Application Server was not connected before run configuration stop, reason: Unable to ping server at localhost:1099<br>      结果时多写了个：<br>      应该是<br>      -Dfile.encoding=UTF-8<br>      键入后完美解决<br>      如果还有问题<br>      打开idea安装目录-bin<br>      用记事本打开idea.exe.vmoptions和idea64.exe.vmoptions文件<br>      在文件后面添加一行：-Dfile.encoding=UTF-8<br>      2.Google浏览器打开新页面会覆盖当前页面的问题<br>        - 点击链接时使用鼠标中间的转轮点击，会在后台打开新网页<br>        - 点击链接时使用Ctrl+鼠标左击，在后台打开新网页<br>        - 点击连接时Ctrl+Shift+左击，跳转到打开的新页面<br>      3. response.setContentType(“text/html;charset=utf-8”)<br>         不可写成response.setContentType(“text/html;setcharacter=utf-8”);<br>      4.           //更新cookie<br>                    c.setValue(encode);<br>                    //设置存活时间<br>                    c.setMaxAge(60<em>60</em>24);<br>                    //这里要注意重设要完add！！！！<br>                    response.addCookie(c);<br>  2020/4/1<br>      1.if(flag.equals(“on”)) 如果flag为空的话 会报空指针异常<br>      所以通常我们写成 if(“on”.equals(flag))就可以避免空指针异常<br>      要养成一个习惯<br>      2.html checkbox的checked属性问题和value属性问题<br>        对于value属性，复选框的 value 属性值不会显示在用户界面中。value 属性用于表单数据的提交（只有选中的复选框才会传递数据到服务端，如果什么都没选则不传递复选框数据）。<br>        只要出现了checked=””，不管等于什么，可以等于checked=”checked”,甚至checked=”false”，其checkbox的属性checked都是true,在alert中输出其checked属性都是true.<br> 2020/4/4<br>     1. 无法在web.xml或使用此应用程序部署的jar文件中解析绝对uri：[<a href="http://java.sun.com/jsp/jstl/core]" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/core]</a><br>     这个问题 自己写了个目录WEB-INFO<br>              然后导入了jar包 结果不知道为啥就是出这个问题<br>              还在网上重新找了包<br>              结果自己将WEB-INFO 删掉 重新导入了一次就可以<br>              感觉白白浪费了很多时间，以后遇到类似问题，要尝试重启或者重新导入。<br> 2020/4/6<br>     1. 犯了一个很傻的错误<br>        request.getRequestDispatcher(“list.jsp”).forward(request,response);<br>        没有写.forward!!!!!!!!<br> 2020/4/8<br>     1.  try {<br>            String sql = “select * from user where username = ? and password = ?”;<br>            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);<br>            return user;<br>        } catch (DataAccessException e) {<br>            e.printStackTrace();<br>            return null;<br>        }<br>        没有加trycatch,直接<br>        String sql = “select * from user where username = ? and password = ?”;<br>            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);<br>            return user;<br>     2. 对于重定向 要加虚拟路径，记住只有转发不加<br>        response.sendRedirect(request.getContextPath()+”/index.jsp”);<br>     3. 表单里要提交的名username,User中一定得包含getUsername属性,不然不会封装到对应的属性当中<br>      <input type="text" name="username" class="form-control" id="user" placeholder="请输入用户名"/><br>      Map&lt;String, String[]&gt; parameterMap = request.getParameterMap();<br>        //封装User<br>        User user = new User() ;<br>        try {<br>         BeanUtils.populate(user,parameterMap);<br>     4.  <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">删除</a><br>         一定要注意中英文切换不报错，虽能看出来，但容易犯错      </p>
 
       
     </div>
@@ -2739,170 +2797,6 @@ public @interface WebServlet {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/21/%E5%AF%B9%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AE%A4%E8%AF%86%EF%BC%88%E5%90%B4%E6%99%BA%E5%86%9B%E8%80%81%E5%B8%88%E7%9A%84%E7%AC%94%E8%AE%B0%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Herman">
-      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Herman的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/21/%E5%AF%B9%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AE%A4%E8%AF%86%EF%BC%88%E5%90%B4%E6%99%BA%E5%86%9B%E8%80%81%E5%B8%88%E7%9A%84%E7%AC%94%E8%AE%B0%EF%BC%89/" class="post-title-link" itemprop="url">对项目的认识（吴智军老师的笔记）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-21 18:01:55" itemprop="dateCreated datePublished" datetime="2020-03-21T18:01:55+08:00">2020-03-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-23 20:45:08" itemprop="dateModified" datetime="2020-03-23T20:45:08+08:00">2020-03-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是项目"><a href="#什么是项目" class="headerlink" title="什么是项目"></a>什么是项目</h3><pre><code>- 项目类型：定制项目
-- 信息化管理系统
-1.12306
-2.10086
-3.淘宝\天猫\京东
-4.教务系统....</code></pre><h3 id="项目开发流程"><a href="#项目开发流程" class="headerlink" title="项目开发流程"></a>项目开发流程</h3><pre><code>1.招投标
-- 岗位：商务或售前工程师
-- 招标（XXX政府采购网） 在政府采购中心购买招标文件，价格一般是500（纸质版）、300（电子版）。
-- 投标（制作标书）根据招标文件要求，写标书，装订标书，根据招标文件的要求，做相应的份数；
-  装到档案袋里，封口除贴上封条，封条接口处盖公司公章。
-- 政府采购中心组织专家评标，确定中标单位
-- 中标单位会受到《中标通知书》
-2.签合同
-- 岗位：商务或售前
-- 软件开发合同（技术服务合同），具有法律效力
-- 甲方付首付款
-3.建立项目组
-- 项目经理PM 《项目计划》
-- 组长TL
-- 开发人员
-4.需求调研
-- 岗位：需求分析工程师
--主要工作：和甲方沟通需求，写《用户需求分析报告》、《产品需求分析报告》
--不写代码，只写文档
-- 必须有开发经验
-5.架构设计
-- 岗位：架构师 《架构设计报告》
-6.数据库设计
-- 岗位：DBA 《数据库设计报告》
-7.详细设计 （模块设计）
-- 岗位：系统分析师 《模块设计报告》
-8.开发
-- 岗位：初中高级
-- 文档：开发文档
-9.测试
-- 岗位：初中高级
-- 文档：测试工程师
-10.部署实施
-- 岗位：实施工程师
-- 文档：开发文档
-11.验收，交付
-12.维护
--岗位：技术支持
--第一年免费维护，第二年是开始付费维护</code></pre><h3 id="项目文档"><a href="#项目文档" class="headerlink" title="项目文档"></a>项目文档</h3><pre><code>-软件公司文档标准
-1.CMM（主流）
--最核心的文档
-1.数据库设计报告
-2.需求分析报告
-3.架构设计报告
-4.详细设计报告
-5.开发文档
-6.部署实施文档
-7.使用手册</code></pre><h3 id="项目开发相关工具"><a href="#项目开发相关工具" class="headerlink" title="项目开发相关工具"></a>项目开发相关工具</h3><pre><code>1.软件 = 程序 + 数据 + 文档 + 服务 （软件是商业产品，商业规范）
-2.工具
-    - 项目管理工具（项目经理在用）
-    1. 禅道
-    2. Project
-    3. 工作云
-    4. .....
-    - 需求分析工具
-    1. Office,WPS
-    2. Axure或墨刀
-    3. Visio、亿图等
-    4. UML工具（画用例图）
-    - 数据库设计工具
-    1. PowerDesigner
-    2. ERWin
-    - 软件设计工具
-    1. Enterprise Architecture
-    2. Visual Paradigm for UML
-    3. SoftwareIdeasModeler
-    4. StarUML
-    5. Rational Rose
-    - 软件测试工具
-    1. 压力测试LR
-    2. 性能测试工具
-    - 代码质量工具
-    1. Alibaba Code Guidelines
-    2. CheckStyle
-    3. PMD
-    4. FindBugs
-    5. Sonar
-    - 配置管理工具
-    1. Git(Github\Gitee)
-    2. SVN
-    - 项目构建工具
-    1. Maven
-    2. Gradle
-    - 其他工具
-    1. XMind
-    2. Markdown (Typora、Haroopad、MarkdownPad )
-    3. Eclipse
-    4. IDEA
-    5. VS Code
-    6. Sublime 
-    7. Atom 
-    8. WSL
-    - APP相关
-    1. MUI
-    2. Uniapp</code></pre><h3 id="做项目"><a href="#做项目" class="headerlink" title="做项目"></a>做项目</h3><pre><code>1. 先设计- 在开发
-2. 简化版：用XMind整理思路，再动手</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2973,7 +2867,7 @@ public @interface WebServlet {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
