@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives<span class="badge">12</span></a>
+    <a href="/archives/" rel="section">Archives<span class="badge">13</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -162,6 +162,215 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/04/22/Filter-Lisner/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/22/Filter-Lisner/" class="post-title-link" itemprop="url">Filter_Lisner</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-22 09:03:20 / Modified: 09:14:13" itemprop="dateCreated datePublished" datetime="2020-04-22T09:03:20+08:00">2020-04-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><pre><code>1. Filter：过滤器
+2. Listener：监听器</code></pre><h1 id="Filter：过滤器"><a href="#Filter：过滤器" class="headerlink" title="Filter：过滤器"></a>Filter：过滤器</h1><pre><code>1. 概念：
+    * 生活中的过滤器：净水器,空气净化器，土匪、
+    * web中的过滤器：当访问服务器的资源时，过滤器可以将请求拦截下来，完成一些特殊的功能。
+    * 过滤器的作用：
+        * 一般用于完成通用的操作。如：登录验证、统一编码处理、敏感字符过滤...
+
+
+2. 快速入门：
+    1. 步骤：
+        1. 定义一个类，实现接口Filter
+        2. 复写方法
+        3. 配置拦截路径
+            1. web.xml
+            2. 注解
+    2. 代码：
+        @WebFilter(&quot;/*&quot;)//访问所有资源之前，都会执行该过滤器
+        public class FilterDemo1 implements Filter {
+            @Override
+            public void init(FilterConfig filterConfig) throws ServletException {
+
+            }
+
+            @Override
+            public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+                System.out.println(&quot;filterDemo1被执行了....&quot;);
+
+
+                //放行
+                filterChain.doFilter(servletRequest,servletResponse);
+
+            }
+
+            @Override
+            public void destroy() {
+
+            }
+        }
+
+
+3. 过滤器细节：
+    1. web.xml配置    
+        &lt;filter&gt;
+            &lt;filter-name&gt;demo1&lt;/filter-name&gt;
+            &lt;filter-class&gt;cn.itcast.web.filter.FilterDemo1&lt;/filter-class&gt;
+        &lt;/filter&gt;
+        &lt;filter-mapping&gt;
+            &lt;filter-name&gt;demo1&lt;/filter-name&gt;
+            &lt;!-- 拦截路径 --&gt;
+            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+        &lt;/filter-mapping&gt;
+    2. 过滤器执行流程
+        1. 执行过滤器
+        2. 执行放行后的资源
+        3. 回来执行过滤器放行代码下边的代码
+    3. 过滤器生命周期方法
+        1. init:在服务器启动后，会创建Filter对象，然后调用init方法。只执行一次。用于加载资源
+        2. doFilter:每一次请求被拦截资源时，会执行。执行多次
+        3. destroy:在服务器关闭后，Filter对象被销毁。如果服务器是正常关闭，则会执行destroy方法。只执行一次。用于释放资源
+    4. 过滤器配置详解
+        * 拦截路径配置：
+            1. 具体资源路径： /index.jsp   只有访问index.jsp资源时，过滤器才会被执行
+            2. 拦截目录： /user/*    访问/user下的所有资源时，过滤器都会被执行
+            3. 后缀名拦截： *.jsp        访问所有后缀名为jsp资源时，过滤器都会被执行
+            4. 拦截所有资源：/*        访问所有资源时，过滤器都会被执行
+        * 拦截方式配置：资源被访问的方式
+            * 注解配置：
+                * 设置dispatcherTypes属性
+                    1. REQUEST：默认值。浏览器直接请求资源
+                    2. FORWARD：转发访问资源
+                    3. INCLUDE：包含访问资源
+                    4. ERROR：错误跳转资源
+                    5. ASYNC：异步访问资源
+            * web.xml配置
+                * 设置&lt;dispatcher&gt;&lt;/dispatcher&gt;标签即可
+
+    5. 过滤器链(配置多个过滤器)
+        * 执行顺序：如果有两个过滤器：过滤器1和过滤器2
+            1. 过滤器1
+            2. 过滤器2
+            3. 资源执行
+            4. 过滤器2
+            5. 过滤器1 
+
+        * 过滤器先后顺序问题：
+            1. 注解配置：按照类名的字符串比较规则比较，值小的先执行
+                * 如： AFilter 和 BFilter，AFilter就先执行了。
+            2. web.xml配置： &lt;filter-mapping&gt;谁定义在上边，谁先执行
+4. 案例：
+    1. 案例1_登录验证
+        * 需求：
+            1. 访问day17_case案例的资源。验证其是否登录
+            2. 如果登录了，则直接放行。
+            3. 如果没有登录，则跳转到登录页面，提示&quot;您尚未登录，请先登录&quot;。
+
+
+
+    2. 案例2_敏感词汇过滤
+        * 需求：
+            1. 对day17_case案例录入的数据进行敏感词汇过滤
+            2. 敏感词汇参考《敏感词汇.txt》
+            3. 如果是敏感词汇，替换为 *** 
+
+        * 分析：
+            1. 对request对象进行增强。增强获取参数相关方法
+            2. 放行。传递代理对象
+
+
+        * 增强对象的功能：
+            * 设计模式：一些通用的解决固定问题的方式
+            1. 装饰模式
+            2. 代理模式
+                * 概念：
+                    1. 真实对象：被代理的对象
+                    2. 代理对象：
+                    3. 代理模式：代理对象代理真实对象，达到增强真实对象功能的目的
+                 * 实现方式：
+                     1. 静态代理：有一个类文件描述代理模式
+                     2. 动态代理：在内存中形成代理类
+                        * 实现步骤：
+                            1. 代理对象和真实对象实现相同的接口
+                            2. 代理对象 = Proxy.newProxyInstance();
+                            3. 使用代理对象调用方法。
+                            4. 增强方法
+
+                        * 增强方式：
+                            1. 增强参数列表
+                            2. 增强返回值类型
+                            3. 增强方法体执行逻辑    </code></pre><h2 id="Listener：监听器"><a href="#Listener：监听器" class="headerlink" title="Listener：监听器"></a>Listener：监听器</h2><pre><code>* 概念：web的三大组件之一。
+    * 事件监听机制
+        * 事件    ：一件事情
+        * 事件源 ：事件发生的地方
+        * 监听器 ：一个对象
+        * 注册监听：将事件、事件源、监听器绑定在一起。 当事件源上发生某个事件后，执行监听器代码
+
+
+* ServletContextListener:监听ServletContext对象的创建和销毁
+    * 方法：
+        * void contextDestroyed(ServletContextEvent sce) ：ServletContext对象被销毁之前会调用该方法
+        * void contextInitialized(ServletContextEvent sce) ：ServletContext对象创建后会调用该方法
+    * 步骤：
+        1. 定义一个类，实现ServletContextListener接口
+        2. 复写方法
+        3. 配置
+            1. web.xml
+                    &lt;listener&gt;
+                      &lt;listener-class&gt;cn.itcast.web.listener.ContextLoaderListener&lt;/listener-class&gt;
+                       &lt;/listener&gt;
+
+                    * 指定初始化参数&lt;context-param&gt;
+            2. 注解：
+                * @WebListener</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -486,7 +695,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-20 16:53:13" itemprop="dateModified" datetime="2020-04-20T16:53:13+08:00">2020-04-20</time>
+                <time title="Modified: 2020-04-22 09:02:32" itemprop="dateModified" datetime="2020-04-22T09:02:32+08:00">2020-04-22</time>
               </span>
 
           
@@ -2558,245 +2767,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/22/web%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Herman">
-      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Herman的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/22/web%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">web相关概念</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-22 10:01:53" itemprop="dateCreated datePublished" datetime="2020-03-22T10:01:53+08:00">2020-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-23 20:45:07" itemprop="dateModified" datetime="2020-03-23T20:45:07+08:00">2020-03-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><pre><code>1. web相关概念回顾
-2. web服务器软件
-3. servlet入门学习</code></pre><h2 id="web相关概念"><a href="#web相关概念" class="headerlink" title="web相关概念"></a>web相关概念</h2><pre><code>1. 软件架构
-    1. C/S : 客户端/服务器端
-    2. B/S : 浏览器/服务器端
-
-2. 资源分类
-    1. 静态资源 ： 所有用户访问后，得到的结果是一样的，称为静态资源，静态资源可以直接被浏览器解析
-        * 如： html,css,JavaScript
-    2. 动态资源
-        * 如：servlet/jsp,php,asp....
-
-3. 网络通信三要素
-    1. IP : 电子设备（计算机）在网络中的唯一标识。
-    2. 端口 ： 应用程序在计算机中的唯一标识。 0~65536
-    3. 传输协议 : 规定了数据传输的规则
-        1. 基础协议 ： 
-            1. tcp : 安全协议，三次握手。速度稍慢
-            2. udp : 不安全协议。速度快</code></pre><h2 id="web服务器软件"><a href="#web服务器软件" class="headerlink" title="web服务器软件"></a>web服务器软件</h2><pre><code>* 服务器：安装了服务器软件的计算机。
-* 服务器软件：接收用户的请求，处理请求，作出响应。
-* web服务器软件：接受用户的请求，处理请求，做出响应。
-    * 在web服务器软件中， 可以部署web项目， 让用户通过浏览器来访问这些项目。
-    * web容器
-
-* 常见的java相关的web服务器软件：
-    * webLogic: oracle公司，大型的JavaEE服务器，支持所有的JavaEE规范（收费）
-    * webSphere: IBM公司， 大型的JavaEE服务器， 支持所有的JavaEE规范（收费）
-    * JBOSS： JBOSS公司的， 大型的JavaEE服务器，支持所有的JavaEE规范（收费）
-    * Tomcat: Apache基金组织， 中小型的JaveEE服务器，仅仅支持少量的JavaEE规范servlet/jsp。开源的，免费的。
-
-* JavaEE：java语言在企业级开发中使用的技术规范的总和， 一共规定了13项大的规范    
-* 查看本地地址</code></pre><pre><code class="bash">$  ipconfig</code></pre>
-<pre><code>* 找进程端口号。</code></pre><pre><code class="bash">$  netstat -ano</code></pre>
-<h2 id="tomcat：web服务器软件"><a href="#tomcat：web服务器软件" class="headerlink" title="tomcat：web服务器软件"></a>tomcat：web服务器软件</h2><pre><code>* Tomcat：web服务器软件
-    1. 下载：http://tomcat.apache.org/
-    2. 安装：解压压缩包即可。
-        * 注意：安装目录建议不要有中文和空格
-    3. 卸载：删除目录就行了
-    4. 启动：
-        * bin/startup.bat ,双击运行该文件即可
-        * 访问：浏览器输入：http://localhost:8080 回车访问自己
-                          http://别人的ip:8080 访问别人
-
-        * 可能遇到的问题：
-            1. 黑窗口一闪而过：
-                * 原因： 没有正确配置JAVA_HOME环境变量
-                * 解决方案：正确配置JAVA_HOME环境变量
-
-            2. 启动报错：
-                1. 暴力：找到占用的端口号，并且找到对应的进程，杀死该进程
-                    * netstat -ano
-                2. 温柔：修改自身的端口号
-                    * conf/server.xml
-                    * &lt;Connector port=&quot;8888&quot; protocol=&quot;HTTP/1.1&quot;
-                       connectionTimeout=&quot;20000&quot;
-                       redirectPort=&quot;8445&quot; /&gt;
-                    * 一般会将tomcat的默认端口号修改为80。80端口号是http协议的默认端口号。
-                        * 好处：在访问时，就不用输入端口号
-    5. 关闭：
-        1. 正常关闭：
-            * bin/shutdown.bat
-            * ctrl+c
-        2. 强制关闭：
-            * 点击启动窗口的×
-    6. 配置:
-        * 部署项目的方式：
-            1. 直接将项目放到webapps目录下即可。
-                * /hello：项目的访问路径--&gt;虚拟目录
-                * 简化部署：将项目打成一个war包，再将war包放置到webapps目录下。
-                    * war包会自动解压缩
-
-            2. 配置conf/server.xml文件
-                在&lt;Host&gt;标签体中配置
-                &lt;Context docBase=&quot;D:\hello&quot; path=&quot;/hehe&quot; /&gt;
-                * docBase:项目存放的路径
-                * path：虚拟目录
-
-            3. 在conf\Catalina\localhost创建任意名称的xml文件。在文件中编写
-                &lt;Context docBase=&quot;D:\hello&quot; /&gt;
-                * 虚拟目录：xml文件的名称
-
-        * 静态项目和动态项目：
-            * 目录结构
-                * java动态项目的目录结构：
-                    -- 项目的根目录
-                        -- WEB-INF目录：
-                            -- web.xml：web项目的核心配置文件
-                            -- classes目录：放置字节码文件的目录
-                            -- lib目录：放置依赖的jar包
-
-
-        * 将Tomcat集成到IDEA中，并且创建JavaEE的项目，部署项目。</code></pre><h2 id="Servlet-server-applet"><a href="#Servlet-server-applet" class="headerlink" title="Servlet : server applet"></a>Servlet : server applet</h2><pre><code>* 概念：运行在服务器端的小程序
-* Servlet就是一个接口，定义了Java类的浏览器访问到（tomcat识别）的规则
-* 将来我们定义一个类，实现Servlet接口， 复写方法。
-
-* 快速入门：
-    1. 创建一个JavaEE项目
-    2. 定义一个类，实现servlet接口
-        * public class ServeltDemo1 implemetns Servlet
-    3. 实现接口的抽象方法
-    4. 配置Servlet
-        在web.xml中配置
-* 执行原理：
-    1. 当服务器接受到客户端浏览器的请求后，会解析请求URL路径，获取访问的Servlet的资源路径
-    2. 查找web.xml文件， 是否有对应的&lt;url-pattern&gt;的标签体内容
-    3. 如果有，则在找到对应的&lt;servlet-class&gt;全类名
-    4. tomcat会将字节码文件加载到内存，并且创建其对象
-    5. 调用其方法    
-* Servlet中的生命周期方法：
-    1. 被创建： 执行init方法，只执行一次
-    * Servlet什么时候被创建？
-    * 默认情况下， 第一次被访问时， servlet被创建
-    * 可以配置执行Servlet的创建时机。
-    *在&lt;servlet&gt;标签下配置
-        1. 第一次被访问时创建
-            * &lt;load-on-startup&gt;的值为负数
-        2. 在服务器启动时， 创建
-            * &lt;load-on-startup&gt;的值为0或正整数
-* Servlet的init方法，只执行一次，说明一个Servlet在内存中只存在一个对象，Servlet是单例的
-    * 多个用户同时访问时， 可能存在线程安全
-    * 解决： 尽量不要在Servlet中定义成员变量。即使定义了成员变量    ，也不要修改值            
-    2. 提供服务： 执行service方法，执行多次
-        * 每次访问Servelt时， Service方法只执行一次 
-    3. 被销毁： 执行derstroy方法， 只执行一次                        
-        * Servlet被销毁时执行。 服务器关闭时，Servlet被销毁
-        * 只有服务器关闭时， 才会执行destroy方法。
-        * destroy方法在servlet被销毁之前执行， 一般用于释放资源</code></pre><ul>
-<li><p>Servlet3.0:</p>
-<ul>
-<li>好处：</li>
-<li>支持注解配置。可以不需要web.xml了。</li>
-<li>步骤：</li>
-</ul>
-<ol>
-<li><p>创建JavaEE项目， 选择Servlet的版本3.0以上，可以不创建web.xml</p>
-</li>
-<li><p>定义一个类，实现Servlet接口</p>
-</li>
-<li><p>复写方法</p>
-</li>
-<li><p>在类上使用@WebServlet注解， 进行配置</p>
-<pre><code>@WebServlet(&quot;资源路径&quot;)
-
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface WebServlet {
-    String name() default &quot;&quot;;//相当于&lt;Servlet-name&gt;
-
-    String[] value() default {};//代表urlPatterns()属性配置
-
-    String[] urlPatterns() default {};//相当于&lt;url-pattern&gt;
-
-    int loadOnStartup() default -1;//相当于&lt;load-on-startup&gt;
-
-    WebInitParam[] initParams() default {};
-
-    boolean asyncSupported() default false;
-
-    String smallIcon() default &quot;&quot;;
-
-    String largeIcon() default &quot;&quot;;
-
-    String description() default &quot;&quot;;
-
-    String displayName() default &quot;&quot;;
-}</code></pre></li>
-</ol>
-</li>
-</ul>
-<h2 id="IDEA与tomcat的相关配置"><a href="#IDEA与tomcat的相关配置" class="headerlink" title="IDEA与tomcat的相关配置"></a>IDEA与tomcat的相关配置</h2><pre><code>1. IDEA 会为每一个tomcat部署的项目单独建立一份配置文件
-    * 查看控制台的log:Using CATALINA_BASE:&quot;          
-2. 工作空间项目 和 tomcat部署的web项目
-    * tomcat真正访问的是&quot;tomcat部署的web项目&quot;,&quot;tomcat部署的web项目&quot;，对应着&quot;工作空间项目&quot;的web目录下的所有资源
-    * WEB-INF 目录下的资源不能被浏览器直接访问
-3. 断点调试：使用“小虫子”启动 debug启动           </code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2867,7 +2837,7 @@ public @interface WebServlet {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
