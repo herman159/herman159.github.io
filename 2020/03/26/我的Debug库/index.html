@@ -28,7 +28,7 @@
 <meta property="og:description" content="2020&#x2F;3&#x2F;26    1. Properties properties &#x3D; new Properties();       &#x2F;&#x2F;properties.load(JDBCUtils.class.getResourceAsStream(“druid.properties”)); 注意这里别写错,忘了.getClassLoader()加载器       properties.load(JDBCU">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-26T09:17:20.000Z">
-<meta property="article:modified_time" content="2020-04-28T14:22:49.517Z">
+<meta property="article:modified_time" content="2020-05-01T02:06:12.706Z">
 <meta property="article:author" content="Herman">
 <meta name="twitter:card" content="summary">
 
@@ -134,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives<span class="badge">14</span></a>
+    <a href="/archives/" rel="section">Archives<span class="badge">16</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -198,7 +198,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-28 22:22:49" itemprop="dateModified" datetime="2020-04-28T22:22:49+08:00">2020-04-28</time>
+                <time title="Modified: 2020-05-01 10:06:12" itemprop="dateModified" datetime="2020-05-01T10:06:12+08:00">2020-05-01</time>
               </span>
 
           
@@ -242,7 +242,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
 <ol start="2">
 <li>问题：从后台获取到的message对象，其中 java.util.Date 类型的数据，前台需要格式化<br>解决： 1.首先引入标签库：<pre><code>   &lt;%@ taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot; %&gt;
 2. 在需要显示日期的地方调用fmt标签  
-   &lt;fmt:formatDate value=&quot;${message.m_date}&quot; pattern=&quot;yyyy-MM-dd&quot;/&gt; </code></pre> 走过的弯路：<br> 分析：前台显示的日期老为空，经分析应该是没有转换格式<br> 于是想到对于日期转换<br> SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");<br> System.out.println(sdf2.format(date));//2017-10-27<br> 但是前台这些代码不能写在标签中<br> 如果写在jsp中<br> <%<br>  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");<br>  System.out.println(sdf.format(${message_m_date}));//2017-10-27<br> %><br> 很明显这样写是错误的：<br> JSP声明（<%! %>）、脚本（<%%>）或者表达式（<%= %>）中的EL表达式是无效的<br> 就好像在servlet里写EL表达式肯定是错误的<br> 之后找到了解决办法：JSTL表达式中格式化日期<br> <fmt:formatDate value="${message.m_date}" pattern="yyyy-MM-dd"/><br> 但却报错了<br>According to TLD or attribute directive in tag file, attribute [value] does not accept any expressions 根据标签文件中的TLD或attribute指令，attribute [value]不接受任何表达式<br>查完后得知：<br>出现错误的原因是使用的是jstl1.2,在jstl1.0和jstp1.1、jstl1.2版本在使用标签库的时候存在一定的差别，在jstl1.0以后的版本uri都应该加上/jsp<br>自动导入的包<%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jstl/fmt&quot;</a> %>是错误的<br>应是<br>  <%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jsp/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/fmt&quot;</a> %></li>
+   &lt;fmt:formatDate value=&quot;${message.m_date}&quot; pattern=&quot;yyyy-MM-dd&quot;/&gt; </code></pre> 走过的弯路：<br> 分析：前台显示的日期老为空，经分析应该是没有转换格式<br> 于是想到对于日期转换<br> SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");<br> System.out.println(sdf2.format(date));//2017-10-27<br> 但是前台这些代码不能写在标签中<br> 如果写在jsp中<br> <%<br>  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");<br>  System.out.println(sdf.format(${message_m_date}));//2017-10-27<br> %><br> 很明显这样写是错误的：<br> JSP声明（<%! %>）、脚本（<%%>）或者表达式（<%= %>）中的EL表达式是无效的<br> 就好像在servlet里写EL表达式肯定是错误的<br> 之后找到了解决办法：JSTL表达式中格式化日期<br> <fmt:formatDate value="${message.m_date}" pattern="yyyy-MM-dd"/><br> 但却报错了<br>According to TLD or attribute directive in tag file, attribute [value] does not accept any expressions 根据标签文件中的TLD或attribute指令，attribute [value]不接受任何表达式<br>查完后得知：<br>出现错误的原因是使用的是jstl1.2,在jstl1.0和jstp1.1、jstl1.2版本在使用标签库的时候存在一定的差别，在jstl1.0以后的版本uri都应该加上/jsp<br>自动导入的包<%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jstl/fmt&quot;</a> %>是错误的<br>应是<br>  <%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jsp/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/fmt&quot;</a> %><br>2020/4/29<br> 同学的Navicat遇到1251 - Client does not support authentication protocol requested by server; consider upgrading MySQL client<br> mysql8 之前的版本中加密规则是mysql_native_password,而在mysql8之后,加密规则是caching_sha2_password,<br> 解决办法：<br> 两个命令行搞定：<br> <a href="https://www.jianshu.com/p/b338a2ffec0d" target="_blank" rel="noopener">https://www.jianshu.com/p/b338a2ffec0d</a><br> 或者降mysql版本 或升Navicat版本<br>2020/5/1<br>checked 属性设置或返回 checkbox 是否应被选中。<br>语法<br>checkboxObject.checked=true|false<br>不可写成 cbs[i].checked = checked;这样是不会选中的</li>
 </ol>
 
     </div>
@@ -338,7 +338,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

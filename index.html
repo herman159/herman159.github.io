@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives<span class="badge">14</span></a>
+    <a href="/archives/" rel="section">Archives<span class="badge">16</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -162,6 +162,1122 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/01/JavaScript%E6%A1%88%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/01/JavaScript%E6%A1%88%E4%BE%8B/" class="post-title-link" itemprop="url">JavaScript案例</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-01 16:33:21 / Modified: 16:47:53" itemprop="dateCreated datePublished" datetime="2020-05-01T16:33:21+08:00">2020-05-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="灯泡案例"><a href="#灯泡案例" class="headerlink" title="灯泡案例"></a>灯泡案例</h3><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电灯开关</title>
+
+</head>
+<body>
+
+<img id="light" src="img/off.gif">
+
+<script>
+    /*
+        分析：
+            1.获取图片对象
+            2.绑定单击事件
+            3.每次点击切换图片
+                * 规则：
+                    * 如果灯是开的 on,切换图片为 off
+                    * 如果灯是关的 off,切换图片为 on
+                * 使用标记flag来完成
+
+     */
+
+    //1.获取图片对象
+    var light = document.getElementById("light");
+
+    var flag = false;//代表灯是灭的。 off图片
+
+    //2.绑定单击事件
+    light.onclick = function(){
+        if(flag){//判断如果灯是开的，则灭掉
+            light.src = "img/off.gif";
+            flag = false;
+
+        }else{
+            //如果灯是灭的，则打开
+
+            light.src = "img/on.gif";
+            flag = true;
+        }
+
+
+    }
+</script>
+</body>
+</html>
+
+<h3 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h3><body>
+    <img id="img" src="img/banner_1.jpg" width="100%">
+    <script>
+        /*
+            分析：
+                1.在页面上使用img标签展示图片
+                2.定义一个方法，修改图片对象的src属性
+                3.定义一个定时器，每隔3秒调用方法一次。
+
+
+<pre><code>     */
+
+
+    //修改图片src属性
+    var number = 1;
+    function fun(){
+        number ++ ;
+        //判断number是否大于3
+        if(number &gt; 3){
+            number = 1;
+        }
+        //获取img对象
+        var img = document.getElementById(&quot;img&quot;);
+        img.src = &quot;img/banner_&quot;+number+&quot;.jpg&quot;;
+    }
+
+    //2.定义定时器
+    setInterval(fun,3000);
+
+&lt;/script&gt;</code></pre></body>
+</html>
+
+<h3 id="自动跳转"><a href="#自动跳转" class="headerlink" title="自动跳转"></a>自动跳转</h3><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动跳转</title>
+    <style>
+        p{
+            text-align: center;
+        }
+        span{
+            color:red;
+        }
+
+<pre><code>&lt;/style&gt;</code></pre></head>
+<body>
+    <p>
+        <span id="time">5</span>秒之后，自动跳转到首页...
+    </p>
+    <script>
+        /*
+            分析：
+               1.显示页面效果  <p>
+               2.倒计时读秒效果实现
+                   2.1 定义一个方法，获取span标签，修改span标签体内容，时间--
+                   2.2 定义一个定时器，1秒执行一次该方法
+               3.在方法中判断时间如果<= 0 ，则跳转到首页
+
+<pre><code>     */
+   // 2.倒计时读秒效果实现
+
+    var second = 5;
+    var time = document.getElementById(&quot;time&quot;);
+
+    //定义一个方法，获取span标签，修改span标签体内容，时间--
+    function showTime(){
+        second -- ;
+        //判断时间如果&lt;= 0 ，则跳转到首页
+        if(second &lt;= 0){
+            //跳转到首页
+            location.href = &quot;https://www.baidu.com&quot;;
+        }
+
+        time.innerHTML = second +&quot;&quot;;
+    }
+    //设置定时器，1秒执行一次该方法
+    setInterval(showTime,1000);
+&lt;/script&gt;</code></pre></body>
+</html>
+
+<h3 id="动态表格"><a href="#动态表格" class="headerlink" title="动态表格"></a>动态表格</h3><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态表格</title>
+
+<pre><code>&lt;style&gt;
+    table{
+        border: 1px solid;
+        margin: auto;
+        width: 500px;
+    }
+
+    td,th{
+        text-align: center;
+        border: 1px solid;
+    }
+    div{
+        text-align: center;
+        margin: 50px;
+    }
+&lt;/style&gt;</code></pre></head>
+<body>
+
+<div>
+    <input type="text" id="id" placeholder="请输入编号">
+    <input type="text" id="name"  placeholder="请输入姓名">
+    <input type="text" id="gender"  placeholder="请输入性别">
+    <input type="button" value="添加" id="btn_add">
+
+</div>
+
+
+<table>
+    <caption>学生信息表</caption>
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>令狐冲</td>
+        <td>男</td>
+        <td><a href="javascript:void(0);" onclick="delTr(this);">删除</a></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>任我行</td>
+        <td>男</td>
+        <td><a href="javascript:void(0);" onclick="delTr(this);">删除</a></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>岳不群</td>
+        <td>?</td>
+        <td><a href="javascript:void(0);" onclick="delTr(this);" >删除</a></td>
+    </tr>
+</table>
+<script>
+    /*
+        分析：
+            1.添加：
+                1. 给添加按钮绑定单击事件
+                2. 获取文本框的内容
+                3. 创建td，设置td的文本为文本框的内容。
+                4. 创建tr
+                5. 将td添加到tr中
+                6. 获取table，将tr添加到table中
+            2.删除：
+                1.确定点击的是哪一个超链接
+                    <a href="javascript:void(0);" onclick="delTr(this);" >删除</a>
+                2.怎么删除？
+                    removeChild():通过父节点删除子节点
+
+<pre><code> */
+
+//1.获取按钮</code></pre><p>   /* document.getElementById(“btn_add”).onclick = function(){<br>        //2.获取文本框的内容<br>        var id = document.getElementById(“id”).value;<br>        var name = document.getElementById(“name”).value;<br>        var gender = document.getElementById(“gender”).value;</p>
+<pre><code>    //3.创建td，赋值td的标签体
+    //id 的 td
+    var td_id = document.createElement(&quot;td&quot;);
+    var text_id = document.createTextNode(id);
+    td_id.appendChild(text_id);
+    //name 的 td
+    var td_name = document.createElement(&quot;td&quot;);
+    var text_name = document.createTextNode(name);
+    td_name.appendChild(text_name);
+    //gender 的 td
+    var td_gender = document.createElement(&quot;td&quot;);
+    var text_gender = document.createTextNode(gender);
+    td_gender.appendChild(text_gender);
+    //a标签的td
+    var td_a = document.createElement(&quot;td&quot;);
+    var ele_a = document.createElement(&quot;a&quot;);
+    ele_a.setAttribute(&quot;href&quot;,&quot;javascript:void(0);&quot;);
+    ele_a.setAttribute(&quot;onclick&quot;,&quot;delTr(this);&quot;);
+    var text_a = document.createTextNode(&quot;删除&quot;);
+    ele_a.appendChild(text_a);
+    td_a.appendChild(ele_a);
+
+    //4.创建tr
+    var tr = document.createElement(&quot;tr&quot;);
+    //5.添加td到tr中
+    tr.appendChild(td_id);
+    tr.appendChild(td_name);
+    tr.appendChild(td_gender);
+    tr.appendChild(td_a);
+    //6.获取table
+    var table = document.getElementsByTagName(&quot;table&quot;)[0];
+    table.appendChild(tr);
+}*/</code></pre><p>   //使用innerHTML添加<br>    document.getElementById(“btn_add”).onclick = function() {<br>        //2.获取文本框的内容<br>        var id = document.getElementById(“id”).value;<br>        var name = document.getElementById(“name”).value;<br>        var gender = document.getElementById(“gender”).value;</p>
+<pre><code>    //获取table
+    var table = document.getElementsByTagName(&quot;table&quot;)[0];
+
+    //追加一行
+    table.innerHTML += &quot;&lt;tr&gt;\n&quot; +
+        &quot;        &lt;td&gt;&quot;+id+&quot;&lt;/td&gt;\n&quot; +
+        &quot;        &lt;td&gt;&quot;+name+&quot;&lt;/td&gt;\n&quot; +
+        &quot;        &lt;td&gt;&quot;+gender+&quot;&lt;/td&gt;\n&quot; +
+        &quot;        &lt;td&gt;&lt;a href=\&quot;javascript:void(0);\&quot; onclick=\&quot;delTr(this);\&quot; &gt;删除&lt;/a&gt;&lt;/td&gt;\n&quot; +
+        &quot;    &lt;/tr&gt;&quot;;
+}
+
+
+//删除方法
+function delTr(obj){
+    var table = obj.parentNode.parentNode.parentNode;
+    var tr = obj.parentNode.parentNode;
+
+    table.removeChild(tr);
+}</code></pre><p></script></p>
+</body>
+</html>
+
+<h3 id="表格全选"><a href="#表格全选" class="headerlink" title="表格全选"></a>表格全选</h3><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态表格</title>
+
+<pre><code>&lt;style&gt;
+    table{
+        border: 1px solid;
+        margin: auto;
+        width: 500px;
+    }
+
+    td,th{
+        text-align: center;
+        border: 1px solid;
+    }
+    div{
+        text-align: center;
+        margin: 50px;
+    }
+&lt;/style&gt;</code></pre></head>
+<body>
+
+<div>
+    <input type="text" id="id" placeholder="请输入编号">
+    <input type="text" id="name"  placeholder="请输入姓名">
+    <input type="text" id="gender"  placeholder="请输入性别">
+    <input type="button" value="添加" id="btn_add">
+
+</div>
+
+
+<table>
+    <caption>学生信息表</caption>
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>令狐冲</td>
+        <td>男</td>
+        <td><a href="javascript:void(0);" onclick="delTr(this);">删除</a></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>任我行</td>
+        <td>男</td>
+        <td><a href="javascript:void(0);" onclick="delTr(this);">删除</a></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>岳不群</td>
+        <td>?</td>
+        <td><a href="javascript:void(0);" onclick="delTr(this);" >删除</a></td>
+    </tr>
+</table>
+
+
+<script>
+    /*
+        分析：
+            1.添加：
+                1. 给添加按钮绑定单击事件
+                2. 获取文本框的内容
+                3. 创建td，设置td的文本为文本框的内容。
+                4. 创建tr
+                5. 将td添加到tr中
+                6. 获取table，将tr添加到table中
+            2.删除：
+                1.确定点击的是哪一个超链接
+                    <a href="javascript:void(0);" onclick="delTr(this);" >删除</a>
+                2.怎么删除？
+                    removeChild():通过父节点删除子节点
+
+     */
+
+    //1.获取按钮
+   /* document.getElementById("btn_add").onclick = function(){
+        //2.获取文本框的内容
+        var id = document.getElementById("id").value;
+        var name = document.getElementById("name").value;
+        var gender = document.getElementById("gender").value;
+
+        //3.创建td，赋值td的标签体
+        //id 的 td
+        var td_id = document.createElement("td");
+        var text_id = document.createTextNode(id);
+        td_id.appendChild(text_id);
+        //name 的 td
+        var td_name = document.createElement("td");
+        var text_name = document.createTextNode(name);
+        td_name.appendChild(text_name);
+        //gender 的 td
+        var td_gender = document.createElement("td");
+        var text_gender = document.createTextNode(gender);
+        td_gender.appendChild(text_gender);
+        //a标签的td
+        var td_a = document.createElement("td");
+        var ele_a = document.createElement("a");
+        ele_a.setAttribute("href","javascript:void(0);");
+        ele_a.setAttribute("onclick","delTr(this);");
+        var text_a = document.createTextNode("删除");
+        ele_a.appendChild(text_a);
+        td_a.appendChild(ele_a);
+
+        //4.创建tr
+        var tr = document.createElement("tr");
+        //5.添加td到tr中
+        tr.appendChild(td_id);
+        tr.appendChild(td_name);
+        tr.appendChild(td_gender);
+        tr.appendChild(td_a);
+        //6.获取table
+        var table = document.getElementsByTagName("table")[0];
+        table.appendChild(tr);
+    }*/
+
+   //使用innerHTML添加
+    document.getElementById("btn_add").onclick = function() {
+        //2.获取文本框的内容
+        var id = document.getElementById("id").value;
+        var name = document.getElementById("name").value;
+        var gender = document.getElementById("gender").value;
+
+        //获取table
+        var table = document.getElementsByTagName("table")[0];
+
+        //追加一行
+        table.innerHTML += "<tr>\n" +
+            "        <td>"+id+"</td>\n" +
+            "        <td>"+name+"</td>\n" +
+            "        <td>"+gender+"</td>\n" +
+            "        <td><a href=\"javascript:void(0);\" onclick=\"delTr(this);\" >删除</a></td>\n" +
+            "    </tr>";
+    }
+
+
+    //删除方法
+    function delTr(obj){
+        var table = obj.parentNode.parentNode.parentNode;
+        var tr = obj.parentNode.parentNode;
+
+        table.removeChild(tr);
+    }
+</script>
+</body>
+</html>
+
+<h3 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h3><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+    body{
+        background: url("img/register_bg.png") no-repeat center;
+        padding-top: 25px;
+    }
+
+<pre><code>.rg_layout{
+    width: 900px;
+    height: 500px;
+    border: 8px solid #EEEEEE;
+    background-color: white;
+    /*让div水平居中*/
+    margin: auto;
+}
+
+.rg_left{
+    /*border: 1px solid red;*/
+    float: left;
+    margin: 15px;
+}
+.rg_left &gt; p:first-child{
+    color:#FFD026;
+    font-size: 20px;
+}
+
+.rg_left &gt; p:last-child{
+    color:#A6A6A6;
+    font-size: 20px;
+
+}
+
+
+.rg_center{
+    float: left;
+   /* border: 1px solid red;*/
+
+}
+
+.rg_right{
+    /*border: 1px solid red;*/
+    float: right;
+    margin: 15px;
+}
+
+.rg_right &gt; p:first-child{
+    font-size: 15px;
+
+}
+.rg_right p a {
+    color:pink;
+}
+
+.td_left{
+    width: 100px;
+    text-align: right;
+    height: 45px;
+}
+.td_right{
+    padding-left: 50px ;
+}
+
+#username,#password,#email,#name,#tel,#birthday,#checkcode{
+    width: 251px;
+    height: 32px;
+    border: 1px solid #A6A6A6 ;
+    /*设置边框圆角*/
+    border-radius: 5px;
+    padding-left: 10px;
+}
+#checkcode{
+    width: 110px;
+}
+
+#img_check{
+    height: 32px;
+    vertical-align: middle;
+}
+
+#btn_sub{
+    width: 150px;
+    height: 40px;
+    background-color: #FFD026;
+    border: 1px solid #FFD026 ;
+}
+.error{
+    color:red;
+}
+#td_sub{
+    padding-left: 150px;
+}</code></pre><p></style></p>
+<script>
+
+    /*
+        分析：
+            1.给表单绑定onsubmit事件。监听器中判断每一个方法校验的结果。
+                如果都为true，则监听器方法返回true
+                如果有一个为false，则监听器方法返回false
+
+            2.定义一些方法分别校验各个表单项。
+            3.给各个表单项绑定onblur事件。
+
+
+
+     */
+
+    window.onload = function(){
+        //1.给表单绑定onsubmit事件
+        document.getElementById("form").onsubmit = function(){
+            //调用用户校验方法   chekUsername();
+            //调用密码校验方法   chekPassword();
+            //return checkUsername() && checkPassword();
+
+            return checkUsername() && checkPassword();
+        }
+
+        //给用户名和密码框分别绑定离焦事件
+        document.getElementById("username").onblur = checkUsername;
+        document.getElementById("password").onblur = checkPassword;
+    }
+
+    //校验用户名
+    function checkUsername(){
+        //1.获取用户名的值
+        var username = document.getElementById("username").value;
+        //2.定义正则表达式
+        var reg_username = /^\w{6,12}$/;
+        //3.判断值是否符合正则的规则
+        var flag = reg_username.test(username);
+        //4.提示信息
+        var s_username = document.getElementById("s_username");
+
+        if(flag){
+            //提示绿色对勾
+            s_username.innerHTML = "<img width='35' height='25' src='img/gou.png'/>";
+        }else{
+            //提示红色用户名有误
+            s_username.innerHTML = "用户名格式有误";
+        }
+        return flag;
+    }
+
+    //校验密码
+    function checkPassword(){
+        //1.获取用户名的值
+        var password = document.getElementById("password").value;
+        //2.定义正则表达式
+        var reg_password = /^\w{6,12}$/;
+        //3.判断值是否符合正则的规则
+        var flag = reg_password.test(password);
+        //4.提示信息
+        var s_password = document.getElementById("s_password");
+
+        if(flag){
+            //提示绿色对勾
+            s_password.innerHTML = "<img width='35' height='25' src='img/gou.png'/>";
+        }else{
+            //提示红色用户名有误
+            s_password.innerHTML = "密码格式有误";
+        }
+        return flag;
+    }
+
+
+
+</script>
+</head>
+<body>
+
+<div class="rg_layout">
+    <div class="rg_left">
+        <p>新用户注册</p>
+        <p>USER REGISTER</p>
+
+   </div>
+    <div class="rg_center">
+        <div class="rg_form">
+            <!--定义表单 form-->
+            <form action="#" id="form" method="get">
+                <table>
+                    <tr>
+                        <td class="td_left"><label for="username">用户名</label></td>
+                        <td class="td_right">
+                            <input type="text" name="username" id="username" placeholder="请输入用户名">
+                            <span id="s_username" class="error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left"><label for="password">密码</label></td>
+                        <td class="td_right">
+                            <input type="password" name="password" id="password" placeholder="请输入密码">
+                            <span id="s_password" class="error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left"><label for="email">Email</label></td>
+                        <td class="td_right"><input type="email" name="email" id="email" placeholder="请输入邮箱"></td>
+                    </tr>
+                    <tr>
+                        <td class="td_left"><label for="name">姓名</label></td>
+                        <td class="td_right"><input type="text" name="name" id="name" placeholder="请输入姓名"></td>
+                    </tr>
+                    <tr>
+                        <td class="td_left"><label for="tel">手机号</label></td>
+                        <td class="td_right"><input type="text" name="tel" id="tel" placeholder="请输入手机号"></td>
+                    </tr>
+                    <tr>
+                        <td class="td_left"><label>性别</label></td>
+                        <td class="td_right">
+                            <input type="radio" name="gender" value="male" checked> 男
+                            <input type="radio" name="gender" value="female"> 女
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_left"><label for="birthday">出生日期</label></td>
+                        <td class="td_right"><input type="date" name="birthday" id="birthday" placeholder="请输入出生日期"></td>
+                    </tr>
+                    <tr>
+                        <td class="td_left"><label for="checkcode" >验证码</label></td>
+                        <td class="td_right"><input type="text" name="checkcode" id="checkcode" placeholder="请输入验证码">
+                            <img id="img_check" src="img/verify_code.jpg">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="td_sub"><input type="submit" id="btn_sub" value="注册"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="rg_right">
+        <p>已有账号?<a href="#">立即登录</a></p>
+    </div>
+</div>
+</body>
+</html>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/01/Bootstrap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/01/Bootstrap/" class="post-title-link" itemprop="url">Bootstrap</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-01 16:24:53 / Modified: 16:31:14" itemprop="dateCreated datePublished" datetime="2020-05-01T16:24:53+08:00">2020-05-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><pre><code>1. Bootstrap</code></pre><h2 id="Bootstrap："><a href="#Bootstrap：" class="headerlink" title="Bootstrap："></a>Bootstrap：</h2><pre><code>1. 概念： 一个前端开发的框架，Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JavaScript 的，它简洁灵活，使得 Web 开发更加快捷。
+    * 框架:一个半成品软件，开发人员可以在框架基础上，在进行开发，简化编码。
+    * 好处：
+        1. 定义了很多的css样式和js插件。我们开发人员直接可以使用这些样式和插件得到丰富的页面效果。
+        2. 响应式布局。
+            * 同一套页面可以兼容不同分辨率的设备。
+
+
+2. 快速入门
+    1. 下载Bootstrap
+    2. 在项目中将这三个文件夹复制
+    3. 创建html页面，引入必要的资源文件
+
+
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang=&quot;zh-CN&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        &lt;!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ --&gt;
+        &lt;title&gt;Bootstrap HelloWorld&lt;/title&gt;
+
+        &lt;!-- Bootstrap --&gt;
+        &lt;link href=&quot;css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+
+        &lt;!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) --&gt;
+        &lt;script src=&quot;js/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+        &lt;!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 --&gt;
+        &lt;script src=&quot;js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1&gt;你好，世界！&lt;/h1&gt;
+
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre><h2 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h2><pre><code>* 同一套页面可以兼容不同分辨率的设备。
+* 实现：依赖于栅格系统：将一行平均分成12个格子，可以指定元素占几个格子
+* 步骤：
+    1. 定义容器。相当于之前的table、
+        * 容器分类：
+            1. container：两边留白
+            2. container-fluid：每一种设备都是100%宽度
+    2. 定义行。相当于之前的tr   样式：row
+    3. 定义元素。指定该元素在不同的设备上，所占的格子数目。样式：col-设备代号-格子数目
+        * 设备代号：
+            1. xs：超小屏幕 手机 (&lt;768px)：col-xs-12
+            2. sm：小屏幕 平板 (≥768px)
+            3. md：中等屏幕 桌面显示器 (≥992px)
+            4. lg：大屏幕 大桌面显示器 (≥1200px)
+
+    * 注意：
+        1. 一行中如果格子数目超过12，则超出部分自动换行。
+        2. 栅格类属性可以向上兼容。栅格类适用于与屏幕宽度大于或等于分界点大小的设备。
+        3. 如果真实设备宽度小于了设置栅格类属性的设备代码的最小值，会一个元素沾满一整行。</code></pre><h2 id="CSS样式和JS插件"><a href="#CSS样式和JS插件" class="headerlink" title="CSS样式和JS插件"></a>CSS样式和JS插件</h2><pre><code>1. 全局CSS样式：
+    * 按钮：class=&quot;btn btn-default&quot;
+    * 图片：
+        *  class=&quot;img-responsive&quot;：图片在任意尺寸都占100%
+        *  图片形状
+            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-rounded&quot;&gt;：方形
+            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-circle&quot;&gt; ： 圆形
+            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-thumbnail&quot;&gt; ：相框
+    * 表格
+        * table
+        * table-bordered
+        * table-hover
+    * 表单
+        * 给表单项添加：class=&quot;form-control&quot; 
+2. 组件：
+    * 导航条
+    * 分页条
+3. 插件：
+    * 轮播图</code></pre><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+    &lt;!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ --&gt;
+    &lt;title&gt;Bootstrap HelloWorld&lt;/title&gt;
+
+    &lt;!-- Bootstrap --&gt;
+    &lt;link href=&quot;css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+
+    &lt;!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) --&gt;
+    &lt;script src=&quot;js/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 --&gt;
+    &lt;script src=&quot;js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        .paddtop{
+            padding-top: 10px;
+        }
+        .search-btn{
+            float: left;
+            border:1px solid #ffc900;
+            width: 90px;
+            height: 35px;
+            background-color:#ffc900 ;
+            text-align: center;
+            line-height: 35px;
+            margin-top: 15px;
+        }
+
+        .search-input{
+            float: left;
+            border:2px solid #ffc900;
+            width: 400px;
+            height: 35px;
+            padding-left: 5px;
+            margin-top: 15px;
+        }
+        .jx{
+            border-bottom: 2px solid #ffc900;
+            padding: 5px;
+        }
+        .company{
+            height: 40px;
+            background-color: #ffc900;
+            text-align: center;
+            line-height:40px ;
+            font-size: 8px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+   &lt;!-- 1.页眉部分--&gt;
+   &lt;header class=&quot;container-fluid&quot;&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;img src=&quot;img/top_banner.jpg&quot; class=&quot;img-responsive&quot;&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row paddtop&quot;&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+               &lt;img src=&quot;img/logo.jpg&quot; class=&quot;img-responsive&quot;&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-5&quot;&gt;
+               &lt;input class=&quot;search-input&quot; placeholder=&quot;请输入线路名称&quot;&gt;
+               &lt;a class=&quot;search-btn&quot; href=&quot;#&quot;&gt;搜索&lt;/a&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-4&quot;&gt;
+               &lt;img src=&quot;img/hotel_tel.png&quot; class=&quot;img-responsive&quot;&gt;
+           &lt;/div&gt;
+
+       &lt;/div&gt;
+       &lt;!--导航栏--&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;nav class=&quot;navbar navbar-default&quot;&gt;
+               &lt;div class=&quot;container-fluid&quot;&gt;
+                   &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
+                   &lt;div class=&quot;navbar-header&quot;&gt;
+                       &lt;!-- 定义汉堡按钮 --&gt;
+                       &lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#bs-example-navbar-collapse-1&quot; aria-expanded=&quot;false&quot;&gt;
+                           &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+                           &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                           &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                           &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                       &lt;/button&gt;
+                       &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;首页&lt;/a&gt;
+                   &lt;/div&gt;
+
+                   &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
+                   &lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;
+                       &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+                           &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Link &lt;span class=&quot;sr-only&quot;&gt;(current)&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+
+                       &lt;/ul&gt;
+                   &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+               &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
+           &lt;/nav&gt;
+
+       &lt;/div&gt;
+
+       &lt;!--轮播图--&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;div id=&quot;carousel-example-generic&quot; class=&quot;carousel slide&quot; data-ride=&quot;carousel&quot;&gt;
+               &lt;!-- Indicators --&gt;
+               &lt;ol class=&quot;carousel-indicators&quot;&gt;
+                   &lt;li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;0&quot; class=&quot;active&quot;&gt;&lt;/li&gt;
+                   &lt;li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;1&quot;&gt;&lt;/li&gt;
+                   &lt;li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;2&quot;&gt;&lt;/li&gt;
+               &lt;/ol&gt;
+
+               &lt;!-- Wrapper for slides --&gt;
+               &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+                   &lt;div class=&quot;item active&quot;&gt;
+                       &lt;img src=&quot;img/banner_1.jpg&quot; alt=&quot;...&quot;&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;item&quot;&gt;
+                       &lt;img src=&quot;img/banner_2.jpg&quot; alt=&quot;...&quot;&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;item&quot;&gt;
+                       &lt;img src=&quot;img/banner_3.jpg&quot; alt=&quot;...&quot;&gt;
+                   &lt;/div&gt;
+
+               &lt;/div&gt;
+
+               &lt;!-- Controls --&gt;
+               &lt;a class=&quot;left carousel-control&quot; href=&quot;#carousel-example-generic&quot; role=&quot;button&quot; data-slide=&quot;prev&quot;&gt;
+                   &lt;span class=&quot;glyphicon glyphicon-chevron-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                   &lt;span class=&quot;sr-only&quot;&gt;Previous&lt;/span&gt;
+               &lt;/a&gt;
+               &lt;a class=&quot;right carousel-control&quot; href=&quot;#carousel-example-generic&quot; role=&quot;button&quot; data-slide=&quot;next&quot;&gt;
+                   &lt;span class=&quot;glyphicon glyphicon-chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                   &lt;span class=&quot;sr-only&quot;&gt;Next&lt;/span&gt;
+               &lt;/a&gt;
+           &lt;/div&gt;
+
+
+
+       &lt;/div&gt;
+
+   &lt;/header&gt;
+   &lt;!-- 2.主体部分--&gt;
+   &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;row jx&quot;&gt;
+            &lt;img src=&quot;img/icon_5.jpg&quot;&gt;
+            &lt;span&gt;黑马精选&lt;/span&gt;
+        &lt;/div&gt;
+
+       &lt;div class=&quot;row paddtop&quot;&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+                &lt;div class=&quot;thumbnail&quot;&gt;
+                    &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                    &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                    &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                &lt;/div&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+               &lt;div class=&quot;thumbnail&quot;&gt;
+                   &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                   &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                   &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+               &lt;/div&gt;
+
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+
+               &lt;div class=&quot;thumbnail&quot;&gt;
+                   &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                   &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                   &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+               &lt;/div&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+
+               &lt;div class=&quot;thumbnail&quot;&gt;
+                   &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                   &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                   &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+               &lt;/div&gt;
+           &lt;/div&gt;
+
+
+       &lt;/div&gt;
+       &lt;div class=&quot;row jx&quot;&gt;
+           &lt;img src=&quot;img/icon_6.jpg&quot;&gt;
+           &lt;span&gt;国内游&lt;/span&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row paddtop&quot;&gt;
+           &lt;div class=&quot;col-md-4&quot;&gt;
+               &lt;img src=&quot;img/guonei_1.jpg&quot;&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-8&quot;&gt;
+               &lt;div class=&quot;row&quot;&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+
+                   &lt;/div&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+
+               &lt;/div&gt;
+               &lt;div class=&quot;row&quot;&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+
+                   &lt;/div&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+
+
+               &lt;/div&gt;
+
+           &lt;/div&gt;
+
+       &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;!-- 3.页脚部分--&gt;
+   &lt;footer class=&quot;container-fluid&quot;&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;img src=&quot;img/footer_service.png&quot; class=&quot;img-responsive&quot;&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row company&quot;&gt;
+           江苏传智播客教育科技股份有限公司 版权所有Copyright 2006-2018, All Rights Reserved 苏ICP备16007882
+       &lt;/div&gt;
+
+   &lt;/footer&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1009,7 +2125,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-28 22:22:49" itemprop="dateModified" datetime="2020-04-28T22:22:49+08:00">2020-04-28</time>
+                <time title="Modified: 2020-05-01 10:06:12" itemprop="dateModified" datetime="2020-05-01T10:06:12+08:00">2020-05-01</time>
               </span>
 
           
@@ -1053,7 +2169,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
 <ol start="2">
 <li>问题：从后台获取到的message对象，其中 java.util.Date 类型的数据，前台需要格式化<br>解决： 1.首先引入标签库：<pre><code>   &lt;%@ taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot; %&gt;
 2. 在需要显示日期的地方调用fmt标签  
-   &lt;fmt:formatDate value=&quot;${message.m_date}&quot; pattern=&quot;yyyy-MM-dd&quot;/&gt; </code></pre> 走过的弯路：<br> 分析：前台显示的日期老为空，经分析应该是没有转换格式<br> 于是想到对于日期转换<br> SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");<br> System.out.println(sdf2.format(date));//2017-10-27<br> 但是前台这些代码不能写在标签中<br> 如果写在jsp中<br> <%<br>  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");<br>  System.out.println(sdf.format(${message_m_date}));//2017-10-27<br> %><br> 很明显这样写是错误的：<br> JSP声明（<%! %>）、脚本（<%%>）或者表达式（<%= %>）中的EL表达式是无效的<br> 就好像在servlet里写EL表达式肯定是错误的<br> 之后找到了解决办法：JSTL表达式中格式化日期<br> <fmt:formatDate value="${message.m_date}" pattern="yyyy-MM-dd"/><br> 但却报错了<br>According to TLD or attribute directive in tag file, attribute [value] does not accept any expressions 根据标签文件中的TLD或attribute指令，attribute [value]不接受任何表达式<br>查完后得知：<br>出现错误的原因是使用的是jstl1.2,在jstl1.0和jstp1.1、jstl1.2版本在使用标签库的时候存在一定的差别，在jstl1.0以后的版本uri都应该加上/jsp<br>自动导入的包<%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jstl/fmt&quot;</a> %>是错误的<br>应是<br>  <%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jsp/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/fmt&quot;</a> %></li>
+   &lt;fmt:formatDate value=&quot;${message.m_date}&quot; pattern=&quot;yyyy-MM-dd&quot;/&gt; </code></pre> 走过的弯路：<br> 分析：前台显示的日期老为空，经分析应该是没有转换格式<br> 于是想到对于日期转换<br> SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");<br> System.out.println(sdf2.format(date));//2017-10-27<br> 但是前台这些代码不能写在标签中<br> 如果写在jsp中<br> <%<br>  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");<br>  System.out.println(sdf.format(${message_m_date}));//2017-10-27<br> %><br> 很明显这样写是错误的：<br> JSP声明（<%! %>）、脚本（<%%>）或者表达式（<%= %>）中的EL表达式是无效的<br> 就好像在servlet里写EL表达式肯定是错误的<br> 之后找到了解决办法：JSTL表达式中格式化日期<br> <fmt:formatDate value="${message.m_date}" pattern="yyyy-MM-dd"/><br> 但却报错了<br>According to TLD or attribute directive in tag file, attribute [value] does not accept any expressions 根据标签文件中的TLD或attribute指令，attribute [value]不接受任何表达式<br>查完后得知：<br>出现错误的原因是使用的是jstl1.2,在jstl1.0和jstp1.1、jstl1.2版本在使用标签库的时候存在一定的差别，在jstl1.0以后的版本uri都应该加上/jsp<br>自动导入的包<%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jstl/fmt&quot;</a> %>是错误的<br>应是<br>  <%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jsp/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/fmt&quot;</a> %><br>2020/4/29<br> 同学的Navicat遇到1251 - Client does not support authentication protocol requested by server; consider upgrading MySQL client<br> mysql8 之前的版本中加密规则是mysql_native_password,而在mysql8之后,加密规则是caching_sha2_password,<br> 解决办法：<br> 两个命令行搞定：<br> <a href="https://www.jianshu.com/p/b338a2ffec0d" target="_blank" rel="noopener">https://www.jianshu.com/p/b338a2ffec0d</a><br> 或者降mysql版本 或升Navicat版本<br>2020/5/1<br>checked 属性设置或返回 checkbox 是否应被选中。<br>语法<br>checkboxObject.checked=true|false<br>不可写成 cbs[i].checked = checked;这样是不会选中的</li>
 </ol>
 
       
@@ -1665,7 +2781,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-03 15:09:57" itemprop="dateModified" datetime="2020-04-03T15:09:57+08:00">2020-04-03</time>
+                <time title="Modified: 2020-05-01 10:43:07" itemprop="dateModified" datetime="2020-05-01T10:43:07+08:00">2020-05-01</time>
               </span>
 
           
@@ -1679,912 +2795,8 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>快捷键 功能<br>Alt+Enter 导入包，自动修正代码<br>Ctrl+Y 删除光标所在行<br>Ctrl+D 复制光标所在行的内容，插入光标位置下面<br>Ctrl+Alt+L 格式化代码<br>Ctrl+/ 单行注释<br>Ctrl+Shift+/ 选中代码注释，多行注释，再按取消注释<br>Alt+Ins 自动生成代码，toString，get，set等方法<br>Alt+Shift+ 上下箭头 移动当前代码行<br>Alt+ctrl+t 添加try catch</p>
+          <p>快捷键 功能<br>Alt+Enter 导入包，自动修正代码<br>Ctrl+Y 删除光标所在行<br>Ctrl+D 复制光标所在行的内容，插入光标位置下面<br>Ctrl+Alt+L 格式化代码<br>Ctrl+/ 单行注释<br>Ctrl+Shift+/ 选中代码注释，多行注释，再按取消注释<br>Alt+Ins 自动生成代码，toString，get，set等方法<br>Alt+Shift+ 上下箭头 移动当前代码行<br>Alt+ctrl+t 添加try catch<br>Ctrl+R 替换 这个用的小心<br>Ctrl+H 查找<br>Ctrl+P 查看参数</p>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/24/JDBC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Herman">
-      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Herman的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/24/JDBC/" class="post-title-link" itemprop="url">JDBC</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-24 21:19:49" itemprop="dateCreated datePublished" datetime="2020-03-24T21:19:49+08:00">2020-03-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-25 14:45:44" itemprop="dateModified" datetime="2020-03-25T14:45:44+08:00">2020-03-25</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><pre><code>1. JDBC基本概念
-2. 快速入门
-3. 对JDBC中各个接口和类详解</code></pre><h2 id="JDBC："><a href="#JDBC：" class="headerlink" title="JDBC："></a>JDBC：</h2><pre><code>1. 概念：Java DataBase Connectivity  Java 数据库连接， Java语言操作数据库
-    * JDBC本质：其实是官方（sun公司）定义的一套操作所有关系型数据库的规则，即接口。各个数据库厂商去实现这套接口，提供数据库驱动jar包。我们可以使用这套接口（JDBC）编程，真正执行的代码是驱动jar包中的实现类。
-
-2. 快速入门：
-    * 步骤：
-        1. 导入驱动jar包 mysql-connector-java-5.1.37-bin.jar
-            1.复制mysql-connector-java-5.1.37-bin.jar到项目的libs目录下
-            2.右键--&gt;Add As Library
-        2. 注册驱动
-        3. 获取数据库连接对象 Connection
-        4. 定义sql
-        5. 获取执行sql语句的对象 Statement
-        6. 执行sql，接受返回结果
-        7. 处理结果
-        8. 释放资源
-
-    * 代码实现：
-          //1. 导入驱动jar包
-        //2.注册驱动
-        Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
-        //3.获取数据库连接对象
-        Connection conn = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/db3&quot;, &quot;root&quot;, &quot;root&quot;);
-        //4.定义sql语句
-        String sql = &quot;update account set balance = 500 where id = 1&quot;;
-        //5.获取执行sql的对象 Statement
-        Statement stmt = conn.createStatement();
-        //6.执行sql
-        int count = stmt.executeUpdate(sql);
-        //7.处理结果
-        System.out.println(count);
-        //8.释放资源
-        stmt.close();
-        conn.close();
-
-3. 详解各个对象：
-    1. DriverManager：驱动管理对象
-        * 功能：
-            1. 注册驱动：告诉程序该使用哪一个数据库驱动jar
-                static void registerDriver(Driver driver) :注册与给定的驱动程序 DriverManager 。 
-                写代码使用：  Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
-                通过查看源码发现：在com.mysql.jdbc.Driver类中存在静态代码块
-                 static {
-                        try {
-                            java.sql.DriverManager.registerDriver(new Driver());
-                        } catch (SQLException E) {
-                            throw new RuntimeException(&quot;Can&apos;t register driver!&quot;);
-                        }
-                    }
-
-                注意：mysql5之后的驱动jar包可以省略注册驱动的步骤。
-            2. 获取数据库连接：
-                * 方法：static Connection getConnection(String url, String user, String password) 
-                * 参数：
-                    * url：指定连接的路径
-                        * 语法：jdbc:mysql://ip地址(域名):端口号/数据库名称
-                        * 例子：jdbc:mysql://localhost:3306/db3
-                        * 细节：如果连接的是本机mysql服务器，并且mysql服务默认端口是3306，则url可以简写为：jdbc:mysql:///数据库名称
-                    * user：用户名
-                    * password：密码 
-    2. Connection：数据库连接对象
-        1. 功能：
-            1. 获取执行sql 的对象
-                * Statement createStatement()
-                * PreparedStatement prepareStatement(String sql)  
-            2. 管理事务：
-                * 开启事务：setAutoCommit(boolean autoCommit) ：调用该方法设置参数为false，即开启事务
-                * 提交事务：commit() 
-                * 回滚事务：rollback() 
-    3. Statement：执行sql的对象
-        1. 执行sql
-            1. boolean execute(String sql) ：可以执行任意的sql 了解 
-            2. int executeUpdate(String sql) ：执行DML（insert、update、delete）语句、DDL(create，alter、drop)语句
-                * 返回值：影响的行数，可以通过这个影响的行数判断DML语句是否执行成功 返回值&gt;0的则执行成功，反之，则失败。
-            3. ResultSet executeQuery(String sql)  ：执行DQL（select)语句
-        2. 练习：
-            1. account表 添加一条记录
-            2. account表 修改记录
-            3. account表 删除一条记录
-
-            代码：
-                Statement stmt = null;
-                Connection conn = null;
-                try {
-                    //1. 注册驱动
-                    Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
-                    //2. 定义sql
-                    String sql = &quot;insert into account values(null,&apos;王五&apos;,3000)&quot;;
-                    //3.获取Connection对象
-                    conn = DriverManager.getConnection(&quot;jdbc:mysql:///db3&quot;, &quot;root&quot;, &quot;root&quot;);
-                    //4.获取执行sql的对象 Statement
-                    stmt = conn.createStatement();
-                    //5.执行sql
-                    int count = stmt.executeUpdate(sql);//影响的行数
-                    //6.处理结果
-                    System.out.println(count);
-                    if(count &gt; 0){
-                        System.out.println(&quot;添加成功！&quot;);
-                    }else{
-                        System.out.println(&quot;添加失败！&quot;);
-                    }
-
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }finally {
-                    //stmt.close();
-                    //7. 释放资源
-                    //避免空指针异常
-                    if(stmt != null){
-                        try {
-                            stmt.close();
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    if(conn != null){
-                        try {
-                            conn.close();
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-    4. ResultSet：结果集对象,封装查询结果
-        * boolean next(): 游标向下移动一行，判断当前行是否是最后一行末尾(是否有数据)，如果是，则返回false，如果不是则返回true
-        * getXxx(参数):获取数据
-            * Xxx：代表数据类型   如： int getInt() ,    String getString()
-            * 参数：
-                1. int：代表列的编号,从1开始   如： getString(1)
-                2. String：代表列名称。 如： getDouble(&quot;balance&quot;)
-
-        * 注意：
-            * 使用步骤：
-                1. 游标向下移动一行
-                2. 判断是否有数据
-                3. 获取数据
-
-               //循环判断游标是否是最后一行末尾。
-                while(rs.next()){
-                    //获取数据
-                    //6.2 获取数据
-                    int id = rs.getInt(1);
-                    String name = rs.getString(&quot;name&quot;);
-                    double balance = rs.getDouble(3);
-
-                    System.out.println(id + &quot;---&quot; + name + &quot;---&quot; + balance);
-                }
-
-        * 练习：
-            * 定义一个方法，查询emp表的数据将其封装为对象，然后装载集合，返回。
-                1. 定义Emp类
-                2. 定义方法 public List&lt;Emp&gt; findAll(){}
-                3. 实现方法 select * from emp;
-
-    5. PreparedStatement：执行sql的对象
-        1. SQL注入问题：在拼接sql时，有一些sql的特殊关键字参与字符串的拼接。会造成安全性问题
-            1. 输入用户随便，输入密码：a&apos; or &apos;a&apos; = &apos;a
-            2. sql：select * from user where username = &apos;fhdsjkf&apos; and password = &apos;a&apos; or &apos;a&apos; = &apos;a&apos; 
-
-        2. 解决sql注入问题：使用PreparedStatement对象来解决
-        3. 预编译的SQL：参数使用?作为占位符
-        4. 步骤：
-            1. 导入驱动jar包 mysql-connector-java-5.1.37-bin.jar
-            2. 注册驱动
-            3. 获取数据库连接对象 Connection
-            4. 定义sql
-                * 注意：sql的参数使用？作为占位符。 如：select * from user where username = ? and password = ?;
-            5. 获取执行sql语句的对象 PreparedStatement  Connection.prepareStatement(String sql) 
-            6. 给？赋值：
-                * 方法： setXxx(参数1,参数2)
-                    * 参数1：？的位置编号 从1 开始
-                    * 参数2：？的值
-            7. 执行sql，接受返回结果，不需要传递sql语句
-            8. 处理结果
-            9. 释放资源
-
-        5. 注意：后期都会使用PreparedStatement来完成增删改查的所有操作
-            1. 可以防止SQL注入
-            2. 效率更高</code></pre><h2 id="抽取JDBC工具类-：-JDBCUtils"><a href="#抽取JDBC工具类-：-JDBCUtils" class="headerlink" title="抽取JDBC工具类 ： JDBCUtils"></a>抽取JDBC工具类 ： JDBCUtils</h2><pre><code>* 目的：简化书写
-* 分析：
-    1. 注册驱动也抽取
-    2. 抽取一个方法获取连接对象
-        * 需求：不想传递参数（麻烦），还得保证工具类的通用性。
-        * 解决：配置文件
-            jdbc.properties
-                url=
-                user=
-                password=
-
-
-    3. 抽取一个方法释放资源
-
-* 代码实现：
-    public class JDBCUtils {
-    private static String url;
-    private static String user;
-    private static String password;
-    private static String driver;
-    /**
-     * 文件的读取，只需要读取一次即可拿到这些值。使用静态代码块
-     */
-    static{
-        //读取资源文件，获取值。
-
-        try {
-            //1. 创建Properties集合类。
-            Properties pro = new Properties();
-
-            //获取src路径下的文件的方式---&gt;ClassLoader 类加载器
-            ClassLoader classLoader = JDBCUtils.class.getClassLoader();
-            URL res  = classLoader.getResource(&quot;jdbc.properties&quot;);
-            String path = res.getPath();
-            System.out.println(path);///D:/IdeaProjects/itcast/out/production/day04_jdbc/jdbc.properties
-            //2. 加载文件
-           // pro.load(new FileReader(&quot;D:\\IdeaProjects\\itcast\\day04_jdbc\\src\\jdbc.properties&quot;));
-            pro.load(new FileReader(path));
-
-            //3. 获取数据，赋值
-            url = pro.getProperty(&quot;url&quot;);
-            user = pro.getProperty(&quot;user&quot;);
-            password = pro.getProperty(&quot;password&quot;);
-            driver = pro.getProperty(&quot;driver&quot;);
-            //4. 注册驱动
-            Class.forName(driver);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * 获取连接
-     * @return 连接对象
-     */
-    public static Connection getConnection() throws SQLException {
-
-        return DriverManager.getConnection(url, user, password);
-    }
-
-    /**
-     * 释放资源
-     * @param stmt
-     * @param conn
-     */
-    public static void close(Statement stmt,Connection conn){
-        if( stmt != null){
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if( conn != null){
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    /**
-     * 释放资源
-     * @param stmt
-     * @param conn
-     */
-    public static void close(ResultSet rs,Statement stmt, Connection conn){
-        if( rs != null){
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if( stmt != null){
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if( conn != null){
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-}
-
-* 练习：
-    * 需求：
-        1. 通过键盘录入用户名和密码
-        2. 判断用户是否登录成功
-            * select * from user where username = &quot;&quot; and password = &quot;&quot;;
-            * 如果这个sql有查询结果，则成功，反之，则失败
-
-    * 步骤：
-        1. 创建数据库表 user
-            CREATE TABLE USER(
-                id INT PRIMARY KEY AUTO_INCREMENT,
-                username VARCHAR(32),
-                PASSWORD VARCHAR(32)
-
-            );
-
-            INSERT INTO USER VALUES(NULL,&apos;zhangsan&apos;,&apos;123&apos;);
-            INSERT INTO USER VALUES(NULL,&apos;lisi&apos;,&apos;234&apos;);
-
-        2. 代码实现：
-            public class JDBCDemo9 {
-
-                public static void main(String[] args) {
-                    //1.键盘录入，接受用户名和密码
-                    Scanner sc = new Scanner(System.in);
-                    System.out.println(&quot;请输入用户名：&quot;);
-                    String username = sc.nextLine();
-                    System.out.println(&quot;请输入密码：&quot;);
-                    String password = sc.nextLine();
-                    //2.调用方法
-                    boolean flag = new JDBCDemo9().login(username, password);
-                    //3.判断结果，输出不同语句
-                    if(flag){
-                        //登录成功
-                        System.out.println(&quot;登录成功！&quot;);
-                    }else{
-                        System.out.println(&quot;用户名或密码错误！&quot;);
-                    }
-
-
-                }
-
-
-
-                /**
-                 * 登录方法
-                 */
-                public boolean login(String username ,String password){
-                    if(username == null || password == null){
-                        return false;
-                    }
-                    //连接数据库判断是否登录成功
-                    Connection conn = null;
-                    Statement stmt =  null;
-                    ResultSet rs = null;
-                    //1.获取连接
-                    try {
-                        conn =  JDBCUtils.getConnection();
-                        //2.定义sql
-                        String sql = &quot;select * from user where username = &apos;&quot;+username+&quot;&apos; and password = &apos;&quot;+password+&quot;&apos; &quot;;
-                        //3.获取执行sql的对象
-                        stmt = conn.createStatement();
-                        //4.执行查询
-                        rs = stmt.executeQuery(sql);
-                        //5.判断
-                       /* if(rs.next()){//如果有下一行，则返回true
-                            return true;
-                        }else{
-                            return false;
-                        }*/
-                       return rs.next();//如果有下一行，则返回true
-
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }finally {
-                        JDBCUtils.close(rs,stmt,conn);
-                    }
-
-
-                    return false;
-                }
-            }</code></pre><h2 id="JDBC控制事务："><a href="#JDBC控制事务：" class="headerlink" title="JDBC控制事务："></a>JDBC控制事务：</h2><pre><code>1. 事务：一个包含多个步骤的业务操作。如果这个业务操作被事务管理，则这多个步骤要么同时成功，要么同时失败。
-2. 操作：
-    1. 开启事务
-    2. 提交事务
-    3. 回滚事务
-3. 使用Connection对象来管理事务
-    * 开启事务：setAutoCommit(boolean autoCommit) ：调用该方法设置参数为false，即开启事务
-        * 在执行sql之前开启事务
-    * 提交事务：commit() 
-        * 当所有sql都执行完提交事务
-    * 回滚事务：rollback() 
-        * 在catch中回滚事务
-
-4. 代码：
-    public class JDBCDemo10 {
-
-        public static void main(String[] args) {
-            Connection conn = null;
-            PreparedStatement pstmt1 = null;
-            PreparedStatement pstmt2 = null;
-
-            try {
-                //1.获取连接
-                conn = JDBCUtils.getConnection();
-                //开启事务
-                conn.setAutoCommit(false);
-
-                //2.定义sql
-                //2.1 张三 - 500
-                String sql1 = &quot;update account set balance = balance - ? where id = ?&quot;;
-                //2.2 李四 + 500
-                String sql2 = &quot;update account set balance = balance + ? where id = ?&quot;;
-                //3.获取执行sql对象
-                pstmt1 = conn.prepareStatement(sql1);
-                pstmt2 = conn.prepareStatement(sql2);
-                //4. 设置参数
-                pstmt1.setDouble(1,500);
-                pstmt1.setInt(2,1);
-
-                pstmt2.setDouble(1,500);
-                pstmt2.setInt(2,2);
-                //5.执行sql
-                pstmt1.executeUpdate();
-                // 手动制造异常
-                int i = 3/0;
-
-                pstmt2.executeUpdate();
-                //提交事务
-                conn.commit();
-            } catch (Exception e) {
-                //事务回滚
-                try {
-                    if(conn != null) {
-                        conn.rollback();
-                    }
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-                e.printStackTrace();
-            }finally {
-                JDBCUtils.close(pstmt1,conn);
-                JDBCUtils.close(pstmt2,null);
-            }
-
-
-        }
-
-    }</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Herman">
-      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Herman的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/" class="post-title-link" itemprop="url">数据库连接池</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-24 21:15:24" itemprop="dateCreated datePublished" datetime="2020-03-24T21:15:24+08:00">2020-03-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-26 19:46:19" itemprop="dateModified" datetime="2020-03-26T19:46:19+08:00">2020-03-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><pre><code>1. 数据库连接池
-
-2. Spring JDBC : JDBC Template</code></pre><h2 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h2><pre><code>1. 概念：其实就是一个容器(集合)，存放数据库连接的容器。
-        当系统初始化好后，容器被创建，容器中会申请一些连接对象，当用户来访问数据库时，从容器中获取连接对象，用户访问完之后，会将连接对象归还给容器。
-
-2. 好处：
-    1. 节约资源
-    2. 用户访问高效
-
-3. 实现：
-    1. 标准接口：DataSource   javax.sql包下的
-        1. 方法：
-            * 获取连接：getConnection()
-            * 归还连接：Connection.close()。如果连接对象Connection是从连接池中获取的，那么调用Connection.close()方法，则不会再关闭连接了。而是归还连接
-
-    2. 一般我们不去实现它，有数据库厂商来实现
-        1. C3P0：数据库连接池技术
-        2. Druid：数据库连接池实现技术，由阿里巴巴提供的
-
-
-4. C3P0：数据库连接池技术
-    * 步骤：
-        1. 导入jar包 (两个) c3p0-0.9.5.2.jar mchange-commons-java-0.2.12.jar ，
-            * 不要忘记导入数据库驱动jar包
-        2. 定义配置文件：
-            * 名称： c3p0.properties 或者 c3p0-config.xml
-            * 路径：直接将文件放在src目录下即可。
-
-        3. 创建核心对象 数据库连接池对象 ComboPooledDataSource
-        4. 获取连接： getConnection
-    * 代码：
-         //1.创建数据库连接池对象
-        DataSource ds  = new ComboPooledDataSource();
-        //2. 获取连接对象
-        Connection conn = ds.getConnection();
-5. Druid：数据库连接池实现技术，由阿里巴巴提供的
-    1. 步骤：
-        1. 导入jar包 druid-1.0.9.jar
-        2. 定义配置文件：
-            * 是properties形式的
-            * 可以叫任意名称，可以放在任意目录下
-        3. 加载配置文件。Properties
-        4. 获取数据库连接池对象：通过工厂来来获取  DruidDataSourceFactory
-        5. 获取连接：getConnection
-    * 代码：
-         //3.加载配置文件
-        Properties pro = new Properties();
-        InputStream is = DruidDemo.class.getClassLoader().getResourceAsStream(&quot;druid.properties&quot;);
-        pro.load(is);
-        //4.获取连接池对象
-        DataSource ds = DruidDataSourceFactory.createDataSource(pro);
-        //5.获取连接
-        Connection conn = ds.getConnection();
-    2. 定义工具类
-        1. 定义一个类 JDBCUtils
-        2. 提供静态代码块加载配置文件，初始化连接池对象
-        3. 提供方法
-            1. 获取连接方法：通过数据库连接池获取连接
-            2. 释放资源
-            3. 获取连接池的方法
-
-
-    * 代码：
-        public class JDBCUtils {
-
-            //1.定义成员变量 DataSource
-            private static DataSource ds ;
-
-            static{
-                try {
-                    //1.加载配置文件
-                    Properties pro = new Properties();
-                    pro.load(JDBCUtils.class.getClassLoader().getResourceAsStream(&quot;druid.properties&quot;));
-                    //2.获取DataSource
-                    ds = DruidDataSourceFactory.createDataSource(pro);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            /**
-             * 获取连接
-             */
-            public static Connection getConnection() throws SQLException {
-                return ds.getConnection();
-            }
-
-            /**
-             * 释放资源
-             */
-            public static void close(Statement stmt,Connection conn){
-               /* if(stmt != null){
-                    try {
-                        stmt.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                if(conn != null){
-                    try {
-                        conn.close();//归还连接
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }*/
-
-               close(null,stmt,conn);
-            }
-
-
-            public static void close(ResultSet rs , Statement stmt, Connection conn){
-
-
-                if(rs != null){
-                    try {
-                        rs.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-                if(stmt != null){
-                    try {
-                        stmt.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                if(conn != null){
-                    try {
-                        conn.close();//归还连接
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            /**
-             * 获取连接池方法
-             */
-
-            public static DataSource getDataSource(){
-                return  ds;
-            }
-
-        }</code></pre><h2 id="Spring-JDBC"><a href="#Spring-JDBC" class="headerlink" title="Spring JDBC"></a>Spring JDBC</h2><pre><code>* Spring框架对JDBC的简单封装。提供了一个JDBCTemplate对象简化JDBC的开发
-* 步骤：
-    1. 导入jar包
-    2. 创建JdbcTemplate对象。依赖于数据源DataSource
-        * JdbcTemplate template = new JdbcTemplate(ds);
-
-    3. 调用JdbcTemplate的方法来完成CRUD的操作
-        * update():执行DML语句。增、删、改语句
-        * queryForMap():查询结果将结果集封装为map集合，将列名作为key，将值作为value 将这条记录封装为一个map集合
-            * 注意：这个方法查询的结果集长度只能是1
-        * queryForList():查询结果将结果集封装为list集合
-            * 注意：将每一条记录封装为一个Map集合，再将Map集合装载到List集合中
-        * query():查询结果，将结果封装为JavaBean对象
-            * query的参数：RowMapper
-                * 一般我们使用BeanPropertyRowMapper实现类。可以完成数据到JavaBean的自动封装
-                * new BeanPropertyRowMapper&lt;类型&gt;(类型.class)
-        * queryForObject：查询结果，将结果封装为对象
-            * 一般用于聚合函数的查询
-
-    4. 练习：
-        * 需求：
-            1. 修改1号数据的 salary 为 10000
-            2. 添加一条记录
-            3. 删除刚才添加的记录
-            4. 查询id为1的记录，将其封装为Map集合
-            5. 查询所有记录，将其封装为List
-            6. 查询所有记录，将其封装为Emp对象的List集合
-            7. 查询总记录数
-
-        * 代码：
-
-            import cn.itcast.domain.Emp;
-            import cn.itcast.utils.JDBCUtils;
-            import org.junit.Test;
-            import org.springframework.jdbc.core.BeanPropertyRowMapper;
-            import org.springframework.jdbc.core.JdbcTemplate;
-            import org.springframework.jdbc.core.RowMapper;
-
-            import java.sql.Date;
-            import java.sql.ResultSet;
-            import java.sql.SQLException;
-            import java.util.List;
-            import java.util.Map;
-
-            public class JdbcTemplateDemo2 {
-
-                //Junit单元测试，可以让方法独立执行
-
-
-                //1. 获取JDBCTemplate对象
-                private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
-                /**
-                 * 1. 修改1号数据的 salary 为 10000
-                 */
-                @Test
-                public void test1(){
-
-                    //2. 定义sql
-                    String sql = &quot;update emp set salary = 10000 where id = 1001&quot;;
-                    //3. 执行sql
-                    int count = template.update(sql);
-                    System.out.println(count);
-                }
-
-                /**
-                 * 2. 添加一条记录
-                 */
-                @Test
-                public void test2(){
-                    String sql = &quot;insert into emp(id,ename,dept_id) values(?,?,?)&quot;;
-                    int count = template.update(sql, 1015, &quot;郭靖&quot;, 10);
-                    System.out.println(count);
-
-                }
-
-                /**
-                 * 3.删除刚才添加的记录
-                 */
-                @Test
-                public void test3(){
-                    String sql = &quot;delete from emp where id = ?&quot;;
-                    int count = template.update(sql, 1015);
-                    System.out.println(count);
-                }
-
-                /**
-                 * 4.查询id为1001的记录，将其封装为Map集合
-                 * 注意：这个方法查询的结果集长度只能是1
-                 */
-                @Test
-                public void test4(){
-                    String sql = &quot;select * from emp where id = ? or id = ?&quot;;
-                    Map&lt;String, Object&gt; map = template.queryForMap(sql, 1001,1002);
-                    System.out.println(map);
-                    //{id=1001, ename=孙悟空, job_id=4, mgr=1004, joindate=2000-12-17, salary=10000.00, bonus=null, dept_id=20}
-
-                }
-
-                /**
-                 * 5. 查询所有记录，将其封装为List
-                 */
-                @Test
-                public void test5(){
-                    String sql = &quot;select * from emp&quot;;
-                    List&lt;Map&lt;String, Object&gt;&gt; list = template.queryForList(sql);
-
-                    for (Map&lt;String, Object&gt; stringObjectMap : list) {
-                        System.out.println(stringObjectMap);
-                    }
-                }
-
-                /**
-                 * 6. 查询所有记录，将其封装为Emp对象的List集合
-                 */
-
-                @Test
-                public void test6(){
-                    String sql = &quot;select * from emp&quot;;
-                    List&lt;Emp&gt; list = template.query(sql, new RowMapper&lt;Emp&gt;() {
-
-                        @Override
-                        public Emp mapRow(ResultSet rs, int i) throws SQLException {
-                            Emp emp = new Emp();
-                            int id = rs.getInt(&quot;id&quot;);
-                            String ename = rs.getString(&quot;ename&quot;);
-                            int job_id = rs.getInt(&quot;job_id&quot;);
-                            int mgr = rs.getInt(&quot;mgr&quot;);
-                            Date joindate = rs.getDate(&quot;joindate&quot;);
-                            double salary = rs.getDouble(&quot;salary&quot;);
-                            double bonus = rs.getDouble(&quot;bonus&quot;);
-                            int dept_id = rs.getInt(&quot;dept_id&quot;);
-
-                            emp.setId(id);
-                            emp.setEname(ename);
-                            emp.setJob_id(job_id);
-                            emp.setMgr(mgr);
-                            emp.setJoindate(joindate);
-                            emp.setSalary(salary);
-                            emp.setBonus(bonus);
-                            emp.setDept_id(dept_id);
-
-                            return emp;
-                        }
-                    });
-
-
-                    for (Emp emp : list) {
-                        System.out.println(emp);
-                    }
-                }
-
-                /**
-                 * 6. 查询所有记录，将其封装为Emp对象的List集合
-                 */
-
-                @Test
-                public void test6_2(){
-                    String sql = &quot;select * from emp&quot;;
-                    List&lt;Emp&gt; list = template.query(sql, new BeanPropertyRowMapper&lt;Emp&gt;(Emp.class));
-                    for (Emp emp : list) {
-                        System.out.println(emp);
-                    }
-                }
-
-                /**
-                 * 7. 查询总记录数
-                 */
-
-                @Test
-                public void test7(){
-                    String sql = &quot;select count(id) from emp&quot;;
-                    Long total = template.queryForObject(sql, Long.class);
-                    System.out.println(total);
-                }
-
-            }</code></pre>
       
     </div>
 
@@ -2669,7 +2881,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

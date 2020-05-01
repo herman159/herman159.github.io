@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"herman159.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="内容1. BootstrapBootstrap：1. 概念： 一个前端开发的框架，Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JavaScript 的，它简洁灵活，使得 Web 开发更加快捷。     * 框架:一个半成品软件，开发人员可以在框架基础上，在进行开发，简化编码。     * 好处：         1. 定义了很多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bootstrap">
+<meta property="og:url" content="https://herman159.github.io/2020/05/01/Bootstrap/index.html">
+<meta property="og:site_name" content="Herman的博客">
+<meta property="og:description" content="内容1. BootstrapBootstrap：1. 概念： 一个前端开发的框架，Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JavaScript 的，它简洁灵活，使得 Web 开发更加快捷。     * 框架:一个半成品软件，开发人员可以在框架基础上，在进行开发，简化编码。     * 好处：         1. 定义了很多">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-01T08:24:53.000Z">
+<meta property="article:modified_time" content="2020-05-01T08:31:14.290Z">
+<meta property="article:author" content="Herman">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://herman159.github.io/2020/05/01/Bootstrap/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Bootstrap | Herman的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Herman的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">Tags<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">Categories<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">Archives<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section">Schedule</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/01/Bootstrap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bootstrap
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-01 16:24:53 / Modified: 16:31:14" itemprop="dateCreated datePublished" datetime="2020-05-01T16:24:53+08:00">2020-05-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><pre><code>1. Bootstrap</code></pre><h2 id="Bootstrap："><a href="#Bootstrap：" class="headerlink" title="Bootstrap："></a>Bootstrap：</h2><pre><code>1. 概念： 一个前端开发的框架，Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JavaScript 的，它简洁灵活，使得 Web 开发更加快捷。
+    * 框架:一个半成品软件，开发人员可以在框架基础上，在进行开发，简化编码。
+    * 好处：
+        1. 定义了很多的css样式和js插件。我们开发人员直接可以使用这些样式和插件得到丰富的页面效果。
+        2. 响应式布局。
+            * 同一套页面可以兼容不同分辨率的设备。
+
+
+2. 快速入门
+    1. 下载Bootstrap
+    2. 在项目中将这三个文件夹复制
+    3. 创建html页面，引入必要的资源文件
+
+
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang=&quot;zh-CN&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        &lt;!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ --&gt;
+        &lt;title&gt;Bootstrap HelloWorld&lt;/title&gt;
+
+        &lt;!-- Bootstrap --&gt;
+        &lt;link href=&quot;css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+
+        &lt;!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) --&gt;
+        &lt;script src=&quot;js/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+        &lt;!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 --&gt;
+        &lt;script src=&quot;js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1&gt;你好，世界！&lt;/h1&gt;
+
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre><h2 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h2><pre><code>* 同一套页面可以兼容不同分辨率的设备。
+* 实现：依赖于栅格系统：将一行平均分成12个格子，可以指定元素占几个格子
+* 步骤：
+    1. 定义容器。相当于之前的table、
+        * 容器分类：
+            1. container：两边留白
+            2. container-fluid：每一种设备都是100%宽度
+    2. 定义行。相当于之前的tr   样式：row
+    3. 定义元素。指定该元素在不同的设备上，所占的格子数目。样式：col-设备代号-格子数目
+        * 设备代号：
+            1. xs：超小屏幕 手机 (&lt;768px)：col-xs-12
+            2. sm：小屏幕 平板 (≥768px)
+            3. md：中等屏幕 桌面显示器 (≥992px)
+            4. lg：大屏幕 大桌面显示器 (≥1200px)
+
+    * 注意：
+        1. 一行中如果格子数目超过12，则超出部分自动换行。
+        2. 栅格类属性可以向上兼容。栅格类适用于与屏幕宽度大于或等于分界点大小的设备。
+        3. 如果真实设备宽度小于了设置栅格类属性的设备代码的最小值，会一个元素沾满一整行。</code></pre><h2 id="CSS样式和JS插件"><a href="#CSS样式和JS插件" class="headerlink" title="CSS样式和JS插件"></a>CSS样式和JS插件</h2><pre><code>1. 全局CSS样式：
+    * 按钮：class=&quot;btn btn-default&quot;
+    * 图片：
+        *  class=&quot;img-responsive&quot;：图片在任意尺寸都占100%
+        *  图片形状
+            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-rounded&quot;&gt;：方形
+            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-circle&quot;&gt; ： 圆形
+            *  &lt;img src=&quot;...&quot; alt=&quot;...&quot; class=&quot;img-thumbnail&quot;&gt; ：相框
+    * 表格
+        * table
+        * table-bordered
+        * table-hover
+    * 表单
+        * 给表单项添加：class=&quot;form-control&quot; 
+2. 组件：
+    * 导航条
+    * 分页条
+3. 插件：
+    * 轮播图</code></pre><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+    &lt;!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ --&gt;
+    &lt;title&gt;Bootstrap HelloWorld&lt;/title&gt;
+
+    &lt;!-- Bootstrap --&gt;
+    &lt;link href=&quot;css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+
+    &lt;!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) --&gt;
+    &lt;script src=&quot;js/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 --&gt;
+    &lt;script src=&quot;js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        .paddtop{
+            padding-top: 10px;
+        }
+        .search-btn{
+            float: left;
+            border:1px solid #ffc900;
+            width: 90px;
+            height: 35px;
+            background-color:#ffc900 ;
+            text-align: center;
+            line-height: 35px;
+            margin-top: 15px;
+        }
+
+        .search-input{
+            float: left;
+            border:2px solid #ffc900;
+            width: 400px;
+            height: 35px;
+            padding-left: 5px;
+            margin-top: 15px;
+        }
+        .jx{
+            border-bottom: 2px solid #ffc900;
+            padding: 5px;
+        }
+        .company{
+            height: 40px;
+            background-color: #ffc900;
+            text-align: center;
+            line-height:40px ;
+            font-size: 8px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+   &lt;!-- 1.页眉部分--&gt;
+   &lt;header class=&quot;container-fluid&quot;&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;img src=&quot;img/top_banner.jpg&quot; class=&quot;img-responsive&quot;&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row paddtop&quot;&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+               &lt;img src=&quot;img/logo.jpg&quot; class=&quot;img-responsive&quot;&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-5&quot;&gt;
+               &lt;input class=&quot;search-input&quot; placeholder=&quot;请输入线路名称&quot;&gt;
+               &lt;a class=&quot;search-btn&quot; href=&quot;#&quot;&gt;搜索&lt;/a&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-4&quot;&gt;
+               &lt;img src=&quot;img/hotel_tel.png&quot; class=&quot;img-responsive&quot;&gt;
+           &lt;/div&gt;
+
+       &lt;/div&gt;
+       &lt;!--导航栏--&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;nav class=&quot;navbar navbar-default&quot;&gt;
+               &lt;div class=&quot;container-fluid&quot;&gt;
+                   &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
+                   &lt;div class=&quot;navbar-header&quot;&gt;
+                       &lt;!-- 定义汉堡按钮 --&gt;
+                       &lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#bs-example-navbar-collapse-1&quot; aria-expanded=&quot;false&quot;&gt;
+                           &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+                           &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                           &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                           &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                       &lt;/button&gt;
+                       &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;首页&lt;/a&gt;
+                   &lt;/div&gt;
+
+                   &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
+                   &lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;
+                       &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+                           &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Link &lt;span class=&quot;sr-only&quot;&gt;(current)&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+
+                       &lt;/ul&gt;
+                   &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+               &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
+           &lt;/nav&gt;
+
+       &lt;/div&gt;
+
+       &lt;!--轮播图--&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;div id=&quot;carousel-example-generic&quot; class=&quot;carousel slide&quot; data-ride=&quot;carousel&quot;&gt;
+               &lt;!-- Indicators --&gt;
+               &lt;ol class=&quot;carousel-indicators&quot;&gt;
+                   &lt;li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;0&quot; class=&quot;active&quot;&gt;&lt;/li&gt;
+                   &lt;li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;1&quot;&gt;&lt;/li&gt;
+                   &lt;li data-target=&quot;#carousel-example-generic&quot; data-slide-to=&quot;2&quot;&gt;&lt;/li&gt;
+               &lt;/ol&gt;
+
+               &lt;!-- Wrapper for slides --&gt;
+               &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+                   &lt;div class=&quot;item active&quot;&gt;
+                       &lt;img src=&quot;img/banner_1.jpg&quot; alt=&quot;...&quot;&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;item&quot;&gt;
+                       &lt;img src=&quot;img/banner_2.jpg&quot; alt=&quot;...&quot;&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;item&quot;&gt;
+                       &lt;img src=&quot;img/banner_3.jpg&quot; alt=&quot;...&quot;&gt;
+                   &lt;/div&gt;
+
+               &lt;/div&gt;
+
+               &lt;!-- Controls --&gt;
+               &lt;a class=&quot;left carousel-control&quot; href=&quot;#carousel-example-generic&quot; role=&quot;button&quot; data-slide=&quot;prev&quot;&gt;
+                   &lt;span class=&quot;glyphicon glyphicon-chevron-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                   &lt;span class=&quot;sr-only&quot;&gt;Previous&lt;/span&gt;
+               &lt;/a&gt;
+               &lt;a class=&quot;right carousel-control&quot; href=&quot;#carousel-example-generic&quot; role=&quot;button&quot; data-slide=&quot;next&quot;&gt;
+                   &lt;span class=&quot;glyphicon glyphicon-chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                   &lt;span class=&quot;sr-only&quot;&gt;Next&lt;/span&gt;
+               &lt;/a&gt;
+           &lt;/div&gt;
+
+
+
+       &lt;/div&gt;
+
+   &lt;/header&gt;
+   &lt;!-- 2.主体部分--&gt;
+   &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;row jx&quot;&gt;
+            &lt;img src=&quot;img/icon_5.jpg&quot;&gt;
+            &lt;span&gt;黑马精选&lt;/span&gt;
+        &lt;/div&gt;
+
+       &lt;div class=&quot;row paddtop&quot;&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+                &lt;div class=&quot;thumbnail&quot;&gt;
+                    &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                    &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                    &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                &lt;/div&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+               &lt;div class=&quot;thumbnail&quot;&gt;
+                   &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                   &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                   &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+               &lt;/div&gt;
+
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+
+               &lt;div class=&quot;thumbnail&quot;&gt;
+                   &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                   &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                   &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+               &lt;/div&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-3&quot;&gt;
+
+               &lt;div class=&quot;thumbnail&quot;&gt;
+                   &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                   &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                   &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+               &lt;/div&gt;
+           &lt;/div&gt;
+
+
+       &lt;/div&gt;
+       &lt;div class=&quot;row jx&quot;&gt;
+           &lt;img src=&quot;img/icon_6.jpg&quot;&gt;
+           &lt;span&gt;国内游&lt;/span&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row paddtop&quot;&gt;
+           &lt;div class=&quot;col-md-4&quot;&gt;
+               &lt;img src=&quot;img/guonei_1.jpg&quot;&gt;
+           &lt;/div&gt;
+           &lt;div class=&quot;col-md-8&quot;&gt;
+               &lt;div class=&quot;row&quot;&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+
+                   &lt;/div&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+
+               &lt;/div&gt;
+               &lt;div class=&quot;row&quot;&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+
+                   &lt;/div&gt;
+                   &lt;div class=&quot;col-md-4&quot;&gt;
+
+                       &lt;div class=&quot;thumbnail&quot;&gt;
+                           &lt;img src=&quot;img/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                           &lt;p&gt;上海直飞三亚5天4晚自由行(春节预售+亲子/蜜月/休闲游首选+豪华酒店任选+接送机)&lt;/p&gt;
+                           &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+
+
+               &lt;/div&gt;
+
+           &lt;/div&gt;
+
+       &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;!-- 3.页脚部分--&gt;
+   &lt;footer class=&quot;container-fluid&quot;&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;img src=&quot;img/footer_service.png&quot; class=&quot;img-responsive&quot;&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row company&quot;&gt;
+           江苏传智播客教育科技股份有限公司 版权所有Copyright 2006-2018, All Rights Reserved 苏ICP备16007882
+       &lt;/div&gt;
+
+   &lt;/footer&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/23/JavaScript/" rel="prev" title="JavaScript">
+      <i class="fa fa-chevron-left"></i> JavaScript
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/01/JavaScript%E6%A1%88%E4%BE%8B/" rel="next" title="JavaScript案例">
+      JavaScript案例 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内容"><span class="nav-number">1.</span> <span class="nav-text">内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bootstrap："><span class="nav-number">1.1.</span> <span class="nav-text">Bootstrap：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应式布局"><span class="nav-number">1.2.</span> <span class="nav-text">响应式布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS样式和JS插件"><span class="nav-number">1.3.</span> <span class="nav-text">CSS样式和JS插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例"><span class="nav-number">1.4.</span> <span class="nav-text">案例</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Herman</p>
+  <div class="site-description" itemprop="description">这是一个集技术分享和资源分享的博客。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Herman</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
