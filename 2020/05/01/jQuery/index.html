@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"herman159.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="内容1. JQuery 基础：     1. 概念     2. 快速入门     3. JQuery对象和JS对象区别与转换     4. 选择器     5. DOM操作     6. 案例JQuery 基础：1. 概念： 一个JavaScript框架。简化JS开发     * jQuery是一个快速、简洁的JavaScript框架，是继Prototype之后又一个优秀的JavaScript代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery">
+<meta property="og:url" content="https://herman159.github.io/2020/05/01/jQuery/index.html">
+<meta property="og:site_name" content="Herman的博客">
+<meta property="og:description" content="内容1. JQuery 基础：     1. 概念     2. 快速入门     3. JQuery对象和JS对象区别与转换     4. 选择器     5. DOM操作     6. 案例JQuery 基础：1. 概念： 一个JavaScript框架。简化JS开发     * jQuery是一个快速、简洁的JavaScript框架，是继Prototype之后又一个优秀的JavaScript代">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-01T10:26:04.000Z">
+<meta property="article:modified_time" content="2020-05-01T11:16:00.109Z">
+<meta property="article:author" content="Herman">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://herman159.github.io/2020/05/01/jQuery/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>jQuery | Herman的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Herman的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">Tags<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">Categories<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">Archives<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section">Schedule</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/01/jQuery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jQuery
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-01 18:26:04 / Modified: 19:16:00" itemprop="dateCreated datePublished" datetime="2020-05-01T18:26:04+08:00">2020-05-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><pre><code>1. JQuery 基础：
+    1. 概念
+    2. 快速入门
+    3. JQuery对象和JS对象区别与转换
+    4. 选择器
+    5. DOM操作
+    6. 案例</code></pre><h1 id="JQuery-基础："><a href="#JQuery-基础：" class="headerlink" title="JQuery 基础："></a>JQuery 基础：</h1><pre><code>1. 概念： 一个JavaScript框架。简化JS开发
+    * jQuery是一个快速、简洁的JavaScript框架，是继Prototype之后又一个优秀的JavaScript代码库（或JavaScript框架）。jQuery设计的宗旨    是“write Less，Do More”，即倡导写更少的代码，做更多的事情。它封装JavaScript常用的功能代码，提供一种简便的JavaScript设计模式，优    化HTML文档操作、事件处理、动画设计和Ajax交互。
+
+    * JavaScript框架：本质上就是一些js文件，封装了js的原生代码而已
+2. 快速入门
+    1. 步骤：
+        1. 下载JQuery
+            * 目前jQuery有三个大版本：
+                1.x：兼容ie678,使用最为广泛的，官方只做BUG维护，
+                     功能不再新增。因此一般项目来说，使用1.x版本就可以了，
+                     最终版本：1.12.4 (2016年5月20日)
+                2.x：不兼容ie678，很少有人使用，官方只做BUG维护，
+                     功能不再新增。如果不考虑兼容低版本的浏览器可以使用2.x，
+                     最终版本：2.2.4 (2016年5月20日)
+                3.x：不兼容ie678，只支持最新的浏览器。除非特殊要求，
+                     一般不会使用3.x版本的，很多老的jQuery插件不支持这个版本。
+                     目前该版本是官方主要更新维护的版本。最新版本：3.2.1（2017年3月20日）
+            * jquery-xxx.js 与 jquery-xxx.min.js区别：
+                1. jquery-xxx.js：开发版本。给程序员看的，有良好的缩进和注释。体积大一些
+                2. jquery-xxx.min.js：生产版本。程序中使用，没有缩进。体积小一些。程序加载更快
+
+        2. 导入JQuery的js文件：导入min.js文件
+        3. 使用
+            var div1 = $(&quot;#div1&quot;);
+               alert(div1.html());
+
+
+3. JQuery对象和JS对象区别与转换
+    1. JQuery对象在操作时，更加方便。
+    2. JQuery对象和js对象方法不通用的.
+    3. 两者相互转换
+        * jq -- &gt; js : jq对象[索引] 或者 jq对象.get(索引)
+        * js -- &gt; jq : $(js对象)
+
+
+4. 选择器：筛选具有相似特征的元素(标签)
+
+    1. 基本操作学习：
+        1. 事件绑定
+            //1.获取b1按钮
+            $(&quot;#b1&quot;).click(function(){
+                alert(&quot;abc&quot;);
+            });
+        2. 入口函数
+             $(function () {
+
+                });
+             window.onload  和 $(function) 区别
+                 * window.onload 只能定义一次,如果定义多次，后边的会将前边的覆盖掉
+                 * $(function)可以定义多次的。
+        3. 样式控制：css方法
+             // $(&quot;#div1&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+              $(&quot;#div1&quot;).css(&quot;backgroundColor&quot;,&quot;pink&quot;);
+
+
+    2. 分类
+        1. 基本选择器
+            1. 标签选择器（元素选择器）
+                * 语法： $(&quot;html标签名&quot;) 获得所有匹配标签名称的元素
+            2. id选择器 
+                * 语法： $(&quot;#id的属性值&quot;) 获得与指定id属性值匹配的元素
+            3. 类选择器
+                * 语法： $(&quot;.class的属性值&quot;) 获得与指定的class属性值匹配的元素
+            4. 并集选择器：
+                * 语法： $(&quot;选择器1,选择器2....&quot;) 获取多个选择器选中的所有元素
+        2. 层级选择器
+            1. 后代选择器
+                * 语法： $(&quot;A B &quot;) 选择A元素内部的所有B元素        
+            2. 子选择器
+                * 语法： $(&quot;A &gt; B&quot;) 选择A元素内部的所有B子元素
+        3. 属性选择器
+            1. 属性名称选择器 
+                * 语法： $(&quot;A[属性名]&quot;) 包含指定属性的选择器
+            2. 属性选择器
+                * 语法： $(&quot;A[属性名=&apos;值&apos;]&quot;) 包含指定属性等于指定值的选择器
+            3. 复合属性选择器
+                * 语法： $(&quot;A[属性名=&apos;值&apos;][]...&quot;) 包含多个属性条件的选择器
+        4. 过滤选择器
+            1. 首元素选择器 
+                * 语法： :first 获得选择的元素中的第一个元素
+            2. 尾元素选择器 
+                * 语法： :last 获得选择的元素中的最后一个元素
+            3. 非元素选择器
+                * 语法： :not(selector) 不包括指定内容的元素
+            4. 偶数选择器
+                * 语法： :even 偶数，从 0 开始计数
+            5. 奇数选择器
+                * 语法： :odd 奇数，从 0 开始计数
+            6. 等于索引选择器
+                * 语法： :eq(index) 指定索引元素
+            7. 大于索引选择器 
+                * 语法： :gt(index) 大于指定索引元素
+            8. 小于索引选择器 
+                * 语法： :lt(index) 小于指定索引元素
+            9. 标题选择器
+                * 语法： :header 获得标题（h1~h6）元素，固定写法
+        5. 表单过滤选择器
+            1. 可用元素选择器 
+                * 语法： :enabled 获得可用元素
+            2. 不可用元素选择器 
+                * 语法： :disabled 获得不可用元素
+            3. 选中选择器 
+                * 语法： :checked 获得单选/复选框选中的元素
+            4. 选中选择器 
+                * 语法： :selected 获得下拉框选中的元素
+
+5. DOM操作
+    1. 内容操作
+        1. html(): 获取/设置元素的标签体内容   &lt;a&gt;&lt;font&gt;内容&lt;/font&gt;&lt;/a&gt;  --&gt; &lt;font&gt;内容&lt;/font&gt;
+        2. text(): 获取/设置元素的标签体纯文本内容   &lt;a&gt;&lt;font&gt;内容&lt;/font&gt;&lt;/a&gt; --&gt; 内容
+        3. val()： 获取/设置元素的value属性值
+    2. 属性操作
+        1. 通用属性操作
+            1. attr(): 获取/设置元素的属性
+            2. removeAttr():删除属性
+            3. prop():获取/设置元素的属性
+            4. removeProp():删除属性
+
+            * attr和prop区别？
+                1. 如果操作的是元素的固有属性，则建议使用prop
+                2. 如果操作的是元素自定义的属性，则建议使用attr
+        2. 对class属性操作
+            1. addClass():添加class属性值
+            2. removeClass():删除class属性值
+            3. toggleClass():切换class属性
+                * toggleClass(&quot;one&quot;): 
+                    * 判断如果元素对象上存在class=&quot;one&quot;，则将属性值one删除掉。  如果元素对象上不存在class=&quot;one&quot;，则添加
+            4. css():
+    3. CRUD操作:
+        1. append():父元素将子元素追加到末尾
+            * 对象1.append(对象2): 将对象2添加到对象1元素内部，并且在末尾
+        2. prepend():父元素将子元素追加到开头
+            * 对象1.prepend(对象2):将对象2添加到对象1元素内部，并且在开头
+        3. appendTo():
+            * 对象1.appendTo(对象2):将对象1添加到对象2内部，并且在末尾
+        4. prependTo()：
+            * 对象1.prependTo(对象2):将对象1添加到对象2内部，并且在开头
+
+
+        5. after():添加元素到元素后边
+            * 对象1.after(对象2)： 将对象2添加到对象1后边。对象1和对象2是兄弟关系
+        6. before():添加元素到元素前边
+            * 对象1.before(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系
+        7. insertAfter()
+            * 对象1.insertAfter(对象2)：将对象2添加到对象1后边。对象1和对象2是兄弟关系
+        8. insertBefore()
+            * 对象1.insertBefore(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系
+
+        9. remove():移除元素
+            * 对象.remove():将对象删除掉
+        10. empty():清空元素的所有后代元素。
+            * 对象.empty():将对象的后代元素全部清空，但是保留当前对象以及其属性节点
+
+
+6. 案例</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/01/Bootstrap/" rel="prev" title="Bootstrap">
+      <i class="fa fa-chevron-left"></i> Bootstrap
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容"><span class="nav-number">1.</span> <span class="nav-text">内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JQuery-基础："><span class="nav-number"></span> <span class="nav-text">JQuery 基础：</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Herman</p>
+  <div class="site-description" itemprop="description">这是一个集技术分享和资源分享的博客。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Herman</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
