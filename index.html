@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives<span class="badge">16</span></a>
+    <a href="/archives/" rel="section">Archives<span class="badge">17</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -162,6 +162,310 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/04/jquery%E9%AB%98%E7%BA%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/04/jquery%E9%AB%98%E7%BA%A7/" class="post-title-link" itemprop="url">jquery高级</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-04 16:29:56 / Modified: 16:31:40" itemprop="dateCreated datePublished" datetime="2020-05-04T16:29:56+08:00">2020-05-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="内容："><a href="#内容：" class="headerlink" title="内容："></a>内容：</h2><pre><code>1. JQuery 高级
+    1. 动画
+    2. 遍历
+    3. 事件绑定
+    4. 案例
+    5. 插件</code></pre><h2 id="JQuery-高级"><a href="#JQuery-高级" class="headerlink" title="JQuery 高级"></a>JQuery 高级</h2><pre><code>1. 动画
+    1. 三种方式显示和隐藏元素
+        1. 默认显示和隐藏方式
+            1. show([speed,[easing],[fn]])
+                1. 参数：
+                    1. speed：动画的速度。三个预定义的值(&quot;slow&quot;,&quot;normal&quot;, &quot;fast&quot;)或表示动画时长的毫秒数值(如：1000)
+                    2. easing：用来指定切换效果，默认是&quot;swing&quot;，可用参数&quot;linear&quot;
+                        * swing：动画执行时效果是 先慢，中间快，最后又慢
+                        * linear：动画执行时速度是匀速的
+                    3. fn：在动画完成时执行的函数，每个元素执行一次。
+
+            2. hide([speed,[easing],[fn]])
+            3. toggle([speed],[easing],[fn])
+
+        2. 滑动显示和隐藏方式
+            1. slideDown([speed],[easing],[fn])
+            2. slideUp([speed,[easing],[fn]])
+            3. slideToggle([speed],[easing],[fn])
+
+        3. 淡入淡出显示和隐藏方式
+            1. fadeIn([speed],[easing],[fn])
+            2. fadeOut([speed],[easing],[fn])
+            3. fadeToggle([speed,[easing],[fn]])
+
+
+2. 遍历
+    1. js的遍历方式
+        * for(初始化值;循环结束条件;步长)
+    2. jq的遍历方式
+        1. jq对象.each(callback)
+            1. 语法：
+                jquery对象.each(function(index,element){});
+                    * index:就是元素在集合中的索引
+                    * element：就是集合中的每一个元素对象
+
+                    * this：集合中的每一个元素对象
+            2. 回调函数返回值：
+                * true:如果当前function返回为false，则结束循环(break)。
+                * false:如果当前function返回为true，则结束本次循环，继续下次循环(continue)
+        2. $.each(object, [callback])
+        3. for..of: jquery 3.0 版本之后提供的方式
+            for(元素对象 of 容器对象)
+
+3. 事件绑定
+    1. jquery标准的绑定方式
+        * jq对象.事件方法(回调函数)；
+        * 注：如果调用事件方法，不传递回调函数，则会触发浏览器默认行为。
+            * 表单对象.submit();//让表单提交
+    2. on绑定事件/off解除绑定
+        * jq对象.on(&quot;事件名称&quot;,回调函数)
+        * jq对象.off(&quot;事件名称&quot;)
+            * 如果off方法不传递任何参数，则将组件上的所有事件全部解绑
+    3. 事件切换：toggle
+        * jq对象.toggle(fn1,fn2...)
+            * 当单击jq对象对应的组件后，会执行fn1.第二次点击会执行fn2.....
+
+        * 注意：1.9版本 .toggle() 方法删除,jQuery Migrate（迁移）插件可以恢复此功能。
+             &lt;script src=&quot;../js/jquery-migrate-1.0.0.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+
+4. 案例
+    1. 广告显示和隐藏
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset=&quot;UTF-8&quot;&gt;
+            &lt;title&gt;广告的自动显示与隐藏&lt;/title&gt;
+            &lt;style&gt;
+                #content{width:100%;height:500px;background:#999}
+            &lt;/style&gt;
+
+            &lt;!--引入jquery--&gt;
+            &lt;script type=&quot;text/javascript&quot; src=&quot;../js/jquery-3.3.1.min.js&quot;&gt;&lt;/script&gt;
+            &lt;script&gt;
+                /*
+                    需求：
+                        1. 当页面加载完，3秒后。自动显示广告
+                        2. 广告显示5秒后，自动消失。
+
+                    分析：
+                        1. 使用定时器来完成。setTimeout (执行一次定时器)
+                        2. 分析发现JQuery的显示和隐藏动画效果其实就是控制display
+                        3. 使用  show/hide方法来完成广告的显示
+                 */
+
+                //入口函数，在页面加载完成之后，定义定时器，调用这两个方法
+                $(function () {
+                   //定义定时器，调用adShow方法 3秒后执行一次
+                   setTimeout(adShow,3000);
+                   //定义定时器，调用adHide方法，8秒后执行一次
+                    setTimeout(adHide,8000);
+                });
+                //显示广告
+                function adShow() {
+                    //获取广告div，调用显示方法
+                    $(&quot;#ad&quot;).show(&quot;slow&quot;);
+                }
+                //隐藏广告
+                function adHide() {
+                    //获取广告div，调用隐藏方法
+                    $(&quot;#ad&quot;).hide(&quot;slow&quot;);
+                }
+
+
+
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+        &lt;!-- 整体的DIV --&gt;
+        &lt;div&gt;
+            &lt;!-- 广告DIV --&gt;
+            &lt;div id=&quot;ad&quot; style=&quot;display: none;&quot;&gt;
+                &lt;img style=&quot;width:100%&quot; src=&quot;../img/adv.jpg&quot; /&gt;
+            &lt;/div&gt;
+
+            &lt;!-- 下方正文部分 --&gt;
+            &lt;div id=&quot;content&quot;&gt;
+                正文部分
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+
+
+
+    2. 抽奖
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset=&quot;UTF-8&quot;&gt;
+            &lt;title&gt;jquery案例之抽奖&lt;/title&gt;
+            &lt;script type=&quot;text/javascript&quot; src=&quot;../js/jquery-3.3.1.min.js&quot;&gt;&lt;/script&gt;
+
+            &lt;script language=&apos;javascript&apos; type=&apos;text/javascript&apos;&gt;
+
+                /*
+                    分析：
+                        1. 给开始按钮绑定单击事件
+                            1.1 定义循环定时器
+                            1.2 切换小相框的src属性
+                                * 定义数组，存放图片资源路径
+                                * 生成随机数。数组索引
+
+
+                        2. 给结束按钮绑定单击事件
+                            1.1 停止定时器
+                            1.2 给大相框设置src属性
+
+                 */
+                var imgs = [&quot;../img/man00.jpg&quot;,
+                            &quot;../img/man01.jpg&quot;,
+                            &quot;../img/man02.jpg&quot;,
+                            &quot;../img/man03.jpg&quot;,
+                            &quot;../img/man04.jpg&quot;,
+                            &quot;../img/man05.jpg&quot;,
+                            &quot;../img/man06.jpg&quot;,
+                            ];
+                var startId;//开始定时器的id
+                var index;//随机角标
+                $(function () {
+                    //处理按钮是否可以使用的效果
+                    $(&quot;#startID&quot;).prop(&quot;disabled&quot;,false);
+                    $(&quot;#stopID&quot;).prop(&quot;disabled&quot;,true);
+
+
+                   //1. 给开始按钮绑定单击事件
+                    $(&quot;#startID&quot;).click(function () {
+                        // 1.1 定义循环定时器 20毫秒执行一次
+                        startId = setInterval(function () {
+                            //处理按钮是否可以使用的效果
+                            $(&quot;#startID&quot;).prop(&quot;disabled&quot;,true);
+                            $(&quot;#stopID&quot;).prop(&quot;disabled&quot;,false);
+
+
+                            //1.2生成随机角标 0-6
+                            index = Math.floor(Math.random() * 7);//0.000--0.999 --&gt; * 7 --&gt; 0.0-----6.9999
+                            //1.3设置小相框的src属性
+                            $(&quot;#img1ID&quot;).prop(&quot;src&quot;,imgs[index]);
+
+                        },20);
+                    });
+
+
+                    //2. 给结束按钮绑定单击事件
+                    $(&quot;#stopID&quot;).click(function () {
+                        //处理按钮是否可以使用的效果
+                        $(&quot;#startID&quot;).prop(&quot;disabled&quot;,false);
+                        $(&quot;#stopID&quot;).prop(&quot;disabled&quot;,true);
+
+
+                       // 1.1 停止定时器
+                        clearInterval(startId);
+                       // 1.2 给大相框设置src属性
+                        $(&quot;#img2ID&quot;).prop(&quot;src&quot;,imgs[index]).hide();
+                        //显示1秒之后
+                        $(&quot;#img2ID&quot;).show(1000);
+                    });
+                });
+
+
+
+
+            &lt;/script&gt;
+
+        &lt;/head&gt;
+        &lt;body&gt;
+
+        &lt;!-- 小像框 --&gt;
+        &lt;div style=&quot;border-style:dotted;width:160px;height:100px&quot;&gt;
+            &lt;img id=&quot;img1ID&quot; src=&quot;../img/man00.jpg&quot; style=&quot;width:160px;height:100px&quot;/&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 大像框 --&gt;
+        &lt;div
+                style=&quot;border-style:double;width:800px;height:500px;position:absolute;left:500px;top:10px&quot;&gt;
+            &lt;img id=&quot;img2ID&quot; src=&quot;../img/man00.jpg&quot; width=&quot;800px&quot; height=&quot;500px&quot;/&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 开始按钮 --&gt;
+        &lt;input
+                id=&quot;startID&quot;
+                type=&quot;button&quot;
+                value=&quot;点击开始&quot;
+                style=&quot;width:150px;height:150px;font-size:22px&quot;&gt;
+
+        &lt;!-- 停止按钮 --&gt;
+        &lt;input
+                id=&quot;stopID&quot;
+                type=&quot;button&quot;
+                value=&quot;点击停止&quot;
+                style=&quot;width:150px;height:150px;font-size:22px&quot;&gt;
+
+
+        &lt;/body&gt;
+        &lt;/html&gt;
+
+5. 插件：增强JQuery的功能
+    1. 实现方式：
+        1. $.fn.extend(object) 
+            * 增强通过Jquery获取的对象的功能  $(&quot;#id&quot;)
+        2. $.extend(object)
+            * 增强JQeury对象自身的功能  $/jQuery</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -2262,71 +2566,6 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/25/Idea%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Herman">
-      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Herman的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/25/Idea%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">Idea的常用快捷键</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-25 14:44:22" itemprop="dateCreated datePublished" datetime="2020-03-25T14:44:22+08:00">2020-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-01 10:43:07" itemprop="dateModified" datetime="2020-05-01T10:43:07+08:00">2020-05-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>快捷键 功能<br>Alt+Enter 导入包，自动修正代码<br>Ctrl+Y 删除光标所在行<br>Ctrl+D 复制光标所在行的内容，插入光标位置下面<br>Ctrl+Alt+L 格式化代码<br>Ctrl+/ 单行注释<br>Ctrl+Shift+/ 选中代码注释，多行注释，再按取消注释<br>Alt+Ins 自动生成代码，toString，get，set等方法<br>Alt+Shift+ 上下箭头 移动当前代码行<br>Alt+ctrl+t 添加try catch<br>Ctrl+R 替换 这个用的小心<br>Ctrl+H 查找<br>Ctrl+P 查看参数</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2397,7 +2636,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
