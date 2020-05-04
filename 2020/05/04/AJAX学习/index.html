@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"herman159.github.io","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="什么是项目- 项目类型：定制项目 - 信息化管理系统 1.12306 2.10086 3.淘宝\天猫\京东 4.教务系统....项目开发流程1.招投标 - 岗位：商务或售前工程师 - 招标（XXX政府采购网） 在政府采购中心购买招标文件，价格一般是500（纸质版）、300（电子版）。 - 投标（制作标书）根据招标文件要求，写标书，装订标书，根据招标文件的要求，做相应的份数；   装到档案袋里，封口">
+  <meta name="description" content="内容1. AJAX：AJAX：1. 概念： ASynchronous JavaScript And XML    异步的JavaScript 和 XML     1. 异步和同步：客户端和服务器端相互通信的基础上         * 客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。         * 客户端不需要等待服务器端的响应。在服务器处理请求的过程中，客户端可以进行其他的操">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对项目的认识（吴智军老师的笔记）">
-<meta property="og:url" content="https://herman159.github.io/2020/03/21/%E5%AF%B9%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AE%A4%E8%AF%86%EF%BC%88%E5%90%B4%E6%99%BA%E5%86%9B%E8%80%81%E5%B8%88%E7%9A%84%E7%AC%94%E8%AE%B0%EF%BC%89/index.html">
+<meta property="og:title" content="AJAX学习">
+<meta property="og:url" content="https://herman159.github.io/2020/05/04/AJAX%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Herman的博客">
-<meta property="og:description" content="什么是项目- 项目类型：定制项目 - 信息化管理系统 1.12306 2.10086 3.淘宝\天猫\京东 4.教务系统....项目开发流程1.招投标 - 岗位：商务或售前工程师 - 招标（XXX政府采购网） 在政府采购中心购买招标文件，价格一般是500（纸质版）、300（电子版）。 - 投标（制作标书）根据招标文件要求，写标书，装订标书，根据招标文件的要求，做相应的份数；   装到档案袋里，封口">
+<meta property="og:description" content="内容1. AJAX：AJAX：1. 概念： ASynchronous JavaScript And XML    异步的JavaScript 和 XML     1. 异步和同步：客户端和服务器端相互通信的基础上         * 客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。         * 客户端不需要等待服务器端的响应。在服务器处理请求的过程中，客户端可以进行其他的操">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-21T10:01:55.000Z">
-<meta property="article:modified_time" content="2020-03-23T12:45:08.808Z">
+<meta property="article:published_time" content="2020-05-04T08:39:12.000Z">
+<meta property="article:modified_time" content="2020-05-04T08:40:15.360Z">
 <meta property="article:author" content="Herman">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://herman159.github.io/2020/03/21/%E5%AF%B9%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AE%A4%E8%AF%86%EF%BC%88%E5%90%B4%E6%99%BA%E5%86%9B%E8%80%81%E5%B8%88%E7%9A%84%E7%AC%94%E8%AE%B0%EF%BC%89/">
+<link rel="canonical" href="https://herman159.github.io/2020/05/04/AJAX%E5%AD%A6%E4%B9%A0/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>对项目的认识（吴智军老师的笔记） | Herman的博客</title>
+  <title>AJAX学习 | Herman的博客</title>
   
 
 
@@ -168,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/21/%E5%AF%B9%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AE%A4%E8%AF%86%EF%BC%88%E5%90%B4%E6%99%BA%E5%86%9B%E8%80%81%E5%B8%88%E7%9A%84%E7%AC%94%E8%AE%B0%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/04/AJAX%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -181,7 +181,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          对项目的认识（吴智军老师的笔记）
+          AJAX学习
         </h1>
 
         <div class="post-meta">
@@ -190,16 +190,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-03-21 18:01:55" itemprop="dateCreated datePublished" datetime="2020-03-21T18:01:55+08:00">2020-03-21</time>
+              <time title="Created: 2020-05-04 16:39:12 / Modified: 16:40:15" itemprop="dateCreated datePublished" datetime="2020-05-04T16:39:12+08:00">2020-05-04</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-23 20:45:08" itemprop="dateModified" datetime="2020-03-23T20:45:08+08:00">2020-03-23</time>
-              </span>
 
           
 
@@ -212,107 +206,93 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="什么是项目"><a href="#什么是项目" class="headerlink" title="什么是项目"></a>什么是项目</h3><pre><code>- 项目类型：定制项目
-- 信息化管理系统
-1.12306
-2.10086
-3.淘宝\天猫\京东
-4.教务系统....</code></pre><h3 id="项目开发流程"><a href="#项目开发流程" class="headerlink" title="项目开发流程"></a>项目开发流程</h3><pre><code>1.招投标
-- 岗位：商务或售前工程师
-- 招标（XXX政府采购网） 在政府采购中心购买招标文件，价格一般是500（纸质版）、300（电子版）。
-- 投标（制作标书）根据招标文件要求，写标书，装订标书，根据招标文件的要求，做相应的份数；
-  装到档案袋里，封口除贴上封条，封条接口处盖公司公章。
-- 政府采购中心组织专家评标，确定中标单位
-- 中标单位会受到《中标通知书》
-2.签合同
-- 岗位：商务或售前
-- 软件开发合同（技术服务合同），具有法律效力
-- 甲方付首付款
-3.建立项目组
-- 项目经理PM 《项目计划》
-- 组长TL
-- 开发人员
-4.需求调研
-- 岗位：需求分析工程师
--主要工作：和甲方沟通需求，写《用户需求分析报告》、《产品需求分析报告》
--不写代码，只写文档
-- 必须有开发经验
-5.架构设计
-- 岗位：架构师 《架构设计报告》
-6.数据库设计
-- 岗位：DBA 《数据库设计报告》
-7.详细设计 （模块设计）
-- 岗位：系统分析师 《模块设计报告》
-8.开发
-- 岗位：初中高级
-- 文档：开发文档
-9.测试
-- 岗位：初中高级
-- 文档：测试工程师
-10.部署实施
-- 岗位：实施工程师
-- 文档：开发文档
-11.验收，交付
-12.维护
--岗位：技术支持
--第一年免费维护，第二年是开始付费维护</code></pre><h3 id="项目文档"><a href="#项目文档" class="headerlink" title="项目文档"></a>项目文档</h3><pre><code>-软件公司文档标准
-1.CMM（主流）
--最核心的文档
-1.数据库设计报告
-2.需求分析报告
-3.架构设计报告
-4.详细设计报告
-5.开发文档
-6.部署实施文档
-7.使用手册</code></pre><h3 id="项目开发相关工具"><a href="#项目开发相关工具" class="headerlink" title="项目开发相关工具"></a>项目开发相关工具</h3><pre><code>1.软件 = 程序 + 数据 + 文档 + 服务 （软件是商业产品，商业规范）
-2.工具
-    - 项目管理工具（项目经理在用）
-    1. 禅道
-    2. Project
-    3. 工作云
-    4. .....
-    - 需求分析工具
-    1. Office,WPS
-    2. Axure或墨刀
-    3. Visio、亿图等
-    4. UML工具（画用例图）
-    - 数据库设计工具
-    1. PowerDesigner
-    2. ERWin
-    - 软件设计工具
-    1. Enterprise Architecture
-    2. Visual Paradigm for UML
-    3. SoftwareIdeasModeler
-    4. StarUML
-    5. Rational Rose
-    - 软件测试工具
-    1. 压力测试LR
-    2. 性能测试工具
-    - 代码质量工具
-    1. Alibaba Code Guidelines
-    2. CheckStyle
-    3. PMD
-    4. FindBugs
-    5. Sonar
-    - 配置管理工具
-    1. Git(Github\Gitee)
-    2. SVN
-    - 项目构建工具
-    1. Maven
-    2. Gradle
-    - 其他工具
-    1. XMind
-    2. Markdown (Typora、Haroopad、MarkdownPad )
-    3. Eclipse
-    4. IDEA
-    5. VS Code
-    6. Sublime 
-    7. Atom 
-    8. WSL
-    - APP相关
-    1. MUI
-    2. Uniapp</code></pre><h3 id="做项目"><a href="#做项目" class="headerlink" title="做项目"></a>做项目</h3><pre><code>1. 先设计- 在开发
-2. 简化版：用XMind整理思路，再动手</code></pre>
+        <h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><pre><code>1. AJAX：</code></pre><h1 id="AJAX："><a href="#AJAX：" class="headerlink" title="AJAX："></a>AJAX：</h1><pre><code>1. 概念： ASynchronous JavaScript And XML    异步的JavaScript 和 XML
+    1. 异步和同步：客户端和服务器端相互通信的基础上
+        * 客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。
+        * 客户端不需要等待服务器端的响应。在服务器处理请求的过程中，客户端可以进行其他的操作。
+
+        Ajax 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。 [1] 
+        通过在后台与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+        传统的网页（不使用 Ajax）如果需要更新内容，必须重载整个网页页面。
+
+        提升用户的体验
+
+2. 实现方式：
+    1. 原生的JS实现方式（了解）
+                 //1.创建核心对象
+                var xmlhttp;
+                if (window.XMLHttpRequest)
+                {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                else
+                {// code for IE6, IE5
+                    xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+                }
+
+                //2. 建立连接
+                /*
+                    参数：
+                        1. 请求方式：GET、POST
+                            * get方式，请求参数在URL后边拼接。send方法为空参
+                            * post方式，请求参数在send方法中定义
+                        2. 请求的URL：
+                        3. 同步或异步请求：true（异步）或 false（同步）
+
+                 */
+                xmlhttp.open(&quot;GET&quot;,&quot;ajaxServlet?username=tom&quot;,true);
+
+                //3.发送请求
+                xmlhttp.send();
+
+                //4.接受并处理来自服务器的响应结果
+                //获取方式 ：xmlhttp.responseText
+                //什么时候获取？当服务器响应成功后再获取
+
+                //当xmlhttp对象的就绪状态改变时，触发事件onreadystatechange。
+                xmlhttp.onreadystatechange=function()
+                {
+                    //判断readyState就绪状态是否为4，判断status响应状态码是否为200
+                    if (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)
+                    {
+                       //获取服务器的响应结果
+                        var responseText = xmlhttp.responseText;
+                        alert(responseText);
+                    }
+                }
+    2. JQeury实现方式
+        1. $.ajax()
+            * 语法：$.ajax({键值对});
+             //使用$.ajax()发送异步请求
+                $.ajax({
+                    url:&quot;ajaxServlet1111&quot; , // 请求路径
+                    type:&quot;POST&quot; , //请求方式
+                    //data: &quot;username=jack&amp;age=23&quot;,//请求参数
+                    data:{&quot;username&quot;:&quot;jack&quot;,&quot;age&quot;:23},
+                    success:function (data) {
+                        alert(data);
+                    },//响应成功后的回调函数
+                    error:function () {
+                        alert(&quot;出错啦...&quot;)
+                    },//表示如果请求响应出现错误，会执行的回调函数
+
+                    dataType:&quot;text&quot;//设置接受到的响应数据的格式
+                });
+        2. $.get()：发送get请求
+            * 语法：$.get(url, [data], [callback], [type])
+                * 参数：
+                    * url：请求路径
+                    * data：请求参数
+                    * callback：回调函数
+                    * type：响应结果的类型
+
+        3. $.post()：发送post请求
+            * 语法：$.post(url, [data], [callback], [type])
+                * 参数：
+                    * url：请求路径
+                    * data：请求参数
+                    * callback：回调函数
+                    * type：响应结果的类型</code></pre>
     </div>
 
     
@@ -327,13 +307,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/19/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
+    <a href="/2020/05/04/jquery%E9%AB%98%E7%BA%A7/" rel="prev" title="jquery高级">
+      <i class="fa fa-chevron-left"></i> jquery高级
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/22/web%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" rel="next" title="web相关概念">
-      web相关概念 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -393,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是项目"><span class="nav-number">1.</span> <span class="nav-text">什么是项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目开发流程"><span class="nav-number">2.</span> <span class="nav-text">项目开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目文档"><span class="nav-number">3.</span> <span class="nav-text">项目文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目开发相关工具"><span class="nav-number">4.</span> <span class="nav-text">项目开发相关工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#做项目"><span class="nav-number">5.</span> <span class="nav-text">做项目</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容"><span class="nav-number">1.</span> <span class="nav-text">内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX："><span class="nav-number"></span> <span class="nav-text">AJAX：</span></a></div>
       </div>
       <!--/noindex-->
 
