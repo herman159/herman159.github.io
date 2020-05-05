@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives<span class="badge">18</span></a>
+    <a href="/archives/" rel="section">Archives<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -166,6 +166,156 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/05/Json%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/05/Json%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Json学习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-05 11:30:27 / Modified: 11:31:01" itemprop="dateCreated datePublished" datetime="2020-05-05T11:30:27+08:00">2020-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JSON："><a href="#JSON：" class="headerlink" title="JSON："></a>JSON：</h1><pre><code>1. 概念： JavaScript Object Notation        JavaScript对象表示法
+    Person p = new Person();
+    p.setName(&quot;张三&quot;);
+    p.setAge(23);
+    p.setGender(&quot;男&quot;);
+
+    var p = {&quot;name&quot;:&quot;张三&quot;,&quot;age&quot;:23,&quot;gender&quot;:&quot;男&quot;};
+
+    * json现在多用于存储和交换文本信息的语法
+    * 进行数据的传输
+    * JSON 比 XML 更小、更快，更易解析。
+
+2. 语法：
+    1. 基本规则
+        * 数据在名称/值对中：json数据是由键值对构成的
+            * 键用引号(单双都行)引起来，也可以不使用引号
+            * 值得取值类型：
+                1. 数字（整数或浮点数）
+                2. 字符串（在双引号中）
+                3. 逻辑值（true 或 false）
+                4. 数组（在方括号中）    {&quot;persons&quot;:[{},{}]}
+                5. 对象（在花括号中） {&quot;address&quot;:{&quot;province&quot;：&quot;陕西&quot;....}}
+                6. null
+        * 数据由逗号分隔：多个键值对由逗号分隔
+        * 花括号保存对象：使用{}定义json 格式
+        * 方括号保存数组：[]
+    2. 获取数据:
+        1. json对象.键名
+        2. json对象[&quot;键名&quot;]
+        3. 数组对象[索引]
+        4. 遍历
+                 //1.定义基本格式
+                var person = {&quot;name&quot;: &quot;张三&quot;, age: 23, &apos;gender&apos;: true};
+
+                var ps = [{&quot;name&quot;: &quot;张三&quot;, &quot;age&quot;: 23, &quot;gender&quot;: true},
+                    {&quot;name&quot;: &quot;李四&quot;, &quot;age&quot;: 24, &quot;gender&quot;: true},
+                    {&quot;name&quot;: &quot;王五&quot;, &quot;age&quot;: 25, &quot;gender&quot;: false}];
+
+
+
+
+                //获取person对象中所有的键和值
+                //for in 循环
+               /* for(var key in person){
+                    //这样的方式获取不行。因为相当于  person.&quot;name&quot;
+                    //alert(key + &quot;:&quot; + person.key);
+                    alert(key+&quot;:&quot;+person[key]);
+                }*/
+
+               //获取ps中的所有值
+                for (var i = 0; i &lt; ps.length; i++) {
+                    var p = ps[i];
+                    for(var key in p){
+                        alert(key+&quot;:&quot;+p[key]);
+                    }
+                }
+
+
+3. JSON数据和Java对象的相互转换
+
+    * JSON解析器：
+        * 常见的解析器：Jsonlib，Gson，fastjson，jackson
+
+    1. JSON转为Java对象
+        1. 导入jackson的相关jar包
+        2. 创建Jackson核心对象 ObjectMapper
+        3. 调用ObjectMapper的相关方法进行转换
+            1. readValue(json字符串数据,Class)
+    2. Java对象转换JSON
+        1. 使用步骤：
+            1. 导入jackson的相关jar包
+            2. 创建Jackson核心对象 ObjectMapper
+            3. 调用ObjectMapper的相关方法进行转换
+                1. 转换方法：
+                    * writeValue(参数1，obj):
+                        参数1：
+                            File：将obj对象转换为JSON字符串，并保存到指定的文件中
+                            Writer：将obj对象转换为JSON字符串，并将json数据填充到字符输出流中
+                            OutputStream：将obj对象转换为JSON字符串，并将json数据填充到字节输出流中
+                    * writeValueAsString(obj):将对象转为json字符串
+
+                2. 注解：
+                    1. @JsonIgnore：排除属性。
+                    2. @JsonFormat：属性值得格式化
+                        * @JsonFormat(pattern = &quot;yyyy-MM-dd&quot;)
+
+                3. 复杂java对象转换
+                    1. List：数组
+                    2. Map：对象格式一致</code></pre><h1 id="案例："><a href="#案例：" class="headerlink" title="案例："></a>案例：</h1><pre><code>* 校验用户名是否存在
+    1. 服务器响应的数据，在客户端使用时，要想当做json数据格式使用。有两种解决方案：
+        1. $.get(type):将最后一个参数type指定为&quot;json&quot;
+        2. 在服务器端设置MIME类型
+            response.setContentType(&quot;application/json;charset=utf-8&quot;);</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/04/AJAX%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -189,10 +339,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-05-04 16:39:12 / Modified: 16:40:15" itemprop="dateCreated datePublished" datetime="2020-05-04T16:39:12+08:00">2020-05-04</time>
+              <time title="Created: 2020-05-04 16:39:12" itemprop="dateCreated datePublished" datetime="2020-05-04T16:39:12+08:00">2020-05-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-05 11:29:39" itemprop="dateModified" datetime="2020-05-05T11:29:39+08:00">2020-05-05</time>
+              </span>
 
           
 
@@ -259,7 +415,7 @@
                         alert(responseText);
                     }
                 }
-    2. JQeury实现方式
+    2. JQuerry实现方式
         1. $.ajax()
             * 语法：$.ajax({键值对});
              //使用$.ajax()发送异步请求
@@ -2150,256 +2306,6 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/25/Response%E5%AF%B9%E8%B1%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Herman">
-      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Herman的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/25/Response%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">Response对象</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-25 21:24:35" itemprop="dateCreated datePublished" datetime="2020-03-25T21:24:35+08:00">2020-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-28 23:43:05" itemprop="dateModified" datetime="2020-03-28T23:43:05+08:00">2020-03-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><pre><code>1. HTTP协议：响应消息
-2. Response对象
-3. ServletContext对象</code></pre><h2 id="HTTP协议："><a href="#HTTP协议：" class="headerlink" title="HTTP协议："></a>HTTP协议：</h2><pre><code>1. 请求消息：客户端发送给服务器端的数据
-    * 数据格式：
-        1. 请求行
-        2. 请求头
-        3. 请求空行
-        4. 请求体
-2. 响应消息：服务器端发送给客户端的数据
-    * 数据格式：
-        1. 响应行
-            1. 组成：协议/版本 响应状态码 状态码描述
-            2. 响应状态码：服务器告诉客户端浏览器本次请求和响应的一个状态。
-                1. 状态码都是3位数字 
-                2. 分类：
-                    1. 1xx：服务器就收客户端消息，但没有接受完成，等待一段时间后，发送1xx多状态码
-                    2. 2xx：成功。代表：200
-                    3. 3xx：重定向。代表：302(重定向)，304(访问缓存)
-                    4. 4xx：客户端错误。
-                        * 代表：
-                            * 404（请求路径没有对应的资源） 
-                            * 405：请求方式没有对应的doXxx方法
-                    5. 5xx：服务器端错误。代表：500(服务器内部出现异常)
-
-
-        2. 响应头：
-            1. 格式：头名称： 值
-            2. 常见的响应头：
-                1. Content-Type：服务器告诉客户端本次响应体数据格式以及编码格式
-                2. Content-disposition：服务器告诉客户端以什么格式打开响应体数据
-                    * 值：
-                        * in-line:默认值,在当前页面内打开
-                        * attachment;filename=xxx：以附件形式打开响应体。文件下载
-        3. 响应空行
-        4. 响应体:传输的数据
-
-
-    * 响应字符串格式
-        HTTP/1.1 200 OK
-        Content-Type: text/html;charset=UTF-8
-        Content-Length: 101
-        Date: Wed, 06 Jun 2018 07:08:42 GMT
-
-        &lt;html&gt;
-          &lt;head&gt;
-            &lt;title&gt;$Title$&lt;/title&gt;
-          &lt;/head&gt;
-          &lt;body&gt;
-          hello , response
-          &lt;/body&gt;
-        &lt;/html&gt;</code></pre><h2 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h2><pre><code>* 功能：设置响应消息
-    1. 设置响应行
-        1. 格式：HTTP/1.1 200 ok
-        2. 设置状态码：setStatus(int sc) 
-    2. 设置响应头：setHeader(String name, String value) 
-
-    3. 设置响应体：
-        * 使用步骤：
-            1. 获取输出流
-                * 字符输出流：PrintWriter getWriter()
-
-                * 字节输出流：ServletOutputStream getOutputStream()
-
-            2. 使用输出流，将数据输出到客户端浏览器
-
-
-* 案例：
-    1. 完成重定向
-        * 重定向：资源跳转的方式
-        * 代码实现：
-            //1. 设置状态码为302
-            response.setStatus(302);
-            //2.设置响应头location
-            response.setHeader(&quot;location&quot;,&quot;/day15/responseDemo2&quot;);
-
-
-            //简单的重定向方法
-            response.sendRedirect(&quot;/day15/responseDemo2&quot;);
-
-        * 重定向的特点:redirect
-            1. 地址栏发生变化
-            2. 重定向可以访问其他站点(服务器)的资源
-            3. 重定向是两次请求。不能使用request对象来共享数据
-        * 转发的特点：forward
-            1. 转发地址栏路径不变
-            2. 转发只能访问当前服务器下的资源
-            3. 转发是一次请求，可以使用request对象来共享数据
-
-        * forward 和  redirect 区别
-
-        * 路径写法：
-            1. 路径分类
-                1. 相对路径：通过相对路径不可以确定唯一资源
-                    * 如：./index.html
-                    * 不以/开头，以.开头路径
-
-                    * 规则：找到当前资源和目标资源之间的相对位置关系
-                        * ./：当前目录
-                        * ../:后退一级目录
-                2. 绝对路径：通过绝对路径可以确定唯一资源
-                    * 如：http://localhost/day15/responseDemo2        /day15/responseDemo2
-                    * 以/开头的路径
-
-                    * 规则：判断定义的路径是给谁用的？判断请求将来从哪儿发出
-                        * 给客户端浏览器使用：需要加虚拟目录(项目的访问路径)
-                            * 建议虚拟目录动态获取：request.getContextPath()
-                            * &lt;a&gt; , &lt;form&gt; 重定向...
-                        * 给服务器使用：不需要加虚拟目录
-                            * 转发路径
-
-
-
-
-    2. 服务器输出字符数据到浏览器
-        * 步骤：
-            1. 获取字符输出流
-            2. 输出数据
-
-        * 注意：
-            * 乱码问题：
-                1. PrintWriter pw = response.getWriter();获取的流的默认编码是ISO-8859-1
-                2. 设置该流的默认编码
-                3. 告诉浏览器响应体使用的编码
-
-                //简单的形式，设置编码，是在获取流之前设置
-                response.setContentType(&quot;text/html;charset=utf-8&quot;);
-    3. 服务器输出字节数据到浏览器
-        * 步骤：
-            1. 获取字节输出流
-            2. 输出数据
-
-    4. 验证码
-        1. 本质：图片
-        2. 目的：防止恶意表单注册</code></pre><h2 id="ServletContext对象："><a href="#ServletContext对象：" class="headerlink" title="ServletContext对象："></a>ServletContext对象：</h2><pre><code>1. 概念：代表整个web应用，可以和程序的容器(服务器)来通信
-2. 获取：
-    1. 通过request对象获取
-        request.getServletContext();
-    2. 通过HttpServlet获取
-        this.getServletContext();
-3. 功能：
-    1. 获取MIME类型：
-        * MIME类型:在互联网通信过程中定义的一种文件数据类型
-            * 格式： 大类型/小类型   text/html        image/jpeg
-
-        * 获取：String getMimeType(String file)  
-    2. 域对象：共享数据
-        1. setAttribute(String name,Object value)
-        2. getAttribute(String name)
-        3. removeAttribute(String name)
-
-        * ServletContext对象范围：所有用户所有请求的数据
-    3. 获取文件的真实(服务器)路径
-        1. 方法：String getRealPath(String path)  
-             String b = context.getRealPath(&quot;/b.txt&quot;);//web目录下资源访问
-             System.out.println(b);
-
-            String c = context.getRealPath(&quot;/WEB-INF/c.txt&quot;);//WEB-INF目录下的资源访问
-            System.out.println(c);
-
-            String a = context.getRealPath(&quot;/WEB-INF/classes/a.txt&quot;);//src目录下的资源访问
-            System.out.println(a);</code></pre><h2 id="案例："><a href="#案例：" class="headerlink" title="案例："></a>案例：</h2><pre><code>* 文件下载需求：
-    1. 页面显示超链接
-    2. 点击超链接后弹出下载提示框
-    3. 完成图片文件下载
-
-
-* 分析：
-    1. 超链接指向的资源如果能够被浏览器解析，则在浏览器中展示，如果不能解析，则弹出下载提示框。不满足需求
-    2. 任何资源都必须弹出下载提示框
-    3. 使用响应头设置资源的打开方式：
-        * content-disposition:attachment;filename=xxx
-
-
-* 步骤：
-    1. 定义页面，编辑超链接href属性，指向Servlet，传递资源名称filename
-    2. 定义Servlet
-        1. 获取文件名称
-        2. 使用字节输入流加载文件进内存
-        3. 指定response的响应头： content-disposition:attachment;filename=xxx
-        4. 将数据写出到response输出流
-
-
-* 问题：
-    * 中文文件问题
-        * 解决思路：
-            1. 获取客户端使用的浏览器版本信息
-            2. 根据不同的版本信息，设置filename的编码方式不同</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2470,7 +2376,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
