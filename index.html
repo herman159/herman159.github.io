@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives<span class="badge">19</span></a>
+    <a href="/archives/" rel="section">Archives<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -162,6 +162,485 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/05/05/redis%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/05/redis%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">redis学习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-05 11:33:40 / Modified: 11:34:18" itemprop="dateCreated datePublished" datetime="2020-05-05T11:33:40+08:00">2020-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><pre><code>1. redis
+    1. 概念
+    2. 下载安装
+    3. 命令操作
+        1. 数据结构
+    4. 持久化操作
+    5. 使用Java客户端操作redis</code></pre><h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><pre><code>1. 概念： redis是一款高性能的NOSQL系列的非关系型数据库
+
+
+    1.1.什么是NOSQL
+        NoSQL(NoSQL = Not Only SQL)，意即“不仅仅是SQL”，是一项全新的数据库理念，泛指非关系型的数据库。
+        随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并发的SNS类型的web2.0纯动态网站已经显得力不从心，暴露了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，尤其是大数据应用难题。
+
+        1.1.1.    NOSQL和关系型数据库比较
+            优点：
+                1）成本：nosql数据库简单易部署，基本都是开源软件，不需要像使用oracle那样花费大量成本购买使用，相比关系型数据库价格便宜。
+                2）查询速度：nosql数据库将数据存储于缓存之中，关系型数据库将数据存储在硬盘中，自然查询速度远不及nosql数据库。
+                3）存储数据的格式：nosql的存储格式是key,value形式、文档形式、图片形式等等，所以可以存储基础类型以及对象或者是集合等各种格式，而数据库则只支持基础类型。
+                4）扩展性：关系型数据库有类似join这样的多表查询机制的限制导致扩展很艰难。
+
+            缺点：
+                1）维护的工具和资料有限，因为nosql是属于新的技术，不能和关系型数据库10几年的技术同日而语。
+                2）不提供对sql的支持，如果不支持sql这样的工业标准，将产生一定用户的学习和使用成本。
+                3）不提供关系型数据库对事务的处理。
+
+        1.1.2.    非关系型数据库的优势：
+            1）性能NOSQL是基于键值对的，可以想象成表中的主键和值的对应关系，而且不需要经过SQL层的解析，所以性能非常高。
+            2）可扩展性同样也是因为基于键值对，数据之间没有耦合性，所以非常容易水平扩展。
+
+        1.1.3.    关系型数据库的优势：
+            1）复杂查询可以用SQL语句方便的在一个表以及多个表之间做非常复杂的数据查询。
+            2）事务支持使得对于安全性能很高的数据访问要求得以实现。对于这两类数据库，对方的优势就是自己的弱势，反之亦然。
+
+        1.1.4.    总结
+            关系型数据库与NoSQL数据库并非对立而是互补的关系，即通常情况下使用关系型数据库，在适合使用NoSQL的时候使用NoSQL数据库，
+            让NoSQL数据库对关系型数据库的不足进行弥补。
+            一般会将数据存储在关系型数据库中，在nosql数据库中备份存储关系型数据库的数据
+
+    1.2.主流的NOSQL产品
+        •    键值(Key-Value)存储数据库
+                相关产品： Tokyo Cabinet/Tyrant、Redis、Voldemort、Berkeley DB
+                典型应用： 内容缓存，主要用于处理大量数据的高访问负载。 
+                数据模型： 一系列键值对
+                优势： 快速查询
+                劣势： 存储的数据缺少结构化
+        •    列存储数据库
+                相关产品：Cassandra, HBase, Riak
+                典型应用：分布式的文件系统
+                数据模型：以列簇式存储，将同一列数据存在一起
+                优势：查找速度快，可扩展性强，更容易进行分布式扩展
+                劣势：功能相对局限
+        •    文档型数据库
+                相关产品：CouchDB、MongoDB
+                典型应用：Web应用（与Key-Value类似，Value是结构化的）
+                数据模型： 一系列键值对
+                优势：数据结构要求不严格
+                劣势： 查询性能不高，而且缺乏统一的查询语法
+        •    图形(Graph)数据库
+                相关数据库：Neo4J、InfoGrid、Infinite Graph
+                典型应用：社交网络
+                数据模型：图结构
+                优势：利用图结构相关算法。
+                劣势：需要对整个图做计算才能得出结果，不容易做分布式的集群方案。
+    1.3 什么是Redis
+        Redis是用C语言开发的一个开源的高性能键值对（key-value）数据库，官方提供测试数据，50个并发执行100000个请求,读的速度是110000次/s,写的速度是81000次/s ，且Redis通过提供多种键值数据类型来适应不同场景下的存储需求，目前为止Redis支持的键值数据类型如下：
+            1) 字符串类型 string
+            2) 哈希类型 hash
+            3) 列表类型 list
+            4) 集合类型 set
+            5) 有序集合类型 sortedset
+        1.3.1 redis的应用场景
+            •    缓存（数据查询、短连接、新闻内容、商品内容等等）
+            •    聊天室的在线好友列表
+            •    任务队列。（秒杀、抢购、12306等等）
+            •    应用排行榜
+            •    网站访问统计
+            •    数据过期处理（可以精确到毫秒
+            •    分布式集群架构中的session分离
+
+
+2. 下载安装
+    1. 官网：https://redis.io
+    2. 中文网：http://www.redis.net.cn/
+    3. 解压直接可以使用：
+        * redis.windows.conf：配置文件
+        * redis-cli.exe：redis的客户端
+        * redis-server.exe：redis服务器端
+
+3. 命令操作
+    1. redis的数据结构：
+        * redis存储的是：key,value格式的数据，其中key都是字符串，value有5种不同的数据结构
+            * value的数据结构：
+                1) 字符串类型 string
+                2) 哈希类型 hash ： map格式  
+                3) 列表类型 list ： linkedlist格式。支持重复元素
+                4) 集合类型 set  ： 不允许重复元素
+                5) 有序集合类型 sortedset：不允许重复元素，且元素有顺序
+
+    2. 字符串类型 string
+        1. 存储： set key value
+            127.0.0.1:6379&gt; set username zhangsan
+            OK
+        2. 获取： get key
+            127.0.0.1:6379&gt; get username
+            &quot;zhangsan&quot;
+        3. 删除： del key
+            127.0.0.1:6379&gt; del age
+            (integer) 1
+    3. 哈希类型 hash
+        1. 存储： hset key field value
+            127.0.0.1:6379&gt; hset myhash username lisi
+            (integer) 1
+            127.0.0.1:6379&gt; hset myhash password 123
+            (integer) 1
+        2. 获取： 
+            * hget key field: 获取指定的field对应的值
+                127.0.0.1:6379&gt; hget myhash username
+                &quot;lisi&quot;
+            * hgetall key：获取所有的field和value
+                127.0.0.1:6379&gt; hgetall myhash
+                1) &quot;username&quot;
+                2) &quot;lisi&quot;
+                3) &quot;password&quot;
+                4) &quot;123&quot;
+
+        3. 删除： hdel key field
+            127.0.0.1:6379&gt; hdel myhash username
+            (integer) 1
+
+    4. 列表类型 list:可以添加一个元素到列表的头部（左边）或者尾部（右边）
+        1. 添加：
+            1. lpush key value: 将元素加入列表左表
+
+            2. rpush key value：将元素加入列表右边
+
+                127.0.0.1:6379&gt; lpush myList a
+                (integer) 1
+                127.0.0.1:6379&gt; lpush myList b
+                (integer) 2
+                127.0.0.1:6379&gt; rpush myList c
+                (integer) 3
+        2. 获取：
+            * lrange key start end ：范围获取
+                127.0.0.1:6379&gt; lrange myList 0 -1
+                1) &quot;b&quot;
+                2) &quot;a&quot;
+                3) &quot;c&quot;
+        3. 删除：
+            * lpop key： 删除列表最左边的元素，并将元素返回
+            * rpop key： 删除列表最右边的元素，并将元素返回
+
+
+    5. 集合类型 set ： 不允许重复元素
+        1. 存储：sadd key value
+            127.0.0.1:6379&gt; sadd myset a
+            (integer) 1
+            127.0.0.1:6379&gt; sadd myset a
+            (integer) 0
+        2. 获取：smembers key:获取set集合中所有元素
+            127.0.0.1:6379&gt; smembers myset
+            1) &quot;a&quot;
+        3. 删除：srem key value:删除set集合中的某个元素    
+            127.0.0.1:6379&gt; srem myset a
+            (integer) 1
+    6. 有序集合类型 sortedset：不允许重复元素，且元素有顺序.每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。
+
+        1. 存储：zadd key score value
+            127.0.0.1:6379&gt; zadd mysort 60 zhangsan
+            (integer) 1
+            127.0.0.1:6379&gt; zadd mysort 50 lisi
+            (integer) 1
+            127.0.0.1:6379&gt; zadd mysort 80 wangwu
+            (integer) 1
+        2. 获取：zrange key start end [withscores]
+            127.0.0.1:6379&gt; zrange mysort 0 -1
+            1) &quot;lisi&quot;
+            2) &quot;zhangsan&quot;
+            3) &quot;wangwu&quot;
+
+            127.0.0.1:6379&gt; zrange mysort 0 -1 withscores
+            1) &quot;zhangsan&quot;
+            2) &quot;60&quot;
+            3) &quot;wangwu&quot;
+            4) &quot;80&quot;
+            5) &quot;lisi&quot;
+            6) &quot;500&quot;
+        3. 删除：zrem key value
+            127.0.0.1:6379&gt; zrem mysort lisi
+            (integer) 1
+
+    7. 通用命令
+        1. keys * : 查询所有的键
+        2. type key ： 获取键对应的value的类型
+        3. del key：删除指定的key value
+
+
+4. 持久化
+    1. redis是一个内存数据库，当redis服务器重启，获取电脑重启，数据会丢失，我们可以将redis内存中的数据持久化保存到硬盘的文件中。
+    2. redis持久化机制：
+        1. RDB：默认方式，不需要进行配置，默认就使用这种机制
+            * 在一定的间隔时间中，检测key的变化情况，然后持久化数据
+            1. 编辑redis.windwos.conf文件
+                #   after 900 sec (15 min) if at least 1 key changed
+                save 900 1
+                #   after 300 sec (5 min) if at least 10 keys changed
+                save 300 10
+                #   after 60 sec if at least 10000 keys changed
+                save 60 10000
+
+            2. 重新启动redis服务器，并指定配置文件名称
+                D:\JavaWeb2018\day23_redis\资料\redis\windows-64\redis-2.8.9&gt;redis-server.exe redis.windows.conf    
+
+        2. AOF：日志记录的方式，可以记录每一条命令的操作。可以每一次命令操作后，持久化数据
+            1. 编辑redis.windwos.conf文件
+                appendonly no（关闭aof） --&gt; appendonly yes （开启aof）
+
+                # appendfsync always ： 每一次操作都进行持久化
+                appendfsync everysec ： 每隔一秒进行一次持久化
+                # appendfsync no     ： 不进行持久化
+
+5. Java客户端 Jedis
+    * Jedis: 一款java操作redis数据库的工具.
+    * 使用步骤：
+        1. 下载jedis的jar包
+        2. 使用
+            //1. 获取连接
+            Jedis jedis = new Jedis(&quot;localhost&quot;,6379);
+               //2. 操作
+               jedis.set(&quot;username&quot;,&quot;zhangsan&quot;);
+            //3. 关闭连接
+            jedis.close();
+
+
+    * Jedis操作各种redis中的数据结构
+        1) 字符串类型 string
+            set
+            get
+
+             //1. 获取连接
+            Jedis jedis = new Jedis();//如果使用空参构造，默认值 &quot;localhost&quot;,6379端口
+            //2. 操作
+            //存储
+            jedis.set(&quot;username&quot;,&quot;zhangsan&quot;);
+            //获取
+            String username = jedis.get(&quot;username&quot;);
+            System.out.println(username);
+
+            //可以使用setex()方法存储可以指定过期时间的 key value
+            jedis.setex(&quot;activecode&quot;,20,&quot;hehe&quot;);//将activecode：hehe键值对存入redis，并且20秒后自动删除该键值对
+
+            //3. 关闭连接
+            jedis.close();
+
+        2) 哈希类型 hash ： map格式  
+            hset
+            hget
+            hgetAll
+            //1. 获取连接
+            Jedis jedis = new Jedis();//如果使用空参构造，默认值 &quot;localhost&quot;,6379端口
+            //2. 操作
+            // 存储hash
+            jedis.hset(&quot;user&quot;,&quot;name&quot;,&quot;lisi&quot;);
+            jedis.hset(&quot;user&quot;,&quot;age&quot;,&quot;23&quot;);
+            jedis.hset(&quot;user&quot;,&quot;gender&quot;,&quot;female&quot;);
+
+            // 获取hash
+            String name = jedis.hget(&quot;user&quot;, &quot;name&quot;);
+            System.out.println(name);
+
+
+            // 获取hash的所有map中的数据
+            Map&lt;String, String&gt; user = jedis.hgetAll(&quot;user&quot;);
+
+            // keyset
+            Set&lt;String&gt; keySet = user.keySet();
+            for (String key : keySet) {
+                //获取value
+                String value = user.get(key);
+                System.out.println(key + &quot;:&quot; + value);
+            }
+
+            //3. 关闭连接
+            jedis.close();
+
+
+        3) 列表类型 list ： linkedlist格式。支持重复元素
+            lpush / rpush
+            lpop / rpop
+            lrange start end : 范围获取
+
+             //1. 获取连接
+            Jedis jedis = new Jedis();//如果使用空参构造，默认值 &quot;localhost&quot;,6379端口
+            //2. 操作
+            // list 存储
+            jedis.lpush(&quot;mylist&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);//从左边存
+            jedis.rpush(&quot;mylist&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);//从右边存
+
+            // list 范围获取
+            List&lt;String&gt; mylist = jedis.lrange(&quot;mylist&quot;, 0, -1);
+            System.out.println(mylist);
+
+            // list 弹出
+            String element1 = jedis.lpop(&quot;mylist&quot;);//c
+            System.out.println(element1);
+
+            String element2 = jedis.rpop(&quot;mylist&quot;);//c
+            System.out.println(element2);
+
+            // list 范围获取
+            List&lt;String&gt; mylist2 = jedis.lrange(&quot;mylist&quot;, 0, -1);
+            System.out.println(mylist2);
+
+            //3. 关闭连接
+            jedis.close();
+
+
+        4) 集合类型 set  ： 不允许重复元素
+            sadd
+            smembers:获取所有元素
+
+            //1. 获取连接
+            Jedis jedis = new Jedis();//如果使用空参构造，默认值 &quot;localhost&quot;,6379端口
+            //2. 操作
+
+
+            // set 存储
+            jedis.sadd(&quot;myset&quot;,&quot;java&quot;,&quot;php&quot;,&quot;c++&quot;);
+
+            // set 获取
+            Set&lt;String&gt; myset = jedis.smembers(&quot;myset&quot;);
+            System.out.println(myset);
+
+            //3. 关闭连接
+            jedis.close();
+        5) 有序集合类型 sortedset：不允许重复元素，且元素有顺序
+            zadd
+            zrange
+
+            //1. 获取连接
+            Jedis jedis = new Jedis();//如果使用空参构造，默认值 &quot;localhost&quot;,6379端口
+            //2. 操作
+            // sortedset 存储
+            jedis.zadd(&quot;mysortedset&quot;,3,&quot;亚瑟&quot;);
+            jedis.zadd(&quot;mysortedset&quot;,30,&quot;后裔&quot;);
+            jedis.zadd(&quot;mysortedset&quot;,55,&quot;孙悟空&quot;);
+
+            // sortedset 获取
+            Set&lt;String&gt; mysortedset = jedis.zrange(&quot;mysortedset&quot;, 0, -1);
+
+            System.out.println(mysortedset);
+
+
+            //3. 关闭连接
+            jedis.close();
+
+
+
+    * jedis连接池： JedisPool
+        * 使用：
+            1. 创建JedisPool连接池对象
+            2. 调用方法 getResource()方法获取Jedis连接
+                //0.创建一个配置对象
+                JedisPoolConfig config = new JedisPoolConfig();
+                config.setMaxTotal(50);
+                config.setMaxIdle(10);
+
+                //1.创建Jedis连接池对象
+                JedisPool jedisPool = new JedisPool(config,&quot;localhost&quot;,6379);
+
+                //2.获取连接
+                Jedis jedis = jedisPool.getResource();
+                //3. 使用
+                jedis.set(&quot;hehe&quot;,&quot;heihei&quot;);
+
+
+                //4. 关闭 归还到连接池中
+                jedis.close();
+
+        * 连接池工具类
+            public class JedisPoolUtils {
+
+                private static JedisPool jedisPool;
+
+                static{
+                    //读取配置文件
+                    InputStream is = JedisPoolUtils.class.getClassLoader().getResourceAsStream(&quot;jedis.properties&quot;);
+                    //创建Properties对象
+                    Properties pro = new Properties();
+                    //关联文件
+                    try {
+                        pro.load(is);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //获取数据，设置到JedisPoolConfig中
+                    JedisPoolConfig config = new JedisPoolConfig();
+                    config.setMaxTotal(Integer.parseInt(pro.getProperty(&quot;maxTotal&quot;)));
+                    config.setMaxIdle(Integer.parseInt(pro.getProperty(&quot;maxIdle&quot;)));
+
+                    //初始化JedisPool
+                    jedisPool = new JedisPool(config,pro.getProperty(&quot;host&quot;),Integer.parseInt(pro.getProperty(&quot;port&quot;)));
+
+
+
+                }
+
+
+                /**
+                 * 获取连接方法
+                 */
+                public static Jedis getJedis(){
+                    return jedisPool.getResource();
+                }
+            }</code></pre><h2 id="案例："><a href="#案例：" class="headerlink" title="案例："></a>案例：</h2><pre><code>案例需求：
+    1. 提供index.html页面，页面中有一个省份 下拉列表
+    2. 当 页面加载完成后 发送ajax请求，加载所有省份
+
+
+* 注意：使用redis缓存一些不经常发生变化的数据。
+    * 数据库的数据一旦发生改变，则需要更新缓存。
+        * 数据库的表执行 增删改的相关操作，需要将redis缓存数据情况，再次存入
+        * 在service对应的增删改方法中，将redis数据删除。</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -2210,102 +2689,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/26/%E6%88%91%E7%9A%84Debug%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Herman">
-      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Herman的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/26/%E6%88%91%E7%9A%84Debug%E5%BA%93/" class="post-title-link" itemprop="url">我的Debug库</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-26 17:17:20" itemprop="dateCreated datePublished" datetime="2020-03-26T17:17:20+08:00">2020-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-01 10:06:12" itemprop="dateModified" datetime="2020-05-01T10:06:12+08:00">2020-05-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>  2020/3/26<br>    1. Properties properties = new Properties();<br>       //properties.load(JDBCUtils.class.getResourceAsStream(“druid.properties”)); 注意这里别写错,忘了.getClassLoader()加载器<br>       properties.load(JDBCUtils.class.getClassLoader().getResourceAsStream(“druid.properties”));<br>    2. // JDBCTemplate jdbcTemplate = new JDBCTemplate(JDBCUtils.getDataSource());<br>          JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());<br>          注意是JdbcTemplate对象！！！<br>  2020/3/27<br>    1.404错误 servletLogin -&gt; servletlogin<br>         这种404错误一定要好好检查路径<br>  2020/3/28<br>    1. 404错误  web目录下的可以直接访问  写绝对路径的时候格式一定是：/虚拟路径/资源路径<br>                <a href="/d15/img/1.jpg">图片</a><br>                不可写成<a href="/d15/web/img/1.jpg">图片</a><br>                还有src 下的直接/虚拟路径/demo<br>                不可 d15/src/demo<br>  2020/3/30<br>      因为tomcat8以前cookie保存中文字符会出问题，所以改了tomcat8<br>      改完以后日志出现了乱码<br>      键入<br>      -Dfile.encoding=UTF-8：<br>      Application Server was not connected before run configuration stop, reason: Unable to ping server at localhost:1099<br>      结果时多写了个：<br>      应该是<br>      -Dfile.encoding=UTF-8<br>      键入后完美解决<br>      如果还有问题<br>      打开idea安装目录-bin<br>      用记事本打开idea.exe.vmoptions和idea64.exe.vmoptions文件<br>      在文件后面添加一行：-Dfile.encoding=UTF-8<br>      2.Google浏览器打开新页面会覆盖当前页面的问题<br>        - 点击链接时使用鼠标中间的转轮点击，会在后台打开新网页<br>        - 点击链接时使用Ctrl+鼠标左击，在后台打开新网页<br>        - 点击连接时Ctrl+Shift+左击，跳转到打开的新页面<br>      3. response.setContentType(“text/html;charset=utf-8”)<br>         不可写成response.setContentType(“text/html;setcharacter=utf-8”);<br>      4.           //更新cookie<br>                    c.setValue(encode);<br>                    //设置存活时间<br>                    c.setMaxAge(60<em>60*24);<br>                    //这里要注意重设要完add！！！！<br>                    response.addCookie(c);<br>  2020/4/1<br>      1.if(flag.equals(“on”)) 如果flag为空的话 会报空指针异常<br>      所以通常我们写成 if(“on”.equals(flag))就可以避免空指针异常<br>      要养成一个习惯<br>      2.html checkbox的checked属性问题和value属性问题<br>        对于value属性，复选框的 value 属性值不会显示在用户界面中。value 属性用于表单数据的提交（只有选中的复选框才会传递数据到服务端，如果什么都没选则不传递复选框数据）。<br>        只要出现了checked=””，不管等于什么，可以等于checked=”checked”,甚至checked=”false”，其checkbox的属性checked都是true,在alert中输出其checked属性都是true.<br> 2020/4/4<br>     1. 无法在web.xml或使用此应用程序部署的jar文件中解析绝对uri：[<a href="http://java.sun.com/jsp/jstl/core]" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/core]</a><br>     这个问题 自己写了个目录WEB-INFO<br>              然后导入了jar包 结果不知道为啥就是出这个问题<br>              还在网上重新找了包<br>              结果自己将WEB-INFO 删掉 重新导入了一次就可以<br>              感觉白白浪费了很多时间，以后遇到类似问题，要尝试重启或者重新导入。<br> 2020/4/6<br>     1. 犯了一个很傻的错误<br>        request.getRequestDispatcher(“list.jsp”).forward(request,response);<br>        没有写.forward!!!!!!!!<br> 2020/4/8<br>     1.  try {<br>            String sql = “select * from user where username = ? and password = ?”;<br>            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);<br>            return user;<br>        } catch (DataAccessException e) {<br>            e.printStackTrace();<br>            return null;<br>        }<br>        没有加trycatch,直接<br>        String sql = “select * from user where username = ? and password = ?”;<br>            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);<br>            return user;<br>     2. 对于重定向 要加虚拟路径，记住只有转发不加<br>        response.sendRedirect(request.getContextPath()+”/index.jsp”);<br>     3. 表单里要提交的名username,User中一定得包含getUsername属性,不然不会封装到对应的属性当中<br>      <input type="text" name="username" class="form-control" id="user" placeholder="请输入用户名"/><br>      Map&lt;String, String[]&gt; parameterMap = request.getParameterMap();<br>        //封装User<br>        User user = new User() ;<br>        try {<br>         BeanUtils.populate(user,parameterMap);<br>     4.  <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">删除</a><br>         一定要注意中英文切换不报错，虽能看出来，但容易犯错<br>2020/4/20<br>    1. 仍是一个非常粗心的bug<br>    PreparedStatementCallback; SQL [select count(</em>) from user where 1=1 ]; Parameter index out of range (1 &gt; number of parameters, which is 0).; nested exception is java.sql.SQLException: Parameter index out of range (1 &gt; number of parameters, which is 0).<br>    这种错误 是 ？ 和 参数 不匹配<br>    我的错误写法：<br>    return jdbcTemplate.queryForObject(sql,Integer.class,params.toArray());<br>    正确写法：<br>    return jdbcTemplate.queryForObject(sb.toString(),Integer.class,params.toArray());<br>    检查<br>    动态的sql语句 忘记结果将原来的sql写了进去 导致 这种错误 是 ？ 和 参数 不匹配<br>     String sql = “select count(*) from user where 1=1 “;<br>     StringBuilder sb = new StringBuilder(sql);<br>     sb.append(“ and “+key+” like ? “);<br>     params.add(“%”+value+”%”);<br>2020/4/22<br>war exploded: Error during artifact deployment. See server log for details.<br>获取真实路径时手敲路径容易敲错<br>2020/4/23<br>同样获取真实路径时手敲路径容易敲错！！<br>2020/4/25<br>今天打开之前做的项目突然发现 访问不到Servlet 报404错误<br>代码本身没有错误之前运行都没有问题，因为有.xml 文件 怀疑是否是xml和注解冲突<br>事实上 除非url-pattern 里的和注解一样会有冲突 像我只用了一种所以问题不在这<br>突然发现之前创建其他的项目的.iml文件 在这里也有 将其删去 程序可以运行<br>这个项目只能有这个项目本身的.iml文件 否则有可能被覆盖<br>2020/4/26</p>
-<ol>
-<li>var div3 = document.createElement(“div3”);<br>var div3 = document.createElement(“div”);<br>创建新的元素 将标签名写了上去导致创建标签失败</li>
-<li>犯了个很傻的问题<br>javascript中方法的定义在了另一个方法中 导致该方法显示未定义<br>所以方法的一定要注意位置 避免嵌套 最好放在<script>标签的首端或尾端<br>2020/4/27</li>
-<li>m_date=null 获取到的messages集合<br>原因： 数据库中创建的是date<pre><code>而对象 Date m_date
-因为属性名不匹配
-导致无法在dao层 
-List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Board&gt;(Board.class));返回一个有date值的对象集合
-所以一定要保证数据库的属性和实体的属性名一致才能封装成功</code></pre>2020/4/28<br>代码： Map<String, String[]> map = request.getParameterMap();<br> Board message = new Board();<br> try {<pre><code>BeanUtils.populate(message,map);</code></pre> } catch (IllegalAccessException e) {<pre><code>e.printStackTrace();</code></pre> } catch (InvocationTargetException e) {<pre><code>e.printStackTrace();</code></pre> }<br>代码错误位置：BeanUtils.populate(message,map);<br>报错信息：org.apache.commons.beanutils.ConversionException: DateConverter does not support default String to 'Date' conversion.<br>分析：Board属性里有Date<br>  在使用beanutils工具类时，因为beanUtils不提供直接将字符串转换成Date（java.util.Date）数据类型的方法，所以在直接使用的时候会抛出以下异常。<br>  beanutils默认支持的转换类型有如下：</li>
-</ol>
-<ul>
-<li>java.lang.BigDecimal  </li>
-<li>java.lang.BigInteger  </li>
-<li>boolean and java.lang.Boolean  </li>
-<li>byte and java.lang.Byte  </li>
-<li>char and java.lang.Character  </li>
-<li>java.lang.Class  </li>
-<li>double and java.lang.Double  </li>
-<li>float and java.lang.Float  </li>
-<li>int and java.lang.Integer  </li>
-<li>long and java.lang.Long  </li>
-<li>short and java.lang.Short  </li>
-<li>java.lang.String  </li>
-<li>java.sql.Date  </li>
-<li>java.sql.Time  </li>
-<li>java.sql.Timestamp<br>看到有Date 但我的是util包下的<br>解决：<br> 加入这行代码<br>ConvertUtils.register(new DateLocaleConverter(), Date.class);<br>具体：Map<String, String[]> map = request.getParameterMap();<br>  //封装成Board对象BeanUtil.populate方法<br>  //org.apache.commons.beanutils.ConversionException: DateConverter does not support default String to 'Date' conversion.<br>  //封装不支持Date,手动加入<br>  ConvertUtils.register(new DateLocaleConverter(), Date.class);<br>  Board message = new Board();<br>  try {<pre><code>BeanUtils.populate(message,map);</code></pre>  } catch (IllegalAccessException e) {<pre><code>e.printStackTrace();</code></pre>  } catch (InvocationTargetException e) {<pre><code>e.printStackTrace();</code></pre>  }</li>
-</ul>
-<ol start="2">
-<li>问题：从后台获取到的message对象，其中 java.util.Date 类型的数据，前台需要格式化<br>解决： 1.首先引入标签库：<pre><code>   &lt;%@ taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot; %&gt;
-2. 在需要显示日期的地方调用fmt标签  
-   &lt;fmt:formatDate value=&quot;${message.m_date}&quot; pattern=&quot;yyyy-MM-dd&quot;/&gt; </code></pre> 走过的弯路：<br> 分析：前台显示的日期老为空，经分析应该是没有转换格式<br> 于是想到对于日期转换<br> SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");<br> System.out.println(sdf2.format(date));//2017-10-27<br> 但是前台这些代码不能写在标签中<br> 如果写在jsp中<br> <%<br>  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");<br>  System.out.println(sdf.format(${message_m_date}));//2017-10-27<br> %><br> 很明显这样写是错误的：<br> JSP声明（<%! %>）、脚本（<%%>）或者表达式（<%= %>）中的EL表达式是无效的<br> 就好像在servlet里写EL表达式肯定是错误的<br> 之后找到了解决办法：JSTL表达式中格式化日期<br> <fmt:formatDate value="${message.m_date}" pattern="yyyy-MM-dd"/><br> 但却报错了<br>According to TLD or attribute directive in tag file, attribute [value] does not accept any expressions 根据标签文件中的TLD或attribute指令，attribute [value]不接受任何表达式<br>查完后得知：<br>出现错误的原因是使用的是jstl1.2,在jstl1.0和jstp1.1、jstl1.2版本在使用标签库的时候存在一定的差别，在jstl1.0以后的版本uri都应该加上/jsp<br>自动导入的包<%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jstl/fmt&quot;</a> %>是错误的<br>应是<br>  <%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jsp/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/fmt&quot;</a> %><br>2020/4/29<br> 同学的Navicat遇到1251 - Client does not support authentication protocol requested by server; consider upgrading MySQL client<br> mysql8 之前的版本中加密规则是mysql_native_password,而在mysql8之后,加密规则是caching_sha2_password,<br> 解决办法：<br> 两个命令行搞定：<br> <a href="https://www.jianshu.com/p/b338a2ffec0d" target="_blank" rel="noopener">https://www.jianshu.com/p/b338a2ffec0d</a><br> 或者降mysql版本 或升Navicat版本<br>2020/5/1<br>checked 属性设置或返回 checkbox 是否应被选中。<br>语法<br>checkboxObject.checked=true|false<br>不可写成 cbs[i].checked = checked;这样是不会选中的</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2376,7 +2759,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
