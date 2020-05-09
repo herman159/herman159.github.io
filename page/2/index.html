@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives<span class="badge">21</span></a>
+    <a href="/archives/" rel="section">Archives<span class="badge">22</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -162,6 +162,215 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/04/22/Filter-Lisner/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Herman">
+      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Herman的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/22/Filter-Lisner/" class="post-title-link" itemprop="url">Filter_Lisner</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-22 09:03:20 / Modified: 09:14:13" itemprop="dateCreated datePublished" datetime="2020-04-22T09:03:20+08:00">2020-04-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><pre><code>1. Filter：过滤器
+2. Listener：监听器</code></pre><h1 id="Filter：过滤器"><a href="#Filter：过滤器" class="headerlink" title="Filter：过滤器"></a>Filter：过滤器</h1><pre><code>1. 概念：
+    * 生活中的过滤器：净水器,空气净化器，土匪、
+    * web中的过滤器：当访问服务器的资源时，过滤器可以将请求拦截下来，完成一些特殊的功能。
+    * 过滤器的作用：
+        * 一般用于完成通用的操作。如：登录验证、统一编码处理、敏感字符过滤...
+
+
+2. 快速入门：
+    1. 步骤：
+        1. 定义一个类，实现接口Filter
+        2. 复写方法
+        3. 配置拦截路径
+            1. web.xml
+            2. 注解
+    2. 代码：
+        @WebFilter(&quot;/*&quot;)//访问所有资源之前，都会执行该过滤器
+        public class FilterDemo1 implements Filter {
+            @Override
+            public void init(FilterConfig filterConfig) throws ServletException {
+
+            }
+
+            @Override
+            public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+                System.out.println(&quot;filterDemo1被执行了....&quot;);
+
+
+                //放行
+                filterChain.doFilter(servletRequest,servletResponse);
+
+            }
+
+            @Override
+            public void destroy() {
+
+            }
+        }
+
+
+3. 过滤器细节：
+    1. web.xml配置    
+        &lt;filter&gt;
+            &lt;filter-name&gt;demo1&lt;/filter-name&gt;
+            &lt;filter-class&gt;cn.itcast.web.filter.FilterDemo1&lt;/filter-class&gt;
+        &lt;/filter&gt;
+        &lt;filter-mapping&gt;
+            &lt;filter-name&gt;demo1&lt;/filter-name&gt;
+            &lt;!-- 拦截路径 --&gt;
+            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+        &lt;/filter-mapping&gt;
+    2. 过滤器执行流程
+        1. 执行过滤器
+        2. 执行放行后的资源
+        3. 回来执行过滤器放行代码下边的代码
+    3. 过滤器生命周期方法
+        1. init:在服务器启动后，会创建Filter对象，然后调用init方法。只执行一次。用于加载资源
+        2. doFilter:每一次请求被拦截资源时，会执行。执行多次
+        3. destroy:在服务器关闭后，Filter对象被销毁。如果服务器是正常关闭，则会执行destroy方法。只执行一次。用于释放资源
+    4. 过滤器配置详解
+        * 拦截路径配置：
+            1. 具体资源路径： /index.jsp   只有访问index.jsp资源时，过滤器才会被执行
+            2. 拦截目录： /user/*    访问/user下的所有资源时，过滤器都会被执行
+            3. 后缀名拦截： *.jsp        访问所有后缀名为jsp资源时，过滤器都会被执行
+            4. 拦截所有资源：/*        访问所有资源时，过滤器都会被执行
+        * 拦截方式配置：资源被访问的方式
+            * 注解配置：
+                * 设置dispatcherTypes属性
+                    1. REQUEST：默认值。浏览器直接请求资源
+                    2. FORWARD：转发访问资源
+                    3. INCLUDE：包含访问资源
+                    4. ERROR：错误跳转资源
+                    5. ASYNC：异步访问资源
+            * web.xml配置
+                * 设置&lt;dispatcher&gt;&lt;/dispatcher&gt;标签即可
+
+    5. 过滤器链(配置多个过滤器)
+        * 执行顺序：如果有两个过滤器：过滤器1和过滤器2
+            1. 过滤器1
+            2. 过滤器2
+            3. 资源执行
+            4. 过滤器2
+            5. 过滤器1 
+
+        * 过滤器先后顺序问题：
+            1. 注解配置：按照类名的字符串比较规则比较，值小的先执行
+                * 如： AFilter 和 BFilter，AFilter就先执行了。
+            2. web.xml配置： &lt;filter-mapping&gt;谁定义在上边，谁先执行
+4. 案例：
+    1. 案例1_登录验证
+        * 需求：
+            1. 访问day17_case案例的资源。验证其是否登录
+            2. 如果登录了，则直接放行。
+            3. 如果没有登录，则跳转到登录页面，提示&quot;您尚未登录，请先登录&quot;。
+
+
+
+    2. 案例2_敏感词汇过滤
+        * 需求：
+            1. 对day17_case案例录入的数据进行敏感词汇过滤
+            2. 敏感词汇参考《敏感词汇.txt》
+            3. 如果是敏感词汇，替换为 *** 
+
+        * 分析：
+            1. 对request对象进行增强。增强获取参数相关方法
+            2. 放行。传递代理对象
+
+
+        * 增强对象的功能：
+            * 设计模式：一些通用的解决固定问题的方式
+            1. 装饰模式
+            2. 代理模式
+                * 概念：
+                    1. 真实对象：被代理的对象
+                    2. 代理对象：
+                    3. 代理模式：代理对象代理真实对象，达到增强真实对象功能的目的
+                 * 实现方式：
+                     1. 静态代理：有一个类文件描述代理模式
+                     2. 动态代理：在内存中形成代理类
+                        * 实现步骤：
+                            1. 代理对象和真实对象实现相同的接口
+                            2. 代理对象 = Proxy.newProxyInstance();
+                            3. 使用代理对象调用方法。
+                            4. 增强方法
+
+                        * 增强方式：
+                            1. 增强参数列表
+                            2. 增强返回值类型
+                            3. 增强方法体执行逻辑    </code></pre><h2 id="Listener：监听器"><a href="#Listener：监听器" class="headerlink" title="Listener：监听器"></a>Listener：监听器</h2><pre><code>* 概念：web的三大组件之一。
+    * 事件监听机制
+        * 事件    ：一件事情
+        * 事件源 ：事件发生的地方
+        * 监听器 ：一个对象
+        * 注册监听：将事件、事件源、监听器绑定在一起。 当事件源上发生某个事件后，执行监听器代码
+
+
+* ServletContextListener:监听ServletContext对象的创建和销毁
+    * 方法：
+        * void contextDestroyed(ServletContextEvent sce) ：ServletContext对象被销毁之前会调用该方法
+        * void contextInitialized(ServletContextEvent sce) ：ServletContext对象创建后会调用该方法
+    * 步骤：
+        1. 定义一个类，实现ServletContextListener接口
+        2. 复写方法
+        3. 配置
+            1. web.xml
+                    &lt;listener&gt;
+                      &lt;listener-class&gt;cn.itcast.web.listener.ContextLoaderListener&lt;/listener-class&gt;
+                       &lt;/listener&gt;
+
+                    * 指定初始化参数&lt;context-param&gt;
+            2. 注解：
+                * @WebListener</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -428,7 +637,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-01 10:06:12" itemprop="dateModified" datetime="2020-05-01T10:06:12+08:00">2020-05-01</time>
+                <time title="Modified: 2020-05-07 11:32:30" itemprop="dateModified" datetime="2020-05-07T11:32:30+08:00">2020-05-07</time>
               </span>
 
           
@@ -472,7 +681,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
 <ol start="2">
 <li>问题：从后台获取到的message对象，其中 java.util.Date 类型的数据，前台需要格式化<br>解决： 1.首先引入标签库：<pre><code>   &lt;%@ taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot; %&gt;
 2. 在需要显示日期的地方调用fmt标签  
-   &lt;fmt:formatDate value=&quot;${message.m_date}&quot; pattern=&quot;yyyy-MM-dd&quot;/&gt; </code></pre> 走过的弯路：<br> 分析：前台显示的日期老为空，经分析应该是没有转换格式<br> 于是想到对于日期转换<br> SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");<br> System.out.println(sdf2.format(date));//2017-10-27<br> 但是前台这些代码不能写在标签中<br> 如果写在jsp中<br> <%<br>  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");<br>  System.out.println(sdf.format(${message_m_date}));//2017-10-27<br> %><br> 很明显这样写是错误的：<br> JSP声明（<%! %>）、脚本（<%%>）或者表达式（<%= %>）中的EL表达式是无效的<br> 就好像在servlet里写EL表达式肯定是错误的<br> 之后找到了解决办法：JSTL表达式中格式化日期<br> <fmt:formatDate value="${message.m_date}" pattern="yyyy-MM-dd"/><br> 但却报错了<br>According to TLD or attribute directive in tag file, attribute [value] does not accept any expressions 根据标签文件中的TLD或attribute指令，attribute [value]不接受任何表达式<br>查完后得知：<br>出现错误的原因是使用的是jstl1.2,在jstl1.0和jstp1.1、jstl1.2版本在使用标签库的时候存在一定的差别，在jstl1.0以后的版本uri都应该加上/jsp<br>自动导入的包<%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jstl/fmt&quot;</a> %>是错误的<br>应是<br>  <%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jsp/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/fmt&quot;</a> %><br>2020/4/29<br> 同学的Navicat遇到1251 - Client does not support authentication protocol requested by server; consider upgrading MySQL client<br> mysql8 之前的版本中加密规则是mysql_native_password,而在mysql8之后,加密规则是caching_sha2_password,<br> 解决办法：<br> 两个命令行搞定：<br> <a href="https://www.jianshu.com/p/b338a2ffec0d" target="_blank" rel="noopener">https://www.jianshu.com/p/b338a2ffec0d</a><br> 或者降mysql版本 或升Navicat版本<br>2020/5/1<br>checked 属性设置或返回 checkbox 是否应被选中。<br>语法<br>checkboxObject.checked=true|false<br>不可写成 cbs[i].checked = checked;这样是不会选中的</li>
+   &lt;fmt:formatDate value=&quot;${message.m_date}&quot; pattern=&quot;yyyy-MM-dd&quot;/&gt; </code></pre> 走过的弯路：<br> 分析：前台显示的日期老为空，经分析应该是没有转换格式<br> 于是想到对于日期转换<br> SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");<br> System.out.println(sdf2.format(date));//2017-10-27<br> 但是前台这些代码不能写在标签中<br> 如果写在jsp中<br> <%<br>  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");<br>  System.out.println(sdf.format(${message_m_date}));//2017-10-27<br> %><br> 很明显这样写是错误的：<br> JSP声明（<%! %>）、脚本（<%%>）或者表达式（<%= %>）中的EL表达式是无效的<br> 就好像在servlet里写EL表达式肯定是错误的<br> 之后找到了解决办法：JSTL表达式中格式化日期<br> <fmt:formatDate value="${message.m_date}" pattern="yyyy-MM-dd"/><br> 但却报错了<br>According to TLD or attribute directive in tag file, attribute [value] does not accept any expressions 根据标签文件中的TLD或attribute指令，attribute [value]不接受任何表达式<br>查完后得知：<br>出现错误的原因是使用的是jstl1.2,在jstl1.0和jstp1.1、jstl1.2版本在使用标签库的时候存在一定的差别，在jstl1.0以后的版本uri都应该加上/jsp<br>自动导入的包<%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jstl/fmt&quot;</a> %>是错误的<br>应是<br>  <%@ taglib prefix="fmt" uri="<a href="http://java.sun.com/jsp/jstl/fmt&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/fmt&quot;</a> %><br>2020/4/29<br> 同学的Navicat遇到1251 - Client does not support authentication protocol requested by server; consider upgrading MySQL client<br> mysql8 之前的版本中加密规则是mysql_native_password,而在mysql8之后,加密规则是caching_sha2_password,<br> 解决办法：<br> 两个命令行搞定：<br> <a href="https://www.jianshu.com/p/b338a2ffec0d" target="_blank" rel="noopener">https://www.jianshu.com/p/b338a2ffec0d</a><br> 或者降mysql版本 或升Navicat版本<br>2020/5/1<br>checked 属性设置或返回 checkbox 是否应被选中。<br>语法<br>checkboxObject.checked=true|false<br>不可写成 cbs[i].checked = checked;这样是不会选中的<br>2020/5/7<br>安装redis时 点了redis-server.exe后闪退<br>原因：打开了ssr 在关掉ssr后成功连接<br>注意：打开redis-server.exe后不要关闭<pre><code>就可以进行数据库操作了</code></pre></li>
 </ol>
 
       
@@ -1084,7 +1293,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-01 10:43:07" itemprop="dateModified" datetime="2020-05-01T10:43:07+08:00">2020-05-01</time>
+                <time title="Modified: 2020-05-07 13:59:19" itemprop="dateModified" datetime="2020-05-07T13:59:19+08:00">2020-05-07</time>
               </span>
 
           
@@ -1098,7 +1307,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>快捷键 功能<br>Alt+Enter 导入包，自动修正代码<br>Ctrl+Y 删除光标所在行<br>Ctrl+D 复制光标所在行的内容，插入光标位置下面<br>Ctrl+Alt+L 格式化代码<br>Ctrl+/ 单行注释<br>Ctrl+Shift+/ 选中代码注释，多行注释，再按取消注释<br>Alt+Ins 自动生成代码，toString，get，set等方法<br>Alt+Shift+ 上下箭头 移动当前代码行<br>Alt+ctrl+t 添加try catch<br>Ctrl+R 替换 这个用的小心<br>Ctrl+H 查找<br>Ctrl+P 查看参数</p>
+          <p>快捷键 功能<br>Alt+Enter 导入包，自动修正代码<br>Ctrl+Y 删除光标所在行<br>Ctrl+D 复制光标所在行的内容，插入光标位置下面<br>Ctrl+Alt+L 格式化代码<br>Ctrl+/ 单行注释<br>Ctrl+Shift+/ 选中代码注释，多行注释，再按取消注释<br>Alt+Ins 自动生成代码，toString，get，set等方法<br>Alt+Shift+ 上下箭头 移动当前代码行<br>Alt+ctrl+t 添加try catch<br>Ctrl+R 替换 这个用的小心<br>Ctrl+H 查找<br>Ctrl+P 查看参数<br>选中文件夹：alt+insert 快速创建一个类</p>
 
       
     </div>
@@ -2053,7 +2262,7 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-04 16:36:23" itemprop="dateModified" datetime="2020-05-04T16:36:23+08:00">2020-05-04</time>
+                <time title="Modified: 2020-05-09 10:53:01" itemprop="dateModified" datetime="2020-05-09T10:53:01+08:00">2020-05-09</time>
               </span>
 
           
@@ -2067,7 +2276,8 @@ List&lt;Board&gt; messages = template.query(sql, new BeanPropertyRowMapper&lt;Bo
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="内容："><a href="#内容：" class="headerlink" title="内容："></a>内容：</h1><pre><code>1. Servlet
+          <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p><img src="/HttpServlet.bmp" alt=""></p>
+<h1 id="内容："><a href="#内容：" class="headerlink" title="内容："></a>内容：</h1><pre><code>1. Servlet
 2. HTTP协议
 3. Request</code></pre><h2 id="Servlet："><a href="#Servlet：" class="headerlink" title="Servlet："></a>Servlet：</h2><pre><code>1. 概念
 2. 步骤
@@ -2770,170 +2980,6 @@ public @interface WebServlet {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://herman159.github.io/2020/03/21/%E5%AF%B9%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AE%A4%E8%AF%86%EF%BC%88%E5%90%B4%E6%99%BA%E5%86%9B%E8%80%81%E5%B8%88%E7%9A%84%E7%AC%94%E8%AE%B0%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Herman">
-      <meta itemprop="description" content="这是一个集技术分享和资源分享的博客。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Herman的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/21/%E5%AF%B9%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%AE%A4%E8%AF%86%EF%BC%88%E5%90%B4%E6%99%BA%E5%86%9B%E8%80%81%E5%B8%88%E7%9A%84%E7%AC%94%E8%AE%B0%EF%BC%89/" class="post-title-link" itemprop="url">对项目的认识（吴智军老师的笔记）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-21 18:01:55" itemprop="dateCreated datePublished" datetime="2020-03-21T18:01:55+08:00">2020-03-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-23 20:45:08" itemprop="dateModified" datetime="2020-03-23T20:45:08+08:00">2020-03-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是项目"><a href="#什么是项目" class="headerlink" title="什么是项目"></a>什么是项目</h3><pre><code>- 项目类型：定制项目
-- 信息化管理系统
-1.12306
-2.10086
-3.淘宝\天猫\京东
-4.教务系统....</code></pre><h3 id="项目开发流程"><a href="#项目开发流程" class="headerlink" title="项目开发流程"></a>项目开发流程</h3><pre><code>1.招投标
-- 岗位：商务或售前工程师
-- 招标（XXX政府采购网） 在政府采购中心购买招标文件，价格一般是500（纸质版）、300（电子版）。
-- 投标（制作标书）根据招标文件要求，写标书，装订标书，根据招标文件的要求，做相应的份数；
-  装到档案袋里，封口除贴上封条，封条接口处盖公司公章。
-- 政府采购中心组织专家评标，确定中标单位
-- 中标单位会受到《中标通知书》
-2.签合同
-- 岗位：商务或售前
-- 软件开发合同（技术服务合同），具有法律效力
-- 甲方付首付款
-3.建立项目组
-- 项目经理PM 《项目计划》
-- 组长TL
-- 开发人员
-4.需求调研
-- 岗位：需求分析工程师
--主要工作：和甲方沟通需求，写《用户需求分析报告》、《产品需求分析报告》
--不写代码，只写文档
-- 必须有开发经验
-5.架构设计
-- 岗位：架构师 《架构设计报告》
-6.数据库设计
-- 岗位：DBA 《数据库设计报告》
-7.详细设计 （模块设计）
-- 岗位：系统分析师 《模块设计报告》
-8.开发
-- 岗位：初中高级
-- 文档：开发文档
-9.测试
-- 岗位：初中高级
-- 文档：测试工程师
-10.部署实施
-- 岗位：实施工程师
-- 文档：开发文档
-11.验收，交付
-12.维护
--岗位：技术支持
--第一年免费维护，第二年是开始付费维护</code></pre><h3 id="项目文档"><a href="#项目文档" class="headerlink" title="项目文档"></a>项目文档</h3><pre><code>-软件公司文档标准
-1.CMM（主流）
--最核心的文档
-1.数据库设计报告
-2.需求分析报告
-3.架构设计报告
-4.详细设计报告
-5.开发文档
-6.部署实施文档
-7.使用手册</code></pre><h3 id="项目开发相关工具"><a href="#项目开发相关工具" class="headerlink" title="项目开发相关工具"></a>项目开发相关工具</h3><pre><code>1.软件 = 程序 + 数据 + 文档 + 服务 （软件是商业产品，商业规范）
-2.工具
-    - 项目管理工具（项目经理在用）
-    1. 禅道
-    2. Project
-    3. 工作云
-    4. .....
-    - 需求分析工具
-    1. Office,WPS
-    2. Axure或墨刀
-    3. Visio、亿图等
-    4. UML工具（画用例图）
-    - 数据库设计工具
-    1. PowerDesigner
-    2. ERWin
-    - 软件设计工具
-    1. Enterprise Architecture
-    2. Visual Paradigm for UML
-    3. SoftwareIdeasModeler
-    4. StarUML
-    5. Rational Rose
-    - 软件测试工具
-    1. 压力测试LR
-    2. 性能测试工具
-    - 代码质量工具
-    1. Alibaba Code Guidelines
-    2. CheckStyle
-    3. PMD
-    4. FindBugs
-    5. Sonar
-    - 配置管理工具
-    1. Git(Github\Gitee)
-    2. SVN
-    - 项目构建工具
-    1. Maven
-    2. Gradle
-    - 其他工具
-    1. XMind
-    2. Markdown (Typora、Haroopad、MarkdownPad )
-    3. Eclipse
-    4. IDEA
-    5. VS Code
-    6. Sublime 
-    7. Atom 
-    8. WSL
-    - APP相关
-    1. MUI
-    2. Uniapp</code></pre><h3 id="做项目"><a href="#做项目" class="headerlink" title="做项目"></a>做项目</h3><pre><code>1. 先设计- 在开发
-2. 简化版：用XMind整理思路，再动手</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -3004,7 +3050,7 @@ public @interface WebServlet {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
